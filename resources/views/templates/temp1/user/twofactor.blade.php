@@ -32,8 +32,8 @@
                                     <h4 class="panel-title text-center">@lang('Two Factor Authenticator')</h4>
                                 </div>
                                 <div class="card-body min-height-310 text-center">
-                                    <button type="button" class="btn btn-block btn-lg bttn btn-fill btn-danger"
-                                        data-toggle="modal" data-target="#disableModal">@lang('Disable Two Factor Authenticator')</button>
+                                    <button type="button" class="btn btn-block btn-lg bttn btn-fill btn-danger show-disable-2fa-modal">
+                                        @lang('Disable Two Factor Authenticator')</button>
                                 </div>
                             </div>
                         @else
@@ -105,7 +105,7 @@
             <div class="modal-content blue-bg ">
                 <div class="modal-header">
                     <h4 class="modal-title">@lang('Verify Your OTP to Disable')</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close hide-disable-2fa-modal" data-dismiss="modal">&times;</button>
 
                 </div>
                 <form action="{{ route('user.twofactor.disable') }}" method="POST">
@@ -117,7 +117,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-block pull-left">@lang('Verify')</button>
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                        <button type="button" class="btn btn-dark hide-disable-2fa-modal" data-dismiss="modal">@lang('Close')</button>
                     </div>
                 </form>
             </div>
@@ -130,12 +130,19 @@
 @push('script')
     <script>
         'use strict';
-        document.getElementById("copybtnpp").onclick = function() {
+        document.getElementById("copybtnpp")?.addEventListener('click', function () {
             document.getElementById('code').select();
             document.execCommand('copy');
             notify('success', 'Copied successfully');
-        }
+        });
 
+        $('.show-disable-2fa-modal').on('click', function() {
+            $('#disableModal').modal('show');
+        });
+
+        $('.hide-disable-2fa-modal').on('click', function() {
+            $('#disableModal').modal('hide');
+        });
 
         $('.show-enable-2fa-modal').on('click', function() {
             $('#enableModal').modal('show');
