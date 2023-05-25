@@ -144,7 +144,7 @@ class CronController extends Controller
         //     }
         // }
         // elseif($id == "sunday"){
-            vipCommissionSet();
+            // vipCommissionSet();
             //UserExtrasAdjust();
             
             /*$posid = 186;

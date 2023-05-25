@@ -3,63 +3,6 @@
 @section('panel')
     @include($activeTemplate . 'user.partials.breadcrumb')
 
-    <div id="enableModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content blue-bg">
-                <div class="modal-header">
-                    <h4 class="modal-title text-dark">@lang('Verify Your OTP')</h4>
-                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-
-                </div>
-                <form action="{{ route('user.twofactor.enable') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <input type="hidden" name="key" value="{{ $secret }}">
-                            <input type="text" class="form-control" name="code" placeholder="@lang('Enter Google Authenticator Code')">
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                        <button type="submit" class="btn btn-success pull-right">@lang('Submit')</button>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-    <!--Disable Modal -->
-    <div id="disableModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content -->
-            <div class="modal-content blue-bg ">
-                <div class="modal-header">
-                    <h4 class="modal-title">@lang('Verify Your OTP to Disable')</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                </div>
-                <form action="{{ route('user.twofactor.disable') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="code" placeholder="@lang('Enter Google Authenticator Code')">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-block pull-left">@lang('Verify')</button>
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-
     <!--Row-->
     <div class="row">
         <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
@@ -112,8 +55,8 @@
 
                                 </div>
                                 <div class="card-footer">
-                                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal"
-                                        data-target="#enableModal">@lang('Enable Two Factor Authenticator')</button>
+                                    <button type="button" class="btn btn-block btn-primary show-enable-2fa-modal">
+                                        @lang('Enable Two Factor Authenticator')</button>
                                 </div>
                             </div>
                         @endif
@@ -123,6 +66,64 @@
         </div>
     </div>
     <!--End row-->
+
+    <!--Enable Modal -->
+    <div id="enableModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content blue-bg">
+                <div class="modal-header">
+                    <h4 class="modal-title text-dark">@lang('Verify Your OTP')</h4>
+                    <button type="button" class="close text-white hide-enable-2fa-modal" data-dismiss="modal">&times;</button>
+
+                </div>
+                <form action="{{ route('user.twofactor.enable') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <input type="hidden" name="key" value="{{ $secret }}">
+                            <input type="text" class="form-control" name="code" placeholder="@lang('Enter Google Authenticator Code')">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark hide-enable-2fa-modal" data-dismiss="modal">@lang('Close')</button>
+                        <button type="submit" class="btn btn-success pull-right">@lang('Submit')</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Disable Modal -->
+    <div id="disableModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content -->
+            <div class="modal-content blue-bg ">
+                <div class="modal-header">
+                    <h4 class="modal-title">@lang('Verify Your OTP to Disable')</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <form action="{{ route('user.twofactor.disable') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="code" placeholder="@lang('Enter Google Authenticator Code')">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-block pull-left">@lang('Verify')</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 
@@ -134,6 +135,15 @@
             document.execCommand('copy');
             notify('success', 'Copied successfully');
         }
+
+
+        $('.show-enable-2fa-modal').on('click', function() {
+            $('#enableModal').modal('show');
+        });
+
+        $('.hide-enable-2fa-modal').on('click', function() {
+            $('#enableModal').modal('hide');
+        });
     </script>
 @endpush
 
