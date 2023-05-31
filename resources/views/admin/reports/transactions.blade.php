@@ -9,6 +9,7 @@
                         <table class="table table--light style--two">
                             <thead>
                                 <tr>
+                                    <th scope="col">Action</th>
                                     <th scope="col">@lang('Date')</th>
                                     <th scope="col">@lang('TRX')</th>
                                     <th scope="col">@lang('Username')</th>
@@ -24,6 +25,13 @@
                             <tbody>
                                 @forelse($transactions as $trx)
                                     <tr>
+                                        <td>
+                                            @if($trx->remark=="VIP_Unilevel_Bonus")
+                                                <button type="button" onclick="deleteUnilevel({{ $trx->id }})" class="btn btn-danger">
+                                                    Delete Unilevel
+                                                </button>
+                                            @endif
+                                        </td>
                                         <td data-label="@lang('Date')">{{ showDateTime($trx->created_at) }}</td>
                                         <td data-label="@lang('TRX')" class="font-weight-bold">{{ $trx->trx }}
                                         </td>
@@ -122,5 +130,21 @@
                 $('.datepicker-here').datepicker();
             }
         })(jQuery)
+
+        function deleteUnilevel(id) {
+
+            $.ajax({
+                url: "{{ route('admin.report.delete.unilevel', '') }}" + '/' + id,
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id : id,
+                },
+                success: function(data) {
+                    console.log(data);
+                    window.location.reload();
+                }
+            });
+        }
     </script>
 @endpush

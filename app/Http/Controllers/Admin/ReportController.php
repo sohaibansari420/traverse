@@ -857,4 +857,26 @@ class ReportController extends Controller
         return view('admin.reports.transactions', compact('page_title', 'transactions', 'empty_message', 'type'));
     }
 
+    public function deleteUnilevelBonus($id)
+    {
+        if (isset($id)) {
+            $trnas = Transaction::find($id);
+
+            if (isset($trnas)) {
+
+                $user_id = $trnas->user_id;
+                $wallet_id = $trnas->wallet_id;
+                $amt = $trnas->amount;
+
+                $user_wallet = UserWallet::where('user_id', $user_id)->where('wallet_id', $wallet_id)->first();
+
+                if (isset($user_wallet)) {
+                    $user_wallet->balance -= $amt;
+                    $user_wallet->update();
+                }
+
+                $trnas->delete();
+            }
+        }
+    }
 }

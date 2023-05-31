@@ -266,6 +266,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('report/wallet/{id}', 'ReportController@wallet')->name('report.wallets');
         Route::get('report/commission', 'ReportController@commission')->name('report.commission');
         Route::get('report/commission/{id}', 'ReportController@commission')->name('report.commissions');
+        Route::post('report/commission/{id}', 'ReportController@deleteUnilevelBonus')->name('report.delete.unilevel');
         Route::get('report/referral-commission', 'ReportController@refCom')->name('report.refCom');
         Route::get('report/binary-commission', 'ReportController@binary')->name('report.binaryCom');
         Route::get('report/roi-income', 'ReportController@roiIncome')->name('report.roi');
