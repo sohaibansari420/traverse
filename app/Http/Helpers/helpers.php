@@ -24,6 +24,7 @@ use App\Models\UserFamily;
 use App\Models\UserNetwork;
 use App\Models\UserWallet;
 use App\Models\Wallet;
+use App\Models\Withdrawal;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Carbon\Carbon;
@@ -1424,7 +1425,8 @@ function cashbackCommission($user_id)
 function vipCommission($id = ''){
 	if($id == 1){
 		echo $id;
-		$users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
+        $users = Withdrawal::where(['wallet_id' => 3, 'status' => 1])->with('user')->get()->pluck('user')->unique('id');
+		// $users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
 	}
     elseif($id == 2){
 		echo $id;
