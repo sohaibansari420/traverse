@@ -123,7 +123,15 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Close</button>
-                                                @if($data->id != $planCount)
+                                                    @php
+                                                        if(in_array($data->price ,$myPlansAmounts)) {
+                                                            $plan_found=true;
+                                                        }
+                                                        else{
+                                                            $plan_found=false;
+                                                        }
+                                                    @endphp
+                                                @if($data->id != $planCount && $plan_found==true)
                                                     <button type="submit" name="plan_upgrade_id" value="{{ $data->id }}"
                                                         class="btn btn-primary float-end">
                                                         @lang('Upgrade Plan')</button>
