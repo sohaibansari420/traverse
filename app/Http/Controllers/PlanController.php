@@ -32,7 +32,7 @@ class PlanController extends Controller
         $data['page_title'] = "Package Plan";
         $data['plans'] = Plan::whereStatus(1)->get();
         $data['myPlans'] = PurchasedPlan::where('user_id', Auth::id())->get();
-        $data['myPlansAmounts'] = PurchasedPlan::where('user_id', Auth::id())->pluck('amount')->toArray(); 
+        $data['myPlansAmounts'] = PurchasedPlan::where('user_id', Auth::id())->pluck('amount')->toArray();
         $data['planCount']=count($data['plans']);
         return view($this->activeTemplate . '.user.plan', $data);
 

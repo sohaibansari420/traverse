@@ -120,7 +120,7 @@
                                                     {{ $general->cur_text }} @lang('will subtract from your balance')</p>
                                                     <input type="hidden" name="plan_amount" value="{{$data->price}}">
                                             </div>
-                                            <div class="modal-footer"> 
+                                            <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Close</button>
                                                     @php
