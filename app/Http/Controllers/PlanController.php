@@ -280,15 +280,16 @@ class PlanController extends Controller
 
     function roiCompound(Request $request)
     {
-        $general = GeneralSetting::first();
-        $release_date = $general->bal_trans_per_charge;
-        $current_date = Carbon::now();
-        $weekdays = Carbon::getDays();
+        // $general = GeneralSetting::first();
+        // $release_date = $general->bal_trans_per_charge;
+        // $current_date = Carbon::now();
+        // $weekdays = Carbon::getDays();
         
-        $roi = $request->compounding;
-        $trx = $request->trx;
+        // $roi = $request->compounding;
+        // $trx = $request->trx;
         
-        $notify[] = roiReturn(Auth::id(), $roi, $trx); 
+
+        $notify[] = roiReturn(Auth::id(), $request->compounding, $request->trx);
         
         return redirect()->route('user.home')->withNotify($notify);
     }
