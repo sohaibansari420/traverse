@@ -9,7 +9,6 @@
                         <table class="table table--light style--two">
                             <thead>
                                 <tr>
-                                    <th scope="col">Action</th>
                                     <th scope="col">@lang('Date')</th>
                                     <th scope="col">@lang('TRX')</th>
                                     <th scope="col">@lang('Username')</th>
@@ -20,18 +19,12 @@
                                     <th scope="col">@lang('Charge')</th>
                                     <th scope="col">@lang('Post Balance')</th>
                                     <th scope="col">@lang('Detail')</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($transactions as $trx)
                                     <tr>
-                                        <td>
-                                            @if($trx->remark=="VIP_Unilevel_Bonus")
-                                                <button type="button" onclick="deleteUnilevel({{ $trx->id }})" class="btn btn-danger">
-                                                    Delete Unilevel
-                                                </button>
-                                            @endif
-                                        </td>
                                         <td data-label="@lang('Date')">{{ showDateTime($trx->created_at) }}</td>
                                         <td data-label="@lang('TRX')" class="font-weight-bold">{{ $trx->trx }}
                                         </td>
@@ -57,6 +50,16 @@
                                         <td data-label="@lang('Post Balance')">{{ $trx->post_balance + 0 }}
                                             {{ $general->cur_text }}</td>
                                         <td data-label="@lang('Detail')">{{ __($trx->details) }}</td>
+                                        <td>
+                                            @if($trx->remark=="VIP_Unilevel_Bonus")
+                                                <button type="button" onclick="deleteUnilevel({{ $trx->id }})" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                                <button type="button" onclick="EditUnilevel({{ $trx->id }})" class="btn btn-primary">
+                                                    Edit
+                                                </button>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -72,6 +75,24 @@
                     {{ $transactions->links('admin.partials.paginate') }}
                 </div>
             </div><!-- card end -->
+        </div>
+    </div>
+    <div class="modal" id="editUnilevel" tabindex="-1" role="dialog"
+        aria-labelledby="editUnilevel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_title">
+                        @lang('Confirm Edit' )?
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                     this is modal
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -145,6 +166,9 @@
                     window.location.reload();
                 }
             });
+        }
+        function EditUnilevel(id){
+            $('#editUnilevel').modal('show');
         }
     </script>
 @endpush

@@ -2,7 +2,6 @@
 
 @section('panel')
     @include($activeTemplate . 'user.partials.breadcrumb')
-
     <div class="row">
         <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
             <div class="card">
@@ -63,6 +62,72 @@
                                                 <button type="submit" name="plan_id" value="{{ $data->id }}"
                                                     class="btn btn-primary float-end">
                                                     @lang('Confirm')</button>
+                                                <button type="button" class="btn btn-success" data-bs-target="#confUpgradeModal{{ $data->id }}"
+                                                    data-bs-toggle="modal">Upgrade Plan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal" id="confUpgradeModal{{ $data->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="confUpgradeModal{{ $data->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confBuyModal{{ $data->id }}">
+                                                @lang('Confirm Purchase ' . $data->name)?
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <form method="post" action="{{ route('user.plan.upgrade.purchase') }}">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">id</th>
+                                                        <th scope="col">Plan</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Plans</th>
+                                                        <th scope="col">Upgrade</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($myPlans as $key => $plan)
+                                                            @if (number_format($plan->amount,2,'.',"") ==  number_format($data->price,2,'.',""))
+                                                                <tr>
+                                                                    <th scope="row">{{$plan->id}}</th>
+                                                                    <td>{{$data->name}}</td>
+                                                                    <td>{{$plan->amount}}</td>
+                                                                    <td>
+                                                                        <select name="plans_select[]">
+                                                                            @foreach ($plans as $plan_v)
+                                                                                @if($plan_v->id > $data->id)
+                                                                                    <option value="{{$plan_v->id}}-{{$plan->id}}">{{$plan_v->name}}</option>
+                                                                                @endif
+                                                                            @endforeach    
+                                                                        </select>
+                                                                    </td>
+                                                                    <td><input type="radio" name="upgrade" value="{{$plan->id}}"/></td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                  </table>
+                                                <p class="text-center">{{ getAmount($data->price) }}
+                                                    {{ $general->cur_text }} @lang('will subtract from your balance')</p>
+                                                    <input type="hidden" name="plan_amount" value="{{$data->price}}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                @if($data->id != $planCount)
+                                                    <button type="submit" name="plan_upgrade_id" value="{{ $data->id }}"
+                                                        class="btn btn-primary float-end">
+                                                        @lang('Upgrade Plan')</button>
+                                                @endif
                                             </div>
                                         </form>
                                     </div>

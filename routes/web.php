@@ -267,6 +267,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('report/commission', 'ReportController@commission')->name('report.commission');
         Route::get('report/commission/{id}', 'ReportController@commission')->name('report.commissions');
         Route::post('report/commission/{id}', 'ReportController@deleteUnilevelBonus')->name('report.delete.unilevel');
+        Route::post('report/commission/edit/{id}', 'ReportController@editComission')->name('report.edit.comission');
         Route::get('report/referral-commission', 'ReportController@refCom')->name('report.refCom');
         Route::get('report/binary-commission', 'ReportController@binary')->name('report.binaryCom');
         Route::get('report/roi-income', 'ReportController@roiIncome')->name('report.roi');
@@ -434,6 +435,7 @@ Route::name('user.')->prefix('user')->group(function () {
             //plan
             Route::get('/plan', 'PlanController@planIndex')->name('plan.index');
             Route::post('/plan', 'PlanController@planStore')->name('plan.purchase');
+            Route::post('/plan-upgrade', 'PlanController@planUpgrade')->name('plan.upgrade.purchase');
             Route::post('/plan-renew', 'PlanController@planRenew')->name('plan.renew');
             Route::get('/referral-log', 'UserController@referralCom')->name('referral.log');
 

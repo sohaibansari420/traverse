@@ -32,6 +32,7 @@ class PlanController extends Controller
         $data['page_title'] = "Package Plan";
         $data['plans'] = Plan::whereStatus(1)->get();
         $data['myPlans'] = PurchasedPlan::where('user_id', Auth::id())->get();
+        $data['planCount']=count($data['plans']);
         return view($this->activeTemplate . '.user.plan', $data);
 
     }
@@ -148,7 +149,68 @@ class PlanController extends Controller
             return redirect()->route('user.home')->withNotify($notify);
         }
     }
+    function planUpgrade(Request $request){
+        $upgrade_id=0;
+        foreach ($request->plans_select as $key => $value) {
+            $val=explode("-",$value);
+            if ($request->upgrade == $val[1]) {
+                $upgrade_id=$val[0];    
+            }
+        }
+        
+        if ($upgrade_id == 0) {
+            $notify[] = ['error', 'Select your new plan to proceed.'];
+            return back()->withNotify($notify);
+        }
 
+        $plan_upgrade_id=$request->plan_upgrade_id;
+        $plan_id=$request->upgrade;
+
+        $this->validate($request, ['plan_upgrade_id' => 'required|integer']);
+        
+        $package = Plan::where('id', $upgrade_id)->where('status', 1)->firstOrFail();
+        $user = User::find(Auth::id());
+        $ref_id = getReferenceId(Auth::id());
+        $trx = getTrx();
+        
+        $type = 'upgrade';
+        $auto_renew = 0;
+        
+        if($type == 'upgrade'){
+            $balance = UserWallet::where('user_id', $user->id)->where('wallet_id', 1)->first()->balance;
+            $remainig_price=$package->price - $request->plan_amount;
+            if ($balance < $remainig_price) {
+                $notify[] = ['error', 'Insufficient Balance'];
+                return back()->withNotify($notify);
+            }
+            
+            $details = $user->username . ' Upgraded to ' . $package->name . ' plan';
+            
+            $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($remainig_price), $details, 0, 'upgrade_purchased_plan', NULL);
+            
+            $oldPlan = $user->plan_purchased;
+            $user->plan_purchased = 1;
+            $user->save();
+    
+            if ($oldPlan == 0){
+                updatePaidCount($user->id);
+            }
+            $purchased_plans=PurchasedPlan::find($plan_id);
+            $purchased_plans->amount = $package->price;
+            $purchased_plans->plan_id = $upgrade_id;
+            $purchased_plans->update();
+    
+            CronUpdate::create([
+                'user_id' => $user->id,
+                'type' => 'upgrade_plan',
+                'amount' => $package->price,
+                'details' => $details,
+                'status' => 0,
+            ]);
+    
+            return redirect()->route('user.home')->withNotify($notify);
+        }
+    }
     function planRenew(Request $request)
     {
 

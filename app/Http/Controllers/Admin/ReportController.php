@@ -879,4 +879,7 @@ class ReportController extends Controller
             }
         }
     }
+    public function editComission($id){
+        return $id;
+    }
 }
