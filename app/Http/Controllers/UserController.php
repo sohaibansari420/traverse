@@ -76,15 +76,20 @@ class UserController extends Controller
                                         ->orderBy('user_count', 'desc')
                                         ->first();
 
-            if (@$data['same_direct']->user_count >= $data['commissions'][4]->commissionDetail[0]->direct) {
+            $now = Carbon::now();
+            $check_fairy = new Carbon(Auth::user()->check_fairy);
+            $rem_days = $data['commissions'][4]->commissionDetail[0]->days - $check_fairy->diffInDays($now);
 
-                $now = Carbon::now();
-                $check_fairy = new Carbon(Auth::user()->check_fairy);
-                $rem_days = $data['commissions'][4]->commissionDetail[0]->days - $check_fairy->diffInDays($now);
+            if (@$data['same_direct']->user_count >= $data['commissions'][4]->commissionDetail[0]->direct && $rem_days > 0) {
 
-                if ($rem_days > 0) {
-                    cashbackCommission(Auth::user());
-                }
+                cashbackCommission(Auth::user());
+            }
+
+            if ($rem_days < 0) {
+
+                $user = Auth::user();
+                $user->check_fairy = $now;
+                $user->save();
             }
 
             $direct_sales    = UserFamily::whereRaw('user_id = ' . Auth::id() . ' and level = 1 ')
