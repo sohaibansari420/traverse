@@ -42,12 +42,12 @@ class UserController extends Controller
     {
         $general = GeneralSetting::first();
         
-        if(Auth::user()->check_fairy == NULL){
-            $user = User::find(Auth::id());
-            $updated_at = Carbon::now();
-            $user->check_fairy = $updated_at;
-            $user->save();
-        }
+        // if(Auth::user()->check_fairy == NULL){
+        //     $user = User::find(Auth::id());
+        //     $updated_at = Carbon::now();
+        //     $user->check_fairy = $updated_at;
+        //     $user->save();
+        // }
 
         if(Auth::user()->check_car == NULL){
             $user = User::find(Auth::id());
@@ -71,18 +71,25 @@ class UserController extends Controller
         if(getUserLowerPlan(Auth::id())){
             $data['same_direct']    = UserFamily::selectRaw('user_id, COUNT(*) as user_count')
                                         ->whereRaw('user_id = ' . Auth::id() . ' and level = 1 and plan_id >= ' . getUserLowerPlan(Auth::id())->plan_id)
-                                        ->where('created_at','>=',Carbon::parse(Auth::user()->check_fairy)->subDays(1))
+                                        ->where('created_at','>=', Carbon::parse(Auth::user()->check_fairy))
                                         ->groupBy('user_id')
                                         ->orderBy('user_count', 'desc')
                                         ->first();
 
-            if(@$data['same_direct']->user_count >= $data['commissions'][4]->commissionDetail[0]->direct){
-                $now = Carbon::now();
-                $created = new Carbon(Auth::user()->created_at);
-                $rem_days = $data['commissions'][4]->commissionDetail[0]->days - $created->diffInDays($now);
-                if($rem_days > 0){
-                    cashbackCommission(Auth::id());
-                }
+            $now = Carbon::now();
+            $check_fairy = new Carbon(Auth::user()->check_fairy);
+            $rem_days = $data['commissions'][4]->commissionDetail[0]->days - $check_fairy->diffInDays($now);
+
+            if (@$data['same_direct']->user_count >= $data['commissions'][4]->commissionDetail[0]->direct && $rem_days > 0) {
+
+                cashbackCommission(Auth::user());
+            }
+
+            if ($rem_days < 0) {
+
+                $user = Auth::user();
+                $user->check_fairy = $now;
+                $user->save();
             }
 
             $direct_sales    = UserFamily::whereRaw('user_id = ' . Auth::id() . ' and level = 1 ')

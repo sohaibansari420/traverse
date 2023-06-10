@@ -1398,24 +1398,27 @@ function referralCommission($user_id, $wallet_id, $percent, $commission_id, $nam
     }
 }
 
-function cashbackCommission($user_id)
+function cashbackCommission(User $user)
 {
     $general = GeneralSetting::first();
-    $user = User::find($user_id);
+
     $user_plan = getUserHigherPlan($user->id);
     $user_plan_release = getUserLowerPlan($user->id);
 
-    if ($user_plan){
+    if ($user_plan) {
+
         $commission = Commission::where('status', 1)->where('id', 5)->firstOrFail();
-        if($commission->is_package == 1){
+
+        if ($commission->is_package == 1) {
             $com = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
-        }
-        else{    
+        } else {
             $com = $commission->commissionDetail[0];
         }
+
         $amount = ($com->percent / 100) * $user_plan_release->plan->price;
         updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id , $general->sitename, $com->commission_limit, $user_plan->trx);
-        $user->check_fairy = NULL;
+
+        $user->check_fairy = Carbon::now();
         $user->save();
     }
 }
