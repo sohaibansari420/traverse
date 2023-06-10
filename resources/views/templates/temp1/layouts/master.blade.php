@@ -196,7 +196,7 @@
                         </div>
                         <p class="sub_technology">Fairy Metaverse is a blockchain-powered platform that offers an immersive and seamless experience across a range of applications. Our ecosystem includes an OTT platform, 3D NFT game, Online shopping mall application, and Crypto Currency Exchange. Our goal is to create a unique and inclusive entertainment experience that is accessible to everyone. We have a team of experts in gaming, blockchain, and entertainment, who are passionate about innovation and pushing the boundaries of what is possible in the Metaverse. Whether you want to play a 3D NFT game, shop for physical goods using cryptocurrency, or exchange cryptocurrencies with other users, Fairy Metaverse has exciting applications that are sure to keep you engaged and entertained. Join us on our journey to redefine the future of entertainment in the Metaverse. With Fairy Metaverse, the possibilities are endless.
                         </p>
-                        <img class="move4 mt-4 mb-4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/site/legal.png') }}" alt="Legal Document">
+                        {{-- <img class="move4 mt-4 mb-4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/site/legal.png') }}" alt="Legal Document"> --}}
                         <div class="swiper-container slider-6">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">

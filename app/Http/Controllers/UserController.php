@@ -100,9 +100,9 @@ class UserController extends Controller
             $car_days = $data['commissions'][6]->commissionDetail[0]->days;
             $car_days_date = Carbon::parse(Auth::user()->check_car)->addDays($car_days);
             $now = Carbon::now();
-            
+
             if($car_days_date->lte($now)){
-                carShare(Auth::id(), $total_direct_sale);
+                carShare(Auth::id(), $total_direct_sale,$car_days_date);
             }
         }
         

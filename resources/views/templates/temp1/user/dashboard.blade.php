@@ -197,7 +197,7 @@
                     </div>
                     <div class="col-12 mt-4">
                         <div class="bgl-primary rounded p-3">
-                            <h4 class="mb-0">Emarlad Rank</h4>
+                            <h4 class="mb-0">Emerald Rank</h4>
                             <small>Requirement</small>
                         </div>
                     </div>

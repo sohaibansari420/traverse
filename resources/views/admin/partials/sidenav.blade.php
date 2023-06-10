@@ -457,6 +457,13 @@
                         <span class="menu-title">@lang('Subscribers') </span>
                     </a>
                 </li>
+                {{-- <li class="sidebar-menu-item  {{ menuActive('admin.promotion.index') }}">
+                    <a href="{{ route('admin.promotion.index') }}" class="nav-link"
+                        data-default-url="{{ route('admin.promotion.index') }}">
+                        <i class="menu-icon las la-thumbs-up"></i>
+                        <span class="menu-title">@lang('Promotions') </span>
+                    </a>
+                </li> --}}
 
 
                 <li class="sidebar__menu-header">@lang('Settings')</li>
