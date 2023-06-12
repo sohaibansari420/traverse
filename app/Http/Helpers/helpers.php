@@ -10,8 +10,6 @@ use App\Models\EmailTemplate;
 use App\Models\Extension;
 use App\Models\Frontend;
 use App\Models\GeneralSetting;
-use App\Models\Income;
-use App\Models\Invoice;
 use App\Models\Plan;
 use App\Models\PurchasedPlan;
 use App\Models\Rank;
@@ -24,10 +22,10 @@ use App\Models\UserFamily;
 use App\Models\UserNetwork;
 use App\Models\UserWallet;
 use App\Models\Wallet;
-use App\Models\Withdrawal;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
@@ -1423,52 +1421,187 @@ function cashbackCommission(User $user)
     }
 }
 
-function vipCommission($id = ''){
-	if($id == 1){
-		echo $id;
-        $users = Withdrawal::where(['wallet_id' => 3, 'status' => 1])->with('user')->get()->pluck('user')->unique('id');
-		// $users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
-	}
-    elseif($id == 2){
-		echo $id;
-		$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
-	}
-	else{
-		echo $id;
-		$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
-	}
+function vipCommission(User $user, int $with_draw_id)
+{
+	// if($id == 1){
+	// 	echo $id;
+    //     $users = Withdrawal::where(['wallet_id' => 3, 'status' => 1])->with('user')->get()->pluck('user')->unique('id');
+	// 	// $users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
+	// }
+    // elseif($id == 2){
+	// 	echo $id;
+	// 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
+	// }
+	// else{
+	// 	echo $id;
+	// 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
+	// }
+
+    // $total_level = CommissionDetail::where('commission_id', 4)->count();
+
+    // foreach ($users as $user){
+    //     $user_plan = getUserHigherPlan($user->id);
+
+    //     if($user_plan){
+    //         $user_levels = UserFamily::where('user_id', $user->id)->orderBy('level', 'desc')->value('level');
+
+    //         if($user_levels >= $total_level){
+    //             $user_levels = $total_level;
+    //         }
+    
+    //         $level = 1;
+    
+    //         while($level <= $user_levels){
+    //             $level_earning = UserFamily::where('user_id', $user->id)->where('level', $level)->sum('weekly_roi');
+    //             $commission = CommissionDetail::where('commission_id', 4)->where('level', $level)->first();
+    
+    //             $amount = ($commission->percent / 100) * $level_earning;
+    
+    //             updateCommissionWithLimit($user->id, $amount, $commission->commission->wallet_id, $commission->commission->id, 'Level ' . $level, $commission->commission_limit, $user_plan->trx);
+    
+    //             $level++;
+    //         }
+    //     }
+    // }
 
     $total_level = CommissionDetail::where('commission_id', 4)->count();
 
-    foreach ($users as $user){
-        $user_plan = getUserHigherPlan($user->id);
+    $user_plan = getUserHigherPlan($user->id);
 
-        if($user_plan){
-            $user_levels = UserFamily::where('user_id', $user->id)->orderBy('level', 'desc')->value('level');
+    if ($user_plan) {
 
-            if($user_levels >= $total_level){
-                $user_levels = $total_level;
-            }
-    
-            $level = 1;
-    
-            while($level <= $user_levels){
-                $level_earning = UserFamily::where('user_id', $user->id)->where('level', $level)->sum('weekly_roi');
-                $commission = CommissionDetail::where('commission_id', 4)->where('level', $level)->first();
-    
-                $amount = ($commission->percent / 100) * $level_earning;
-    
-                updateCommissionWithLimit($user->id, $amount, $commission->commission->wallet_id, $commission->commission->id, 'Level ' . $level, $commission->commission_limit, $user_plan->trx);
-    
-                $level++;
-            }
+        $user_levels = UserFamily::where('user_id', $user->id)->orderBy('level', 'desc')->value('level');
+
+        if ($user_levels >= $total_level) {
+            $user_levels = $total_level;
         }
+
+        $level = 1;
+
+        while ($level <= $user_levels) {
+            $level_earning = UserFamily::where('user_id', $user->id)->where('level', $level)->sum('weekly_roi');
+            $commission = CommissionDetail::where('commission_id', 4)->where('level', $level)->first();
+
+            $amount = ($commission->percent / 100) * $level_earning;
+
+            updateUniLevelBonus($user, $amount, $commission->commission->wallet_id, $commission->commission->id, 'Level ' . $level, $commission->commission_limit, $user_plan->trx, $with_draw_id);
+
+            $level++;
+        }
+
     }
 }
 
-function vipCommissionSet(){
-    $user_familys = UserFamily::all();
-    foreach($user_familys as $user_family){
+function updateUniLevelBonus(User $user, float $amount, int $wallet_id, int $commission_id, string $msg, float $commission_limit, string $tnx, int $with_draw_id)
+{
+    $plan = PurchasedPlan::where('trx', $tnx)->firstOrFail();
+
+    if ($amount != 0) {
+        if ($commission_limit != 0) {
+
+            $limit = checkLimit($amount, $commission_limit, $plan);
+
+            if ($limit <= 100) {
+                $plan->limit_consumed = $limit;
+                $plan->save();
+
+                //update commission
+                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+                addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
+            } else {
+                //set limit
+                $remaining_amount = setLimit($amount, $commission_limit, $plan);
+
+                //update commission
+                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+                addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
+
+
+                while($remaining_amount != 0){
+                    $remaining_amount = limitRemaining($user->id, $remaining_amount, $wallet_id, $commission_id, $msg, $commission_limit, $plan);
+                }
+                
+            }
+
+        } else {
+            //update commission
+            $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+            addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
+        } 
+    }
+
+    return 0;
+}
+
+function addTransactionWithOutUpdateWallet(User $user, string $tnx, int $wallet_id, int $commission_id, float $amount, string $details, float $charges, string $remarks, string $plan_trx, int $with_draw_id)
+{
+    $transaction = new Transaction();
+    $transaction->withdraw_id = $with_draw_id;
+    $transaction->user_id = $user->id;
+    $transaction->amount = $amount;
+    $transaction->charge = $charges;
+    $transaction->details = $details;
+    $transaction->trx = $tnx;
+    $transaction->plan_trx = $plan_trx;
+    $transaction->country = User::where('id', $user->id)->first()->address->country;
+    $transaction->remark = $remarks;
+    $transaction->commission_id = $commission_id;
+
+    $wallet = UserWallet::where(['user_id' => $user->id, 'wallet_id' => $wallet_id])->first();
+
+    $transaction->post_balance = getAmount($wallet->balance);
+
+    if ($wallet->wallet->passive > 0) {
+
+        $commission_ammount = ($amount * $wallet->wallet->passive) / 100;
+        $amount = $amount - $commission_ammount; 
+        $passive_wallet = UserWallet::where(['user_id' => $user->id, 'wallet_id' => 9])->first();
+        $passive_wallet->balance += $commission_ammount;
+        // $passive_wallet->save();
+
+        $details2 = 'Received Income in ' . getWalletName(9)  . ' From ' . getCommissionName($commission_id);
+
+        $transaction2 = new Transaction();
+        $transaction2->withdraw_id = $with_draw_id;
+        $transaction2->user_id = $user->id;
+        $transaction2->amount = $commission_ammount;
+        $transaction2->charge = $charges;
+        $transaction2->details = $details2;
+        $transaction2->trx =  $tnx;
+        $transaction2->plan_trx =  $plan_trx;
+        $transaction2->country = User::where('id', $user->id)->first()->address->country;
+        $transaction2->remark = 'passive_income';
+        $transaction2->commission_id = $commission_id;
+        $transaction2->post_balance = getAmount($passive_wallet->balance);
+        $transaction2->trx_type = '+';
+        $transaction2->wallet_id =  9;
+        $transaction2->save();
+
+        $transaction->amount = $amount;
+    }
+
+    // $wallet->balance += $amount;
+    $transaction->trx_type = '+';
+    $transaction->wallet_id =  $wallet_id;
+
+    // $wallet->save();
+    $transaction->save();
+
+    return ['success', $details];
+}
+
+function vipCommissionSet(int $user_id)
+{
+    // $user_familys = UserFamily::all();
+    // foreach($user_familys as $user_family){
+    //     $user_family->current_roi = $user_family->weekly_roi;
+    //     $user_family->weekly_roi = 0;
+    //     $user_family->save();
+    // }
+
+    $user_families = UserFamily::where('user_id', $user_id)->get();
+
+    foreach ($user_families as $user_family) {
         $user_family->current_roi = $user_family->weekly_roi;
         $user_family->weekly_roi = 0;
         $user_family->save();
