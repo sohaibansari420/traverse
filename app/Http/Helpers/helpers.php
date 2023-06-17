@@ -16,6 +16,7 @@ use App\Models\Rank;
 use App\Models\RankAchiever;
 use App\Models\SmsTemplate;
 use App\Models\Transaction;
+use App\Models\UnprocessedData;
 use App\Models\User;
 use App\Models\UserExtra;
 use App\Models\UserFamily;
@@ -1291,13 +1292,20 @@ function updateBV($id, $bv, $details)
                             $binary = $commission->commissionDetail[0];
                         }
     
-                        $res = cutPoints($posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx);
+                        UnprocessedData::create([
+                            'uuid' => \Illuminate\Support\Str::uuid(),
+                            'method' => 'cutPoints',
+                            'data' => json_encode([$posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx]),
+                        ]);
+
+                        // info('meadasd', [$posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx]);
+                        // $res = cutPoints($posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx);
         
-                        $count += $res;
+                        // $count += $res;
         
-                        if($count == 5){
-                            //break;
-                        }
+                        // if($count == 5){
+                        //     //break;
+                        // }
                     }
                 }
             }

@@ -9,6 +9,7 @@ use App\Models\GeneralSetting;
 use App\Models\Plan;
 use App\Models\PurchasedPlan;
 use App\Models\Transaction;
+use App\Models\UnprocessedData;
 use App\Models\User;
 use App\Models\UserExtra;
 use App\Models\UserFamily;
@@ -129,6 +130,13 @@ class CronController extends Controller
             rewardRelease();
             //checkPaidStatusDaily();
             //autoCompounding();
+        }
+        elseif($id == "unprocessed_data"){
+            $unprocessedDatas = UnprocessedData::where('is_processed', 0)->get();
+
+            foreach ($unprocessedDatas as $unprocessedData) {
+                call_user_func_array($unprocessedData->method, json_decode($unprocessedData->data));
+            }
         }
         // elseif($id == "saturday"){
         //     $commissions = Commission::where('status', 1)->where('commission_release_id', 4)->get();
