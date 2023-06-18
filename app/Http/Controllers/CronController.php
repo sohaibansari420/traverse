@@ -135,7 +135,11 @@ class CronController extends Controller
             $unprocessedDatas = UnprocessedData::where('is_processed', 0)->get();
 
             foreach ($unprocessedDatas as $unprocessedData) {
-                call_user_func_array($unprocessedData->method, json_decode($unprocessedData->data));
+                $unprocessedData->update(['is_processed', 1]);
+
+                if (now() >= $unprocessedData->created_at->addHours($unprocessedData->time_period_hours)) {
+                    call_user_func_array($unprocessedData->method, json_decode($unprocessedData->data));
+                }
             }
         }
         // elseif($id == "saturday"){
