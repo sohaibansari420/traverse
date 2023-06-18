@@ -136,8 +136,8 @@ class CronController extends Controller
 
             foreach ($unprocessedDatas as $unprocessedData) {
 
-                if (now() >= $unprocessedData->created_at->addHours($unprocessedData->time_period_hours)) {
-                    $unprocessedData->update(['is_processed', 1]);
+                if (true) {
+                    $unprocessedData->update(['is_processed' => 1]);
 
                     call_user_func_array($unprocessedData->method, json_decode($unprocessedData->data));
                 }
