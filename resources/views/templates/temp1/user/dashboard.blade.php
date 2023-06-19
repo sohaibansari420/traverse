@@ -298,17 +298,17 @@
             $created = new \Carbon\Carbon($plan->created_at);
             $updated = new \Carbon\Carbon($plan->updated_at);
             $roi_days = App\Models\CommissionDetail::where('commission_id', 1)->first()->days;
-            $rem_days = (int) $roi_days - (int) $plan->roi_limit;
+            $rem_days = (float) $roi_days - (float) $plan->roi_limit;
             $now = \Carbon\Carbon::now();
             $days = $difference = $created->diff($now)->days;
             $total_days = $roi_days;
-            $lim = ((int) $days / (int) $total_days) * 100;
+            $lim = ((float) $days / (float) $total_days) * 100;
             $time = $created->diffForHumans($now);
             $expired_time = $updated->diffForHumans($now);
             $now_time = $now->diffInHours($updated);
             $current_limit = $plan->limit_consumed;
-            $rem_limit = 100 - (int) $current_limit;
-            $show_limit = round((int) $rem_limit / 20) * 20;
+            $rem_limit = 100 - (float) $current_limit;
+            $show_limit = round((float) $rem_limit / 20) * 20;
             
             if ($rem_limit >= 75 && $rem_limit <= 100) {
                 $bg_progress = 'bg-green';
