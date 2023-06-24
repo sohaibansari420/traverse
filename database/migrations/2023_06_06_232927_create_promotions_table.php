@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id(); 
             $table->string('name')->nullable();
             $table->text('detail')->nullable();
-            $table->integer('user_id')->default(0);
-            $table->string('country')->nullable();
+            $table->text('user_id')->nullable();
+            $table->text('country')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
             $table->text('image')->nullable();

@@ -130,15 +130,15 @@
                         <ul class="widget-link contact">
                             <li>
                                 <p>Address</p>
-                                <a href="#">1901 Thornridge Cir. Shiloh, Hawaii 81063</a>
+                                <a href="#">291 Brighton Road, South Croydon, United Kingdom</a>
                             </li>
                             <li>
                                 <p>Phone</p>
-                                <a href="#">+33 7 00 55 57 60</a>
+                                <a href="#">+44 20 3435 4354</a>
                             </li>
                             <li class="email">
                                 <p>Email</p>
-                                <a href="#">support@fairymetaverse.com</a>
+                                <a href="#">admin@fairymetaverse.com</a>
                             </li>
                         </ul>
                     </div>
