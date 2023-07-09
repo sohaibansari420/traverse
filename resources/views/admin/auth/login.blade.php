@@ -20,6 +20,12 @@
                     <div class="form-group d-flex justify-content-between align-items-center">
                         <a href="{{ route('admin.password.reset') }}" class="text-muted text--small"><i class="las la-lock"></i>@lang('Forgot password?')</a>
                     </div>
+                    @if (reCaptcha())
+                        <div class="form-group">
+                            @php echo reCaptcha(); @endphp
+                        </div>
+                    @endif
+                    @include('admin.partials.custom-captcha')
                     <div class="form-group">
                         <button type="submit" class="submit-btn mt-25 b-radius--capsule">@lang('Login') <i class="las la-sign-in-alt"></i></button>
                     </div>

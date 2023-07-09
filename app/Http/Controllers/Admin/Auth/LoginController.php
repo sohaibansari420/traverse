@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Models\GeneralSetting;
 use App\Http\Controllers\Controller;
+use App\Models\Extension;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -75,7 +76,12 @@ class LoginController extends Controller
 
         $this->validateLogin($request);
 
-//
+        if(isset($request->captcha)){
+            if(!captchaVerify($request->captcha, $request->captcha_secret)){
+                $notify[] = ['error',"Invalid Captcha"];
+                return back()->withNotify($notify)->withInput();
+            }
+        }
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -110,5 +116,21 @@ class LoginController extends Controller
     {
         $page_title = 'Account Recovery';
         return view('admin.reset', compact('page_title'));
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $customRecaptcha = Extension::where('act', 'custom-captcha')->where('status', 1)->first();
+        $validation_rule = [
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ];
+
+        if ($customRecaptcha) {
+            $validation_rule['captcha'] = 'required';
+        }
+
+        $request->validate($validation_rule);
+
     }
 }
