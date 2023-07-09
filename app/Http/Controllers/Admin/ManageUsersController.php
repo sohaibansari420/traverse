@@ -108,6 +108,7 @@ class ManageUsersController extends Controller
                             4=> 'mobile',
                             5=> 'created_at',
                             6=> 'id',
+                            7=> 'status',
                         );
                         
         if($id == "all"){
@@ -312,7 +313,8 @@ class ManageUsersController extends Controller
                 $nestedData['email'] = $record->email;
                 $nestedData['mobile'] = $record->mobile;
                 $nestedData['created_at'] = date('j M Y h:i a',strtotime($record->created_at));
-                $nestedData['action'] = "<a href='{$details}' class='icon-btn'data-toggle='tooltip' data-original-title='Details')'><i class='las la-desktop text--shadow'></i></a>";
+                $nestedData['action'] = "<a href='{$details}' class='icon-btn mr-3' data-toggle='tooltip' data-original-title='Details')'><i class='las la-desktop text--shadow'></i></a>";
+                $nestedData['action'] .= $record->status ? "<button class='btn btn-danger js-enable-disable-user' data-id='$record->id'>Disable</button>" : "<button class='btn btn-success js-enable-disable-user' data-id='$record->id'>Enable</button>";
                 
                 $data[] = $nestedData;
 
@@ -766,5 +768,10 @@ class ManageUsersController extends Controller
         return back()->withNotify($notify);
     }
 
+    public function usersActivation(Request $request)
+    {
+        $user = User::find($request->id);
 
+        return response()->json(['success' => $user->status ? $user->update(['status' => 0]) : $user->update(['status' => 1])]);
+    }
 }

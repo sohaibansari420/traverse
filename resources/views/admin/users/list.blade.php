@@ -80,5 +80,15 @@
 
             });
         });
+
+        $(document).on('click', '.js-enable-disable-user', function() {
+            $.ajax({
+                url: "{{ route('admin.users.activation', '') }}/" + $(this).data('id'),
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+            $('#dataTable').DataTable().ajax.reload(null, false);
+        });
     </script>
 @endpush

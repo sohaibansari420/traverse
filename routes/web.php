@@ -88,6 +88,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         // Users Manager
         Route::post('users/data/{id}', 'ManageUsersController@usersData')->name('users.data');
         Route::get('users', 'ManageUsersController@allUsers')->name('users.all');
+        Route::get('users/activation/{id}', 'ManageUsersController@usersActivation')->name('users.activation');
         Route::get('users/active', 'ManageUsersController@activeUsers')->name('users.active');
         Route::get('users/banned', 'ManageUsersController@bannedUsers')->name('users.banned');
         Route::get('users/email-verified', 'ManageUsersController@emailVerifiedUsers')->name('users.emailVerified');
