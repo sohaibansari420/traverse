@@ -146,12 +146,12 @@
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img1.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[4]->name }}</h3>
-                <p class="text-white mb-2">Join The Millionaire Metaverse, earn cash back, sponsor 10 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
+                <p class="text-white mb-2">Join The Fairy Metaverse, earn cash back, sponsor 10 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="mb-0 fs-15">The Millionaire Metaverse Special Bonus rewards new members of The Millionaire Metaverse ecosystem who sponsor 10 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
+                        <p class="mb-0 fs-15">The Fairy Special Bonus rewards new members of The Fairy Metaverse ecosystem who sponsor 10 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
                     </div>
                     <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -193,7 +193,7 @@
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="mb-0 fs-15">The Global Share Bonus is a unique bonus offered by The Millionaire Metaverse that allows all qualified members to earn a 2% share in the company's global turnover. This bonus is available to members who have achieved the rank of Emerald or above.</p>
+                        <p class="mb-0 fs-15">The Global Share Bonus is a unique bonus offered by The Fairy Metaverse that allows all qualified members to earn a 2% share in the company's global turnover. This bonus is available to members who have achieved the rank of Emerald or above.</p>
                     </div>
                     <div class="col-12 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -217,7 +217,7 @@
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[6]->name }}</h3>
-                <p class="text-white mb-2">Luxurious Car Bonus from The Millionaire Metaverse based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
+                <p class="text-white mb-2">Luxurious Car Bonus from The Fairy Metaverse based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">

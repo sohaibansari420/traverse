@@ -42,10 +42,10 @@ class UserController extends Controller
     {
         $general = GeneralSetting::first();
         
-        // if(Auth::user()->check_millionairemetaverse == NULL){
+        // if(Auth::user()->check_fairy == NULL){
         //     $user = User::find(Auth::id());
         //     $updated_at = Carbon::now();
-        //     $user->check_millionairemetaverse = $updated_at;
+        //     $user->check_fairy = $updated_at;
         //     $user->save();
         // }
 

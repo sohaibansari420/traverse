@@ -11,7 +11,7 @@
                             <h6 class="title">Register</h6>
                             <h6 class="title show-mobie"><a href="{{route('user.login')}}">Login</a></h6>
                             <h6 class="title link"><a href="{{route('user.login')}}">Login</a></h6>
-                            <p>Welcome to Millionaire Metaverse, please enter your details</p>
+                            <p>Welcome to Fairy Metaverse, please enter your details</p>
                             <div class="form-inner"> 
         
                                 @if ($ref_user == null)

@@ -90,9 +90,9 @@
                 <div class="col-md-6">
                     <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Join The <br/>Millionaire Metaverse Community Today!
+                            Join The <br/>Fairy Metaverse Community Today!
                         </h2>
-                        <p class="sub">Take the first step towards financial freedom in the metaverse. Join Millionaire Metaverse or contact us to learn more about our innovative products and earning opportunities.</p>
+                        <p class="sub">Take the first step towards financial freedom in the metaverse. Join Fairy Metaverse or contact us to learn more about our innovative products and earning opportunities.</p>
                         <div class="wrap-btn">
                             <a href="#" class="tf-button style3">
                                 Join Now
@@ -117,7 +117,7 @@
                         <div class="logo_footers">
                             <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Fairy Metaverse Logo">
                         </div>
-                        <p class="mt-4">The Millionaire Metaverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the metaverse and achieve financial freedom.</p>
+                        <p class="mt-4">The Fairy Metaverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the metaverse and achieve financial freedom.</p>
                     </div>
                     <div class="widget">
                         
@@ -149,7 +149,7 @@
             <div class="container">
                 <div class="wrap-fx">
                     <div class="Copyright">
-                        Copyright © Millionaire Metaverse. All Rights Reserved.
+                        Copyright © Fairy Metaverse. All Rights Reserved.
                     </div>
                 </div>
             </div>
