@@ -23,6 +23,9 @@ use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Models\Founder;
 
 
 class ManageUsersController extends Controller
@@ -773,5 +776,93 @@ class ManageUsersController extends Controller
         $user = User::find($request->id);
 
         return response()->json(['success' => $user->status ? $user->update(['status' => 0]) : $user->update(['status' => 1])]);
+    }
+
+    public function founderList(Request $request){
+        $page_title = 'Founder Bonus';
+        $founder = Founder::all();
+        return view('admin.reports.founderbonus', compact('page_title','founder'));
+        $report = [];
+
+        $deposit = 0;
+        $roi = 0;
+        $bonus = 0;
+
+        $month_start= Carbon::now()->startOfMonth()->format('Y-m-d');
+        $month_end= Carbon::now()->endOfMonth()->format('Y-m-d');
+        $thisMonth=Carbon::now()->format('m');
+        
+        $commissions = Commission::with('trans')->get();
+
+        foreach ($commissions as $key => $commission) {
+            if($commission->name == "ROI Income"){
+                $roi=$commission->trans->sum('amount');
+            }
+            else{
+                $bonus+=$commission->trans->sum('amount');
+            }
+            
+        }
+
+        $deposit = Deposit::whereYear('created_at', '>=', Carbon::now()->subYear())
+            ->selectRaw("SUM( CASE WHEN status = 1 THEN amount END) as depositAmount")
+            ->selectRaw("DATE_FORMAT(created_at,'%M') as months")
+            ->orderBy('created_at')
+            ->groupBy(DB::Raw("MONTH(created_at)"))->get();
+
+        foreach ($deposit as $key => $dep) {
+            $depMonth = Carbon::parse($dep->months)->format('m');
+            if (Carbon::createFromFormat('m',$thisMonth)->eq(Carbon::createFromFormat('m',$depMonth))) {
+                $deposit=$dep->depositAmount;
+            }
+        }    
+        
+        $objReport=[];
+        $objReport['month']=carbon::createFromFormat('m',$thisMonth)->format('F');
+        $objReport['deposit']=$deposit;
+        $objReport['roi']=$roi;
+        $objReport['bonus']=$bonus;
+        $objReport['profit']=($deposit)-($roi+$bonus);
+        $objReport['founder_bonus']=(($deposit)-($roi+$bonus))*0.01;
+        $objReport['total_profit']=($deposit)-($roi+$bonus) - ((($deposit)-($roi+$bonus))*0.01);
+
+        array_push($report,$objReport);
+        
+        return view('admin.reports.founderbonus', compact('page_title','report'));
+    }
+
+    public function GetFounderUsers(Request $request){
+        $users= User::with('activePlan')->where('is_founder','yes')->get();
+        
+        foreach ($users as $key => $user) {
+            if (count($user->activePlan) == 0) {
+                $is_founder=user::where('id',$user->id)->first();
+                $is_founder->is_founder = 'no';
+                $is_founder->update();
+            }
+        }
+        return $users;
+    }    
+    public function SaveFounderUsers(Request $request){
+        
+        if ($request->bonus_amount == '') {
+            $notify[] = ['error', 'Amount is Null'];
+            return redirect()->back()->withNotify($notify);
+        }
+        
+        $founder_count=count($request->id);
+        $bonus        =(1/$founder_count)*$request->bonus_amount;
+
+        foreach ($request->id as $key => $value) {
+            $founder=new Founder;
+            $founder->user_id=$value;
+            $founder->username=$request->username[$key];
+            $founder->email=$request->email[$key];
+            $founder->amount=$bonus;
+            $founder->status='paid';
+            $founder->Save();
+        }
+        $notify[] = ['success', 'Bonus is Distributed'];
+        return redirect()->back()->withNotify($notify);
     }
 }

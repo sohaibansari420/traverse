@@ -90,6 +90,12 @@ class PlanController extends Controller
                 'details' => $details,
                 'status' => 0,
             ]);
+
+            if ($package->price >= 25000) {
+                $user_founder=User::find($user->id);
+                $user_founder->is_founder = 'yes';
+                $user_founder->update();
+            }
     
             return redirect()->route('user.home')->withNotify($notify);
         }

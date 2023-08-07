@@ -73,7 +73,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Withdrawal::class)->where('status','!=',0);
     }
-
+    public function activePlan()
+    {
+        return $this->hasMany(PurchasedPlan::class,'user_id','id')->where('is_expired',0)->where('amount','>=','25000')->orderBy('id','desc');
+    }
     //mlm
     public function userExtra()
     {
