@@ -138,14 +138,14 @@
         @php
             $now = \Carbon\Carbon::now();
             $created = new \Carbon\Carbon(auth()->user()->check_fairy);
-            $rem_days = $commissions[4]->commissionDetail[0]->days - $created->diffInDays($now);
+            $rem_days = $commissions[3]->commissionDetail[0]->days - $created->diffInDays($now);
             if($rem_days < 0){
                 $rem_days = 0;
             }
         @endphp
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img1.png);">
-                <h3 class="mt-3 mb-1 text-white">{{ $commissions[4]->name }}</h3>
+                <h3 class="mt-3 mb-1 text-white">{{ $commissions[3]->name }}</h3>
                 <p class="text-white mb-2">Join The Millionaire Metaverse, earn cash back, sponsor 10 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
             </div>
             <div class="card-body">
@@ -155,7 +155,7 @@
                     </div>
                     <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
-                            <h4 class="mb-0">{{ $commissions[4]->commissionDetail[0]->direct - @$same_direct->user_count}}</h4>
+                            <h4 class="mb-0">{{ (int) $commissions[3]->commissionDetail[0]->direct - @$same_direct->user_count}}</h4>
                             <small>Remaining Members</small>
                         </div>
                     </div>
@@ -171,11 +171,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
-                            <h6>{{ @$same_direct->user_count / $commissions[4]->commissionDetail[0]->direct * 100 }}%</h6>
+                            <h6>{{ @$same_direct->user_count / $commissions[3]->commissionDetail[0]->direct * 100 }}%</h6>
                             <span>Direct Members</span>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-primary" style="width: {{ @$same_direct->user_count / $commissions[4]->commissionDetail[0]->direct * 100 }}%"></div>
+                            <div class="progress-bar bg-primary" style="width: {{ @$same_direct->user_count / $commissions[3]->commissionDetail[0]->direct * 100 }}%"></div>
                         </div>
                     </div>
                 </div>						
@@ -187,7 +187,7 @@
     <div class="col-xl-6 wow fadeInUp" data-wow-delay="1.7s">
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img3.png);">
-                <h3 class="mt-3 mb-1 text-white">{{ $commissions[5]->name }}</h3>
+                <h3 class="mt-3 mb-1 text-white">{{ $commissions[4]->name }}</h3>
                 <p class="text-white mb-2">Earn 2% share in company's turnover. Qualify as Emerald or above. Monthly payout based on sales volume.</p>
             </div>
             <div class="card-body">
@@ -209,14 +209,14 @@
         @php
             $now = \Carbon\Carbon::now();
             $created = new \Carbon\Carbon(auth()->user()->check_car);
-            $rem_day = $commissions[6]->commissionDetail[0]->days - $created->diffInDays($now);
+            $rem_day = $commissions[5]->commissionDetail[0]->days - $created->diffInDays($now);
             if($rem_day < 0){
                 $rem_day = 0;
             }
         @endphp
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
-                <h3 class="mt-3 mb-1 text-white">{{ $commissions[6]->name }}</h3>
+                <h3 class="mt-3 mb-1 text-white">{{ $commissions[5]->name }}</h3>
                 <p class="text-white mb-2">Luxurious Car Bonus from The Millionaire Metaverse based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
             </div>
             <div class="card-body">
@@ -264,7 +264,7 @@
     <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
         <div class="card overflow-hidden">
             <div class="text-center p-3" >
-                <h2 class="mt-3 mb-1 text-white">{{ $commissions[7]->name }}</h2>
+                <h2 class="mt-3 mb-1 text-white">{{ $commissions[6]->name }}</h2>
             </div>
             <div class="card-body text-center">
                 <p><strong class="text-success">{{ $rem_points }} BV</strong> Remaining to Achieve Next Rank</p>
