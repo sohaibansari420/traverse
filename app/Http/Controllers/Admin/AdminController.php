@@ -47,7 +47,7 @@ class AdminController extends Controller
         $wallets = Wallet::all();
 
         //Commissions
-        $commissions = Commission::all();
+        $commissions = Commission::where('status', 1)->get();
 
         // Monthly Deposit & Withdraw Report Graph
         $report['months'] = collect([]);
