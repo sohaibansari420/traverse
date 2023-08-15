@@ -60,7 +60,7 @@ class RegisterController extends Controller
     {
         $content = Frontend::where('data_keys', 'sign_up.content')->first();
         $info = json_decode(json_encode(getIpInfo()), true);
-        $country_code = @implode(',', $info['code']);
+        $country_code = @implode(',', $info['code'])?? null;
 
         if ($request->ref && $request->position) {
             $ref_user = User::where('username', $request->ref)->first();
