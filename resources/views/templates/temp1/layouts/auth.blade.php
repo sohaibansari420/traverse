@@ -45,7 +45,7 @@
         <div class="container">
             <div id="site-header-inner">
                 <div class="header_logo">
-                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Fairy Metaverse Logo"></a>
+                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo"></a>
                 </div>
                
                 <nav id="main-nav" class="main-nav">
@@ -115,7 +115,7 @@
                 <div class="row">
                     <div class="footer-logo">
                         <div class="logo_footers">
-                            <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Fairy Metaverse Logo">
+                            <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo">
                         </div>
                         <p class="mt-4">The Millionaire Metaverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the metaverse and achieve financial freedom.</p>
                     </div>
@@ -138,7 +138,7 @@
                             </li>
                             <li class="email">
                                 <p>Email</p>
-                                <a href="#">admin@fairymetaverse.com</a>
+                                <a href="#">admin@millionairemetverse.com</a>
                             </li>
                         </ul>
                     </div>
