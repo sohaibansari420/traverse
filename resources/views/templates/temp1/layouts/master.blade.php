@@ -299,10 +299,10 @@
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div>
                                 </div>
-                                <h5 class="heading"><a href="#">FMC Token</a></h5>
+                                <h5 class="heading"><a href="#">MM Token</a></h5>
                             </div>
                             <div class="content">
-                                <p>FMC Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Millionaire Metaverse ecosystem, it serves as a medium of exchange and store of value for users within the platform. FMC can be used to purchase virtual land, goods, and services within the Metaverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. FMC Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
+                                <p>MM Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Millionaire Metaverse ecosystem, it serves as a medium of exchange and store of value for users within the platform. MM can be used to purchase virtual land, goods, and services within the Metaverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. MM Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -316,7 +316,7 @@
                                 <h5 class="heading"><a href="#">Online Shopping Mall</a></h5>
                             </div>
                             <div class="content">
-                                <p>The online shopping mall application in Millionaire Metaverse is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the FMC Token, allowing users to make purchases using the cryptocurrency.</p>
+                                <p>The online shopping mall application in Millionaire Metaverse is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the MM Token, allowing users to make purchases using the cryptocurrency.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -358,7 +358,7 @@
                                 <h5 class="heading"><a href="#">Crypto Currency Exchange</a></h5>
                             </div>
                             <div class="content">
-                                <p>The crypto currency exchange in Millionaire Metaverse is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and FMC. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the FMC Token, allowing users to trade cryptocurrencies using the Millionaire Metaverse's native cryptocurrency.</p>
+                                <p>The crypto currency exchange in Millionaire Metaverse is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the MM Token, allowing users to trade cryptocurrencies using the Millionaire Metaverse's native cryptocurrency.</p>
                             </div>
                         </div>
                     </div>
@@ -407,11 +407,11 @@
                                             <div class="content">
                                                 <h6 class="date">Q4, 2023</h6>
                                                 <ul>
-                                                    <li><h6>FMC Token</h6></li>
-                                                    <li>Launch FMC token on multiple exchanges</li>
-                                                    <li>Integration of FMC token for payments within The Millionaire Metaverse ecosystem</li>
-                                                    <li>Collaboration with other projects for increased use cases and adoption of FMC</li>
-                                                    <li>Develop a mobile wallet for FMC</li>
+                                                    <li><h6>MM Token</h6></li>
+                                                    <li>Launch MM token on multiple exchanges</li>
+                                                    <li>Integration of MM token for payments within The Millionaire Metaverse ecosystem</li>
+                                                    <li>Collaboration with other projects for increased use cases and adoption of MM</li>
+                                                    <li>Develop a mobile wallet for MM</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -427,7 +427,7 @@
                                                     <li><h6>Online Shopping Mall</h6></li>
                                                     <li>Onboard more merchants to the shopping mall</li>
                                                     <li>Launch of an affiliate program for members to earn rewards for referring shoppers</li>
-                                                    <li>Integration of FMC token for payments within the shopping mall</li>
+                                                    <li>Integration of MM token for payments within the shopping mall</li>
                                                     <li>Addition of more product categories and features</li>
                                                 </ul>
                                             </div>
@@ -443,7 +443,7 @@
                                                 <ul>
                                                     <li><h6>OTT Platform</h6></li>
                                                     <li>Launch of original content series</li>
-                                                    <li>Integration of FMC token for subscriptions and pay-per-view content</li>
+                                                    <li>Integration of MM token for subscriptions and pay-per-view content</li>
                                                     <li>Expansion of platform to more regions</li>
                                                     <li>Partnership with content creators and studios for exclusive content</li>
                                                 </ul>
@@ -461,8 +461,8 @@
                                                     <li><h6>3D NFT Game</h6></li>
                                                     <li>Launch of beta version for testing and feedback</li>
                                                     <li>Addition of more game modes and features</li>
-                                                    <li>Integration of FMC token for in-game purchases and rewards</li>
-                                                    <li>Launch of esports tournaments with FMC prize pools</li>
+                                                    <li>Integration of MM token for in-game purchases and rewards</li>
+                                                    <li>Launch of esports tournaments with MM prize pools</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -478,7 +478,7 @@
                                                     <li><h6>Crypto Exchange</h6></li>
                                                     <li>Obtain necessary licenses and regulatory approvals</li>
                                                     <li>Onboard more cryptocurrency pairs</li>
-                                                    <li>Integration of FMC token for trading and fee discounts</li>
+                                                    <li>Integration of MM token for trading and fee discounts</li>
                                                     <li>Partnership with other exchanges for increased liquidity and trading volume</li>
                                                 </ul>
                                             </div>
