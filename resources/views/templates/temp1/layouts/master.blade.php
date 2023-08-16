@@ -459,7 +459,7 @@
                                                 <h6 class="date">Q1, 2025</h6>
                                                 <ul>
                                                     <li><h6>3D NFT Game</h6></li>
-                                                    <li>Launch of beta version for testing and feedback</li>
+                                                    <li>Launch of beta version for testing and feedback</li> 
                                                     <li>Addition of more game modes and features</li>
                                                     <li>Integration of MM token for in-game purchases and rewards</li>
                                                     <li>Launch of esports tournaments with MM prize pools</li>
