@@ -932,13 +932,14 @@ function updateFreeCount($id)
             $position = getPositionLocation($id);
 
             $extra = UserExtra::where('user_id', $posid)->first();
-
-            if ($position == 1) {
-                $extra->free_left += 1;
-            } else {
-                $extra->free_right += 1;
+            if (isset($extra)) {
+                if ($position == 1) {
+                    $extra->free_left += 1;
+                } else {
+                    $extra->free_right += 1;
+                }
+                $extra->save();
             }
-            $extra->save();
 
             $id = $posid;
 
