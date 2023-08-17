@@ -32,7 +32,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 
 
-function sidebarVariation(){
+function sidebarVariation()
+{
 
     /// for sidebar
     $variation['sidebar'] = 'bg_img';
@@ -109,15 +110,14 @@ function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
 
     $file_type = $file->getMimeType();
 
-    if($file_type == 'image/svg'){
+    if ($file_type == 'image/svg') {
         //Move Uploaded File
-        $file->move($location,$filename);
-    }
-    else{
+        $file->move($location, $filename);
+    } else {
         $image = Image::make($file);
         if (!empty($size)) {
             $size = explode('x', strtolower($size));
-            $image->resize($size[0], $size[1],function($constraint){
+            $image->resize($size[0], $size[1], function ($constraint) {
                 $constraint->upsize();
             });
         }
@@ -126,7 +126,7 @@ function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
         if (!empty($thumb)) {
 
             $thumb = explode('x', $thumb);
-            Image::make($file)->resize($thumb[0], $thumb[1],function($constraint){
+            Image::make($file)->resize($thumb[0], $thumb[1], function ($constraint) {
                 $constraint->upsize();
             })->save($location . '/thumb_' . $filename);
         }
@@ -135,7 +135,8 @@ function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
     return $filename;
 }
 
-function uploadFile($file, $location, $size = null, $old = null){
+function uploadFile($file, $location, $size = null, $old = null)
+{
     $path = makeDirectory($location);
     if (!$path) throw new Exception('File could not been created.');
 
@@ -144,7 +145,7 @@ function uploadFile($file, $location, $size = null, $old = null){
     }
 
     $filename = uniqid() . time() . '.' . $file->getClientOriginalExtension();
-    $file->move($location,$filename);
+    $file->move($location, $filename);
     return $filename;
 }
 
@@ -204,15 +205,15 @@ function tawkto()
 
 function fbcomment()
 {
-    $comment = Extension::where('act', 'fb-comment')->where('status',1)->first();
-    return  $comment ? $comment->generateScript() : '';
+    $comment = Extension::where('act', 'fb-comment')->where('status', 1)->first();
+    return $comment ? $comment->generateScript() : '';
 }
 
 function getCustomCaptcha($height = 46, $width = '300px', $bgcolor = '#003', $textcolor = '#abc')
 {
-    $textcolor = '#'.GeneralSetting::first()->base_color;
+    $textcolor = '#' . GeneralSetting::first()->base_color;
     $captcha = Extension::where('act', 'custom-captcha')->where('status', 1)->first();
-    if($captcha){
+    if ($captcha) {
         $code = rand(100000, 999999);
         $char = str_split($code);
         $ret = '<link href="https://fonts.googleapis.com/css?family=Henny+Penny&display=swap" rel="stylesheet">';
@@ -224,7 +225,7 @@ function getCustomCaptcha($height = 46, $width = '300px', $bgcolor = '#003', $te
         $captchaSecret = hash_hmac('sha256', $code, $captcha->shortcode->random_key->value);
         $ret .= '<input type="hidden" name="captcha_secret" value="' . $captchaSecret . '">';
         return $ret;
-    }else{
+    } else {
         return false;
     }
 }
@@ -254,7 +255,7 @@ function getTrx($length = 12)
 
 function getAmount($amount, $length = 0)
 {
-    if(0 < $length){
+    if (0 < $length) {
         return round($amount + 0, $length);
     }
     return $amount + 0;
@@ -390,7 +391,8 @@ function getIpInfo()
 }
 
 //moveable
-function osBrowser(){
+function osBrowser()
+{
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
     $os_platform = "Unknown OS Platform";
     $os_array = array(
@@ -491,14 +493,14 @@ function getPageSections($arr = false)
 }
 
 
-function getImage($image,$size = null)
+function getImage($image, $size = null)
 {
     $clean = '';
     $size = $size ? $size : 'undefined';
     if (file_exists($image) && is_file($image)) {
         return asset($image) . $clean;
-    }else{
-        return route('placeholderImage',$size);
+    } else {
+        return route('placeholderImage', $size);
     }
 }
 
@@ -534,7 +536,7 @@ function sendSms($user, $type, $shortCodes = [])
 function sendEmail($user, $type = null, $shortCodes = [])
 {
     $general = GeneralSetting::first();
-    
+
     $email_template = EmailTemplate::where('act', $type)->where('email_status', 1)->first();
     if ($general->en != 1 || !$email_template) {
         return;
@@ -542,24 +544,24 @@ function sendEmail($user, $type = null, $shortCodes = [])
 
     $message = shortCodeReplacer("{{name}}", $user->username, $general->email_template);
     $message = shortCodeReplacer("{{message}}", $email_template->email_body, $message);
-    
+
     if (empty($message)) {
         $message = $email_template->email_body;
     }
-    
+
     foreach ($shortCodes as $code => $value) {
         $message = shortCodeReplacer('{{' . $code . '}}', $value, $message);
     }
     $config = $general->mail_config;
 
     if ($config->name == 'php') {
-        sendPhpMail($user->email, $user->username,$email_template->subj, $message);
+        sendPhpMail($user->email, $user->username, $email_template->subj, $message);
     } else if ($config->name == 'smtp') {
-        sendSmtpMail($config, $user->email, $user->username, $email_template->subj, $message,$general);
+        sendSmtpMail($config, $user->email, $user->username, $email_template->subj, $message, $general);
     } else if ($config->name == 'sendgrid') {
-        sendSendGridMail($config, $user->email, $user->username, $email_template->subj, $message,$general);
+        sendSendGridMail($config, $user->email, $user->username, $email_template->subj, $message, $general);
     } else if ($config->name == 'mailjet') {
-        sendMailjetMail($config, $user->email, $user->username, $email_template->subj, $message,$general);
+        sendMailjetMail($config, $user->email, $user->username, $email_template->subj, $message, $general);
     }
 }
 
@@ -572,7 +574,9 @@ function sendPhpMail($receiver_email, $receiver_name, $subject, $html)
     // $headers .= "MIME-Version: 1.0\r\n";
     // $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     // @mail($receiver_email, $subject, $message, $headers);
-    
+
+//    dd($receiver_email, $receiver_name, $subject, $html,$gnl->sitename);
+//    dd(config('mail.mailers.smtp.username'));
     Mail::html($html, function ($message) use ($receiver_email, $subject, $gnl) {
         $message->to($receiver_email)
             ->from(config('mail.mailers.smtp.username'), $gnl->sitename)
@@ -582,23 +586,23 @@ function sendPhpMail($receiver_email, $receiver_name, $subject, $html)
 }
 
 
-function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $message,$gnl)
+function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $message, $gnl)
 {
     $mail = new PHPMailer(true);
 
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->Host       = $config->host;
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $config->username;
-        $mail->Password   = $config->password;
+        $mail->Host = $config->host;
+        $mail->SMTPAuth = true;
+        $mail->Username = $config->username;
+        $mail->Password = $config->password;
         if ($config->enc == 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        }else{
+        } else {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         }
-        $mail->Port       = $config->port;
+        $mail->Port = $config->port;
         $mail->CharSet = 'UTF-8';
         //Recipients
         $mail->setFrom($gnl->email_from, $gnl->sitetitle);
@@ -607,7 +611,7 @@ function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $messa
         // Content
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $mail->Body    = $message;
+        $mail->Body = $message;
         $mail->send();
     } catch (Exception $e) {
         throw new Exception($e);
@@ -615,7 +619,7 @@ function sendSmtpMail($config, $receiver_email, $receiver_name, $subject, $messa
 }
 
 
-function sendSendGridMail($config, $receiver_email, $receiver_name, $subject, $message,$gnl)
+function sendSendGridMail($config, $receiver_email, $receiver_name, $subject, $message, $gnl)
 {
     $sendgridMail = new \SendGrid\Mail\Mail();
     $sendgridMail->setFrom($gnl->email_from, $gnl->sitetitle);
@@ -631,7 +635,7 @@ function sendSendGridMail($config, $receiver_email, $receiver_name, $subject, $m
 }
 
 
-function sendMailjetMail($config, $receiver_email, $receiver_name, $subject, $message,$gnl)
+function sendMailjetMail($config, $receiver_email, $receiver_name, $subject, $message, $gnl)
 {
     $mj = new \Mailjet\Client($config->public_key, $config->secret_key, true, ['version' => 'v3.1']);
     $body = [
@@ -687,26 +691,26 @@ function menuActive($routeName, $type = null)
 function imagePath()
 {
     $db_name = Config::get('database.default');
-    if($db_name == "mysql2"){
+    if ($db_name == "mysql2") {
         $location = 'myamano/assets/';
-    }elseif($db_name == "mysql3"){
+    } elseif ($db_name == "mysql3") {
         $location = 'amano3/assets/';
-    }elseif($db_name == "mysql4"){
+    } elseif ($db_name == "mysql4") {
         $location = 'amano4/assets/';
-    }else{
+    } else {
         $location = 'assets/';
     }
-            
+
     $data['gateway'] = [
         'path' => 'assets/images/gateway',
         'size' => '800x800',
     ];
     $data['verify'] = [
-        'withdraw'=>[
-            'path'=>'assets/images/verify/withdraw'
+        'withdraw' => [
+            'path' => 'assets/images/verify/withdraw'
         ],
-        'deposit'=>[
-            'path'=>'assets/images/verify/deposit'
+        'deposit' => [
+            'path' => 'assets/images/verify/deposit'
         ]
     ];
     $data['image'] = [
@@ -719,7 +723,7 @@ function imagePath()
         ]
     ];
     $data['ticket'] = [
-        'path' => $location. 'images/support',
+        'path' => $location . 'images/support',
     ];
     $data['language'] = [
         'path' => 'assets/images/lang',
@@ -739,13 +743,13 @@ function imagePath()
         'size' => '600x315'
     ];
     $data['profile'] = [
-        'user'=> [
-            'path'=>'assets/images/user/profile',
-            'size'=>'350x300'
+        'user' => [
+            'path' => 'assets/images/user/profile',
+            'size' => '350x300'
         ],
-        'admin'=> [
-            'path'=>'assets/admin/images/profile',
-            'size'=>'400x400'
+        'admin' => [
+            'path' => 'assets/admin/images/profile',
+            'size' => '400x400'
         ]
     ];
     return $data;
@@ -777,7 +781,7 @@ function sendGeneralEmail($email, $subject, $message, $receiver_name = '')
 
     $message = shortCodeReplacer("{{message}}", $message, $general->email_template);
     $message = shortCodeReplacer("{{name}}", $receiver_name, $message);
-    $config  = $general->mail_config;
+    $config = $general->mail_config;
 
     if ($config->name == 'php') {
         sendPhpMail($email, $receiver_name, $general->email_from, $subject, $message);
@@ -790,7 +794,7 @@ function sendGeneralEmail($email, $subject, $message, $receiver_name = '')
     }
 }
 
-function getContent($data_keys, $singleQuery = false, $limit = null,$orderById = false)
+function getContent($data_keys, $singleQuery = false, $limit = null, $orderById = false)
 {
     if ($singleQuery) {
         $content = Frontend::where('data_keys', $data_keys)->latest()->first();
@@ -799,9 +803,9 @@ function getContent($data_keys, $singleQuery = false, $limit = null,$orderById =
         $article->when($limit != null, function ($q) use ($limit) {
             return $q->limit($limit);
         });
-        if($orderById){
+        if ($orderById) {
             $content = $article->where('data_keys', $data_keys)->orderBy('id')->get();
-        }else{
+        } else {
             $content = $article->where('data_keys', $data_keys)->latest()->get();
         }
     }
@@ -809,11 +813,13 @@ function getContent($data_keys, $singleQuery = false, $limit = null,$orderById =
 }
 
 
-function gatewayRedirectUrl(){
+function gatewayRedirectUrl()
+{
     return 'user.deposit';
 }
 
-function paginateLinks($data, $design = 'admin.partials.paginate'){
+function paginateLinks($data, $design = 'admin.partials.paginate')
+{
     return $data->appends(request()->all())->links($design);
 }
 
@@ -831,7 +837,8 @@ function getUserById($id)
     return User::find($id);
 }
 
-function createBVLog($user_id, $lr, $amount, $details){
+function createBVLog($user_id, $lr, $amount, $details)
+{
     $bvlog = new BvLog();
     $bvlog->user_id = $user_id;
     $bvlog->position = $lr;
@@ -985,25 +992,24 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
     $user_plan = PurchasedPlan::where('trx', $trx)->firstOrFail();
     $roi = [];
     $roi_status = Transaction::where(['commission_id' => 1, 'user_id' => $user_id, 'plan_trx' => $trx])
-                    ->whereDate('created_at', Carbon::today())
-                    ->count();
+        ->whereDate('created_at', Carbon::today())
+        ->count();
 
-    if($user_plan->is_roi == 0){
+    if ($user_plan->is_roi == 0) {
         return ['error', 'ROI is off for this Plan'];
     }
 
-    if($roi_status != 0){
+    if ($roi_status != 0) {
         return ['error', 'Already received the ROI for this Plan'];
     }
 
-    if($commission->is_package == 1){
-        $roi = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
-    }
-    else{
+    if ($commission->is_package == 1) {
+        $roi = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $user_plan->plan_id)->first();
+    } else {
         $roi = $commission->commissionDetail[0];
     }
 
-    if($is_compounding == 0 || $is_compounding == 2){
+    if ($is_compounding == 0 || $is_compounding == 2) {
         $percent = $roi->percent;
         $network_limit = $roi->commission_limit;
         $weeks = $roi->days;
@@ -1011,7 +1017,7 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
 
         $amount = ($plan_price / 100) * $percent;
 
-        if($is_compounding == 2){
+        if ($is_compounding == 2) {
             $user_plan->auto_compounding = 1;
         }
 
@@ -1019,17 +1025,16 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
         $user_plan->amount += $amount;
         $user_plan->save();
 
-        $details = 'Compounding '. getCommissionName(1) . ' From ' . $user_plan->plan->name . ' Plan';
+        $details = 'Compounding ' . getCommissionName(1) . ' From ' . $user_plan->plan->name . ' Plan';
         updateTransaction($user->id, getTrx(), NULL, 1, '+', getAmount($amount), $details, 0, 'compounding', $trx);
 
         DB::table('user_families')
-        ->where('mem_id', $user->id)
-        ->update([
-            'weekly_roi' => DB::raw('weekly_roi + '. $amount),
-        ]);
-    }
-    else{
-        
+            ->where('mem_id', $user->id)
+            ->update([
+                'weekly_roi' => DB::raw('weekly_roi + ' . $amount),
+            ]);
+    } else {
+
         $percent = $roi->percent / 5;
         $network_limit = $roi->commission_limit;
         $weeks = $roi->days;
@@ -1037,7 +1042,7 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
 
         $amount = ($plan_price / 100) * $percent;
 
-        if($user_plan->is_expired == 0){
+        if ($user_plan->is_expired == 0) {
             updateCommissionWithLimit($user->id, $amount, $commission->wallet_id, $commission->id, $user_plan->plan->name . ' Plan', $network_limit, $trx);
         }
 
@@ -1054,10 +1059,10 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
         }
 
         DB::table('user_families')
-        ->where('mem_id', $user->id)
-        ->update([
-            'weekly_roi' => DB::raw('weekly_roi + '. $amount),
-        ]);
+            ->where('mem_id', $user->id)
+            ->update([
+                'weekly_roi' => DB::raw('weekly_roi + ' . $amount),
+            ]);
     }
 
     return ['success', 'Roi Return Successfully'];
@@ -1068,7 +1073,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
     $mem = UserExtra::where('user_id', $posid)->first();
 
     if ($mem->binary_active == 1) {
-        
+
         $pack_cap = $plan_amount * $capping;
         $today_income = Transaction::whereRaw('user_id = ? and commission_id = ? and Date(created_at) = ?', [$posid, 2, Carbon::today()->toDateString()])->sum('amount');
 
@@ -1089,8 +1094,8 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                     updateCommissionWithLimit($mem->user_id, $adjust_point, $wallet_id, 2, 'Business Volume Matching', $network_limit, $plan_trx);
 
                     //update flused off
-                    $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
+                    $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
 
                     $mem->bv_right = 0;
                     $mem->bv_left = $lp;
@@ -1098,9 +1103,9 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                 }
             } else {
                 //update flused off
-                $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
-                
+                $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+
                 $mem->bv_right = 0;
                 $mem->bv_left = $lp;
                 $mem->save();
@@ -1124,8 +1129,8 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                     updateCommissionWithLimit($mem->user_id, $adjust_point, $wallet_id, 2, 'Business Volume Matching', $network_limit, $plan_trx);
 
                     //update flused off
-                    $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
+                    $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
 
                     $mem->bv_right = $rp;
                     $mem->bv_left = 0;
@@ -1133,8 +1138,8 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                 }
             } else {
                 //update flused off
-                $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
+                $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
 
                 $mem->bv_right = $rp;
                 $mem->bv_left = 0;
@@ -1159,8 +1164,8 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                     updateCommissionWithLimit($mem->user_id, $adjust_point, $wallet_id, 2, 'Business Volume Matching', $network_limit, $plan_trx);
 
                     //update flused off
-                    $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
+                    $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
 
                     $mem->bv_right = 0;
                     $mem->bv_left = 0;
@@ -1168,8 +1173,8 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
                 }
             } else {
                 //update flused off
-                $details = 'Flushed-Off '. getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7 , 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL); 
+                $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
 
                 $mem->bv_right = 0;
                 $mem->bv_left = 0;
@@ -1178,7 +1183,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
             updateRankPoints($mem->user_id, $cut_points);
             return 1;
         }
-        
+
     }
     return 0;
 }
@@ -1186,7 +1191,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
 function updateNoBV($id, $bv, $details)
 {
     $user = User::find($id);
-    $commission =  Commission::where('status', 1)->where('id', 2)->firstOrFail();
+    $commission = Commission::where('status', 1)->where('id', 2)->firstOrFail();
     $count = 0;
     while ($id != "" || $id != "0") {
         if (isUserExists($id)) {
@@ -1205,23 +1210,22 @@ function updateNoBV($id, $bv, $details)
                 treeAdjust($posid, $user->id, $position);
 
                 if ($posUser->plan_purchased != 0) {
-                
+
                     $user_plan = getUserHigherPlan($posid);
 
-                    if($user_plan){
+                    if ($user_plan) {
 
-                        if($commission->is_package == 1){
-                            $binary = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
-                        }
-                        else{
+                        if ($commission->is_package == 1) {
+                            $binary = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $user_plan->plan_id)->first();
+                        } else {
                             $binary = $commission->commissionDetail[0];
                         }
-    
-                        $res = cutPoints($posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx);
-        
+
+                        $res = cutPoints($posid, $binary->capping, $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx);
+
                         $count += $res;
-        
-                        if($count == 5){
+
+                        if ($count == 5) {
                             //break;
                         }
                     }
@@ -1238,7 +1242,7 @@ function updateNoBV($id, $bv, $details)
 function updateBV($id, $bv, $details)
 {
     $user = User::find($id);
-    $commission =  Commission::where('status', 1)->where('id', 2)->firstOrFail();
+    $commission = Commission::where('status', 1)->where('id', 2)->firstOrFail();
     $count = 0;
     while ($id != "" || $id != "0") {
         if (isUserExists($id)) {
@@ -1248,7 +1252,7 @@ function updateBV($id, $bv, $details)
             }
             $posUser = User::find($posid);
 
-            if ($posUser->status != 0){
+            if ($posUser->status != 0) {
                 $position = getPositionLocation($id);
                 $extra = UserExtra::where('user_id', $posid)->first();
                 $bvlog = new BvLog();
@@ -1258,16 +1262,16 @@ function updateBV($id, $bv, $details)
                     $extra->bv_left += $bv;
                     $extra->total_bv_left += $bv;
                     $bvlog->position = '1';
-                    $details = 'Received Business Volume From ' . $user->username; 
-                    if($posid <= $user->ref_id){
+                    $details = 'Received Business Volume From ' . $user->username;
+                    if ($posid <= $user->ref_id) {
                         $extra->spill_bv_left += $bv;
                     }
                 } else {
                     $extra->bv_right += $bv;
                     $extra->total_bv_right += $bv;
                     $bvlog->position = '2';
-                    $details = 'Received Business Volume From ' . $user->username; 
-                    if($posid <= $user->ref_id){
+                    $details = 'Received Business Volume From ' . $user->username;
+                    if ($posid <= $user->ref_id) {
                         $extra->spill_bv_right += $bv;
                     }
                 }
@@ -1281,29 +1285,28 @@ function updateBV($id, $bv, $details)
                 treeAdjust($posid, $user->id, $position);
 
                 if ($posUser->plan_purchased != 0) {
-                
+
                     $user_plan = getUserHigherPlan($posid);
 
-                    if($user_plan){
+                    if ($user_plan) {
 
-                        if($commission->is_package == 1){
-                            $binary = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
-                        }
-                        else{
+                        if ($commission->is_package == 1) {
+                            $binary = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $user_plan->plan_id)->first();
+                        } else {
                             $binary = $commission->commissionDetail[0];
                         }
-    
+
                         UnprocessedData::create([
                             'uuid' => \Illuminate\Support\Str::uuid(),
                             'method' => 'cutPoints',
-                            'data' => json_encode([$posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx]),
+                            'data' => json_encode([$posid, $binary->capping, $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx]),
                         ]);
 
                         // info('meadasd', [$posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx]);
                         // $res = cutPoints($posid, $binary->capping,  $user_plan->plan->price, $binary->percent, $binary->commission->wallet_id, $binary->commission_limit, $user_plan->trx);
-        
+
                         // $count += $res;
-        
+
                         // if($count == 5){
                         //     //break;
                         // }
@@ -1322,7 +1325,7 @@ function updateBV($id, $bv, $details)
 function binaryActivation($id = '', $user_id = '', $position = '')
 {
     $user_type = getUserLastPlan($user_id)->type;
-    if($user_type != "sponsor"){
+    if ($user_type != "sponsor") {
         $mem = UserExtra::where('user_id', $id)->first();
         $user = User::find($user_id);
         if ($mem->binary_active == 0 && $user->ref_id == $id) {
@@ -1349,33 +1352,34 @@ function treeAdjust($id = '', $user_id = '', $position = '')
     if ($user_tree > 0) {
         UserNetwork::where('user_id', $mem->user_id)->where('mem_id', $user->id)
             ->update([
-                'is_roi' =>  0,
+                'is_roi' => 0,
                 'is_point' => 0,
             ]);
     } else {
         UserNetwork::Create([
             'user_id' => $mem->user_id,
             'mem_id' => $user->id,
-            'position' =>  $user->position,
+            'position' => $user->position,
             'team' => $position,
-            'is_roi' =>  0,
+            'is_roi' => 0,
             'is_point' => 0,
         ]);
     }
 }
 
-function familyTreeAdjust($user_id=''){
+function familyTreeAdjust($user_id = '')
+{
     $user = User::find($user_id);
     $ref_id = $user->ref_id;
     $level = 1;
-    While($ref_id > 0){
+    while ($ref_id > 0) {
         $direct = User::find($ref_id);
         $user_family = UserFamily::where('user_id', $direct->id)->where('mem_id', $user->id)->count();
-        if($user_family == 0){
+        if ($user_family == 0) {
             UserFamily::Create([
                 'user_id' => $direct->id,
                 'mem_id' => $user->id,
-                'level' =>  $level,
+                'level' => $level,
                 'weekly_roi' => 0,
                 'current_roi' => 0,
             ]);
@@ -1397,10 +1401,9 @@ function referralCommission($user_id, $wallet_id, $percent, $commission_id, $nam
         $amount = ($percent / 100) * $plan->bv;
         if ($ref_plan) {
             updateCommissionWithLimit($refer->id, $amount, $wallet_id, $commission_id, $user->username, $limit, $ref_plan->trx);
-        }
-        else{
-            $details = 'Received '. getCommissionName($commission_id) . ' From ' . $user->username;
-            updateWallet($refer->id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), NULL);
+        } else {
+            $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $user->username;
+            updateWallet($refer->id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), NULL);
         }
     }
 }
@@ -1417,13 +1420,13 @@ function cashbackCommission(User $user)
         $commission = Commission::where('status', 1)->where('id', 5)->firstOrFail();
 
         if ($commission->is_package == 1) {
-            $com = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
+            $com = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $user_plan->plan_id)->first();
         } else {
             $com = $commission->commissionDetail[0];
         }
 
         $amount = ($com->percent / 100) * $user_plan_release->plan->price;
-        updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id , $general->sitename, $com->commission_limit, $user_plan->trx);
+        updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id, $general->sitename, $com->commission_limit, $user_plan->trx);
 
         $user->check_fairy = Carbon::now();
         $user->save();
@@ -1432,19 +1435,19 @@ function cashbackCommission(User $user)
 
 function vipCommission(User $user, int $with_draw_id)
 {
-	// if($id == 1){
-	// 	echo $id;
+    // if($id == 1){
+    // 	echo $id;
     //     $users = Withdrawal::where(['wallet_id' => 3, 'status' => 1])->with('user')->get()->pluck('user')->unique('id');
-	// 	// $users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
-	// }
+    // 	// $users = User::whereRaw("plan_purchased != 0 and status = 1")->get();
+    // }
     // elseif($id == 2){
-	// 	echo $id;
-	// 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
-	// }
-	// else{
-	// 	echo $id;
-	// 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
-	// }
+    // 	echo $id;
+    // 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
+    // }
+    // else{
+    // 	echo $id;
+    // 	$users = User::where(['plan_purchased' => 1, 'status' => 1])->where('id', '>', 4000)->get();
+    // }
 
     // $total_level = CommissionDetail::where('commission_id', 4)->count();
 
@@ -1457,17 +1460,17 @@ function vipCommission(User $user, int $with_draw_id)
     //         if($user_levels >= $total_level){
     //             $user_levels = $total_level;
     //         }
-    
+
     //         $level = 1;
-    
+
     //         while($level <= $user_levels){
     //             $level_earning = UserFamily::where('user_id', $user->id)->where('level', $level)->sum('weekly_roi');
     //             $commission = CommissionDetail::where('commission_id', 4)->where('level', $level)->first();
-    
+
     //             $amount = ($commission->percent / 100) * $level_earning;
-    
+
     //             updateCommissionWithLimit($user->id, $amount, $commission->commission->wallet_id, $commission->commission->id, 'Level ' . $level, $commission->commission_limit, $user_plan->trx);
-    
+
     //             $level++;
     //         }
     //     }
@@ -1515,28 +1518,28 @@ function updateUniLevelBonus(User $user, float $amount, int $wallet_id, int $com
                 $plan->save();
 
                 //update commission
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $msg;
                 addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
             } else {
                 //set limit
                 $remaining_amount = setLimit($amount, $commission_limit, $plan);
 
                 //update commission
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $msg;
                 addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
 
 
-                while($remaining_amount != 0){
+                while ($remaining_amount != 0) {
                     $remaining_amount = limitRemaining($user->id, $remaining_amount, $wallet_id, $commission_id, $msg, $commission_limit, $plan);
                 }
-                
+
             }
 
         } else {
             //update commission
-            $details = 'Received '. getCommissionName($commission_id) . ' From ' . $msg;
+            $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $msg;
             addTransactionWithOutUpdateWallet($user, getTrx(), $wallet_id, $commission_id, getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $tnx, $with_draw_id);
-        } 
+        }
     }
 
     return 0;
@@ -1563,12 +1566,12 @@ function addTransactionWithOutUpdateWallet(User $user, string $tnx, int $wallet_
     if ($wallet->wallet->passive > 0) {
 
         $commission_ammount = ($amount * $wallet->wallet->passive) / 100;
-        $amount = $amount - $commission_ammount; 
+        $amount = $amount - $commission_ammount;
         $passive_wallet = UserWallet::where(['user_id' => $user->id, 'wallet_id' => 9])->first();
         $passive_wallet->balance += $commission_ammount;
         // $passive_wallet->save();
 
-        $details2 = 'Received Income in ' . getWalletName(9)  . ' From ' . getCommissionName($commission_id);
+        $details2 = 'Received Income in ' . getWalletName(9) . ' From ' . getCommissionName($commission_id);
 
         $transaction2 = new Transaction();
         $transaction2->withdraw_id = $with_draw_id;
@@ -1576,14 +1579,14 @@ function addTransactionWithOutUpdateWallet(User $user, string $tnx, int $wallet_
         $transaction2->amount = $commission_ammount;
         $transaction2->charge = $charges;
         $transaction2->details = $details2;
-        $transaction2->trx =  $tnx;
-        $transaction2->plan_trx =  $plan_trx;
+        $transaction2->trx = $tnx;
+        $transaction2->plan_trx = $plan_trx;
         $transaction2->country = User::where('id', $user->id)->first()->address->country;
         $transaction2->remark = 'passive_income';
         $transaction2->commission_id = $commission_id;
         $transaction2->post_balance = getAmount($passive_wallet->balance);
         $transaction2->trx_type = '+';
-        $transaction2->wallet_id =  9;
+        $transaction2->wallet_id = 9;
         $transaction2->save();
 
         $transaction->amount = $amount;
@@ -1591,7 +1594,7 @@ function addTransactionWithOutUpdateWallet(User $user, string $tnx, int $wallet_
 
     // $wallet->balance += $amount;
     $transaction->trx_type = '+';
-    $transaction->wallet_id =  $wallet_id;
+    $transaction->wallet_id = $wallet_id;
 
     // $wallet->save();
     $transaction->save();
@@ -1701,11 +1704,10 @@ function showSingleUserinTreeUser($user)
             $planName = $user->plan[0]->plan->name;
             $img = getImage('assets/images/user/profile/default.png', '120x120');
         }
-        
-        if($user->storm_plan == 1){
+
+        if ($user->storm_plan == 1) {
             $stormPlan = "";
-        }
-        else{
+        } else {
             $stormPlan = "";
         }
 
@@ -1763,7 +1765,7 @@ function showSingleUserinTree($user)
             $planName = $user->plan[0]->plan->name;
         }
 
-        $img = getImage('assets/images/user/profile/'. $user->image, '120x120');
+        $img = getImage('assets/images/user/profile/' . $user->image, '120x120');
         $refby = getUserById($user->ref_id)->fullname ?? '';
         if (auth()->guard('admin')->user()) {
             $hisTree = route('admin.users.other.tree', $user->username);
@@ -1806,20 +1808,21 @@ function showSingleUserinTree($user)
 /*
 ===============TREE AUTH==============
 */
-function treeAuth($whichID, $whoID){
+function treeAuth($whichID, $whoID)
+{
 
-    if($whichID==$whoID){
+    if ($whichID == $whoID) {
         return true;
     }
     $formid = $whichID;
-    while($whichID!=""||$whichID!="0"){
-        if(isUserExists($whichID)){
+    while ($whichID != "" || $whichID != "0") {
+        if (isUserExists($whichID)) {
             $posid = getPositionId($whichID);
-            if($posid=="0"){
+            if ($posid == "0") {
                 break;
             }
             $position = getPositionLocation($whichID);
-            if($posid==$whoID){
+            if ($posid == $whoID) {
                 return true;
             }
             $whichID = $posid;
@@ -1833,14 +1836,14 @@ function treeAuth($whichID, $whoID){
 function displayRating($val)
 {
     $result = '';
-    for($i=0; $i<intval($val); $i++){
+    for ($i = 0; $i < intval($val); $i++) {
         $result .= '<i class="la la-star text--warning"></i>';
     }
-    if(fmod($val, 1)==0.5){
+    if (fmod($val, 1) == 0.5) {
         $i++;
-        $result .='<i class="las la-star-half-alt text--warning"></i>';
+        $result .= '<i class="las la-star-half-alt text--warning"></i>';
     }
-    for($k=0; $k<5-$i ; $k++){
+    for ($k = 0; $k < 5 - $i; $k++) {
         $result .= '<i class="lar la-star text--warning"></i>';
     }
     return $result;
@@ -1863,8 +1866,9 @@ function createWallets($id = '')
     }
 }
 
-function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = ''){
-    
+function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '')
+{
+
     $user = User::findOrFail($user_id);
 
     $transaction = new Transaction();
@@ -1872,40 +1876,40 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
     $transaction->amount = $amount;
     $transaction->charge = $charges;
     $transaction->details = $details;
-    $transaction->trx =  $trx;
-    $transaction->plan_trx =  $plan_trx;
+    $transaction->trx = $trx;
+    $transaction->plan_trx = $plan_trx;
     $transaction->country = User::where('id', $user_id)->first()->address->country;
     $transaction->remark = $remarks;
     $transaction->commission_id = $commission_id;
 
     $wallet = UserWallet::where(['user_id' => $user_id, 'wallet_id' => $wallet_id])->first();
-    
+
     $transaction->post_balance = getAmount($wallet->balance);
 
 
-    if($opration == '+'){
-        if($wallet->wallet->passive > 0){
+    if ($opration == '+') {
+        if ($wallet->wallet->passive > 0) {
             $commission_ammount = ($amount * $wallet->wallet->passive) / 100;
-            $amount = $amount - $commission_ammount; 
+            $amount = $amount - $commission_ammount;
             $passive_wallet = UserWallet::where(['user_id' => $user_id, 'wallet_id' => 9])->first();
             $passive_wallet->balance += $commission_ammount;
             $passive_wallet->save();
 
-            $details2 = 'Received Income in ' . getWalletName(9)  . ' From ' . getCommissionName($commission_id);
+            $details2 = 'Received Income in ' . getWalletName(9) . ' From ' . getCommissionName($commission_id);
 
             $transaction2 = new Transaction();
             $transaction2->user_id = $user_id;
             $transaction2->amount = $commission_ammount;
             $transaction2->charge = $charges;
             $transaction2->details = $details2;
-            $transaction2->trx =  $trx;
-            $transaction2->plan_trx =  $plan_trx;
+            $transaction2->trx = $trx;
+            $transaction2->plan_trx = $plan_trx;
             $transaction2->country = User::where('id', $user_id)->first()->address->country;
             $transaction2->remark = 'passive_income';
             $transaction2->commission_id = $commission_id;
             $transaction2->post_balance = getAmount($passive_wallet->balance);
             $transaction2->trx_type = '+';
-            $transaction2->wallet_id =  9;
+            $transaction2->wallet_id = 9;
             $transaction2->save();
 
             $transaction->amount = $amount;
@@ -1913,20 +1917,19 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
 
         $wallet->balance += $amount;
         $transaction->trx_type = '+';
-        $transaction->wallet_id =  $wallet_id;
+        $transaction->wallet_id = $wallet_id;
 
         $wallet->save();
         $transaction->save();
 
         return ['success', $details];
-    }
-    elseif($opration == '-'){
+    } elseif ($opration == '-') {
         if ($amount > $wallet->balance) {
             return ['error', $user->username . ' has insufficient balance.'];
         }
         $wallet->balance -= $amount;
         $transaction->trx_type = '-';
-        $transaction->wallet_id =  $wallet_id;
+        $transaction->wallet_id = $wallet_id;
 
         $wallet->save();
         $transaction->save();
@@ -1944,7 +1947,7 @@ function checkLimit($amount = '', $network_limits = '', $plan)
     return $amount_limit + $limit_consumed;
 }
 
-function setLimit( $amount = '', $network_limit = '', $plan)
+function setLimit($amount = '', $network_limit = '', $plan)
 {
     $network_limit = $plan->plan->price * $network_limit;
     $remaining_limit = 100 - $plan->limit_consumed;
@@ -1958,57 +1961,54 @@ function setLimit( $amount = '', $network_limit = '', $plan)
     return $amount - $adjusted_amount;
 }
 
-function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id = '', $from = '', $network_limit = '', $plan){
-    
+function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id = '', $from = '', $network_limit = '', $plan)
+{
+
     $commission = Commission::where('status', 1)->where('id', $commission_id)->firstOrFail();
     $new_trx = getPlanExceptTrx($id, $plan->trx);
 
-    if($new_trx != $plan->trx){
+    if ($new_trx != $plan->trx) {
         //if have anyother active package send money with it
         $new_plan = PurchasedPlan::where('trx', $new_trx)->firstOrFail();
 
-        if($commission->is_package == 1){
-            $network_limit = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $new_plan->plan_id)->firstOrFail()->commission_limit;
+        if ($commission->is_package == 1) {
+            $network_limit = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $new_plan->plan_id)->firstOrFail()->commission_limit;
         }
 
         $limit = checkLimit($amount, $network_limit, $new_plan);
-        if($limit <= 100){
+        if ($limit <= 100) {
             $new_plan->limit_consumed = $limit;
             $new_plan->save();
 
             //update commission
-            if($commission->id == 1){
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $new_plan->plan->name . ' Plan';
+            if ($commission->id == 1) {
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $new_plan->plan->name . ' Plan';
+            } else {
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
             }
-            else{
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-            }
-            
-            updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
+
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
 
             return 0;
-        }
-        else{
+        } else {
             //set limit
             $remaining_amount = setLimit($amount, $network_limit, $new_plan);
 
             //update commission
-            if($commission->id == 1){
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $new_plan->plan->name . ' Plan';
+            if ($commission->id == 1) {
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $new_plan->plan->name . ' Plan';
+            } else {
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
             }
-            else{
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-            }
-            updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
 
             return $remaining_amount;
-            
+
         }
-        
-    }
-    else{
-        if($amount >= $plan->plan->price){
-            if($plan->auto_renew == 1){
+
+    } else {
+        if ($amount >= $plan->plan->price) {
+            if ($plan->auto_renew == 1) {
                 // renew current package with the amount
                 $user = User::find($id);
                 $user->plan_purchased = 1;
@@ -2017,7 +2017,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                 $plan_trx = getTrx();
                 $details = $user->username . ' Renew ' . $plan->plan->name . ' plan';
 
-                updateWallet($id, $plan_trx, $wallet_id , $commission_id, '-', getAmount($plan->plan->price), $details, 0, 'auto_renew_plan', NULL); 
+                updateWallet($id, $plan_trx, $wallet_id, $commission_id, '-', getAmount($plan->plan->price), $details, 0, 'auto_renew_plan', NULL);
 
                 $plan->limit_consumed = 0;
                 $plan->is_expired = 0;
@@ -2033,54 +2033,49 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                 ]);
 
                 $limit = checkLimit($amount, $network_limit, $plan);
-                if($limit <= 100){
+                if ($limit <= 100) {
                     $plan->limit_consumed = $limit;
                     $plan->save();
 
                     //update commission
-                    if($commission->id == 1){
-                        $details = 'Received '. getCommissionName($commission_id) . ' From ' . $plan->plan->name . ' Plan';
+                    if ($commission->id == 1) {
+                        $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $plan->plan->name . ' Plan';
+                    } else {
+                        $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
                     }
-                    else{
-                        $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-                    }
-                    
-                    updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+
+                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
 
                     return 0;
-                }
-                else{
+                } else {
                     //set limit
                     $remaining_amount = setLimit($amount, $network_limit, $plan);
 
                     //update commission
-                    if($commission->id == 1){
-                        $details = 'Received '. getCommissionName($commission_id) . ' From ' . $plan->plan->name . ' Plan';
+                    if ($commission->id == 1) {
+                        $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $plan->plan->name . ' Plan';
+                    } else {
+                        $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
                     }
-                    else{
-                        $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-                    }
-                    updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
 
                     return $remaining_amount;
-                    
+
                 }
 
-            }
-            else{
+            } else {
                 //if not auto renew flush the amount
                 //update flused off
-                $details = 'Flushed-Off '. getCommissionName($commission_id) . ' Due to Network Limit';
-                updateWallet($id, getTrx(), 6 , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx); 
+                $details = 'Flushed-Off ' . getCommissionName($commission_id) . ' Due to Network Limit';
+                updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
 
                 return 0;
             }
-        }
-        else{
+        } else {
             //if not renew flush the amount
             //update flused off
-            $details = 'Flushed-Off '. getCommissionName($commission_id) . ' Due to Network Limit';
-            updateWallet($id, getTrx(), 6 , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx); 
+            $details = 'Flushed-Off ' . getCommissionName($commission_id) . ' Due to Network Limit';
+            updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
 
             return 0;
         }
@@ -2092,44 +2087,43 @@ function updateCommissionWithLimit($id = '', $amount = '', $wallet_id = '', $com
     $plan = PurchasedPlan::where('trx', $trx)->firstOrFail();
     $nl = $network_limit;
     if ($amount != 0) {
-        if($network_limit != 0){
+        if ($network_limit != 0) {
             $limit = checkLimit($amount, $network_limit, $plan);
-            if($limit <= 100){
+            if ($limit <= 100) {
                 $plan->limit_consumed = $limit;
                 $plan->save();
 
                 //update commission
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-                updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
-            }
-            else{
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
+                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+            } else {
                 //set limit
                 $remaining_amount = setLimit($amount, $network_limit, $plan);
 
                 //update commission
-                $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-                updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+                $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
+                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
 
-                while($remaining_amount != 0){
+                while ($remaining_amount != 0) {
                     $remaining_amount = limitRemaining($id, $remaining_amount, $wallet_id, $commission_id, $from, $network_limit, $plan);
                 }
-                
+
             }
             //adjustLimit($id, $nl);
-        }
-        else{
+        } else {
             //update commission
-            $details = 'Received '. getCommissionName($commission_id) . ' From ' . $from;
-            updateWallet($id, getTrx(), $wallet_id , $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
-        } 
+            $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+        }
     }
 
     return 0;
 }
 
-function adjustLimit($user_id = '', $network_limit = ''){
+function adjustLimit($user_id = '', $network_limit = '')
+{
     $user_plans = PurchasedPlan::where(['user_id' => $user_id, 'is_expired' => 0])->get();
-    foreach($user_plans as $plan){
+    foreach ($user_plans as $plan) {
         echo $network_earning = Transaction::where(['plan_trx' => $plan->trx, 'trx_type' => '+'])->sum('amount');
         $plan_limit = $plan->plan->price * $network_limit;
         $limit = ($network_earning / $plan_limit) * 100;
@@ -2138,19 +2132,23 @@ function adjustLimit($user_id = '', $network_limit = ''){
     }
 }
 
-function getCommissionName($id){
+function getCommissionName($id)
+{
     return Commission::where('status', 1)->where('id', $id)->firstOrFail()->name;
 }
 
-function getCommission($id){
+function getCommission($id)
+{
     return Commission::where('status', 1)->where('id', $id)->firstOrFail();
 }
 
-function getWalletName($id){
+function getWalletName($id)
+{
     return Wallet::where('status', 1)->where('id', $id)->firstOrFail()->name;
 }
 
-function getUserPlanPurchasedStatus($user_id = ''){
+function getUserPlanPurchasedStatus($user_id = '')
+{
     return PurchasedPlan::where(['user_id' => $user_id, 'is_expired' => 0])->count();
 }
 
@@ -2164,17 +2162,16 @@ function rewardRelease()
         $amount = $rank_achiever->reward;
         $send_date = Carbon::parse($rank_achiever->send_date);
         $now = Carbon::now();
-        if($send_date->lte($now)){
-            if ($user_plan){
+        if ($send_date->lte($now)) {
+            if ($user_plan) {
                 $commission = Commission::where('status', 1)->where('id', 8)->firstOrFail();
-                if($commission->is_package == 1){
-                    $com = CommissionDetail::where('commission_id', $commission->id )->where('plan_id', $user_plan->plan_id)->first();
-                }
-                else{    
+                if ($commission->is_package == 1) {
+                    $com = CommissionDetail::where('commission_id', $commission->id)->where('plan_id', $user_plan->plan_id)->first();
+                } else {
                     $com = $commission->commissionDetail[0];
                 }
-                
-                updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id , $general->sitename, $com->commission_limit, $user_plan->trx);
+
+                updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id, $general->sitename, $com->commission_limit, $user_plan->trx);
             }
 
             $rank_achiever->is_sent = 1;
@@ -2183,7 +2180,8 @@ function rewardRelease()
     }
 }
 
-function updateRankPoints($id, $points){
+function updateRankPoints($id, $points)
+{
     $user = User::find($id);
     $user->total_bv += $points;
     $user->save();
@@ -2199,7 +2197,7 @@ function updateRankPoints($id, $points){
                 if ($rank_achievers_count == 0) {
                     $date = Carbon::now();
                     $date->addDays(30);
-                    if($rank->value != 0){
+                    if ($rank->value != 0) {
                         RankAchiever::Create([
                             'user_id' => $user->id,
                             'rank_id' => $rank->id,
@@ -2208,7 +2206,7 @@ function updateRankPoints($id, $points){
                             'send_date' => $date
                         ]);
                     }
-                    
+
                     //$message = 'Congratulations on the achievement of ' . $rank->name . ' Rank.';
                     //send_email($user->email, 'Congratulations ' . $rank->name . ' Rank Achiever', $user->first_name, $message);
                 }
@@ -2217,7 +2215,8 @@ function updateRankPoints($id, $points){
     }
 }
 
-function updateRankStatus($id){
+function updateRankStatus($id)
+{
     $user = User::find($id);
     $ranks = Rank::all();
     foreach ($ranks as $rank) {
@@ -2229,7 +2228,7 @@ function updateRankStatus($id){
                 if ($rank_achievers_count == 0) {
                     $date = Carbon::now();
                     $date->addDays(30);
-                    if($rank->value != 0){
+                    if ($rank->value != 0) {
                         RankAchiever::Create([
                             'user_id' => $user->id,
                             'rank_id' => $rank->id,
@@ -2238,7 +2237,7 @@ function updateRankStatus($id){
                             'send_date' => $date
                         ]);
                     }
-                    
+
                     //$message = 'Congratulations on the achievement of ' . $rank->name . ' Rank.';
                     //send_email($user->email, 'Congratulations ' . $rank->name . ' Rank Achiever', $user->first_name, $message);
                 }
@@ -2247,54 +2246,55 @@ function updateRankStatus($id){
     }
 }
 
-function getPlanExceptTrx($id, $trx){
-    $plans = PurchasedPlan::where('user_id', $id)->where('trx' , '!=', $trx)->where('is_expired', 0)->get();
-    foreach($plans as $plan){
+function getPlanExceptTrx($id, $trx)
+{
+    $plans = PurchasedPlan::where('user_id', $id)->where('trx', '!=', $trx)->where('is_expired', 0)->get();
+    foreach ($plans as $plan) {
         return $plan->trx;
     }
 
     return $trx;
 }
 
-function updateTransaction($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = ''){
+function updateTransaction($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '')
+{
 
     $transaction = new Transaction();
     $transaction->user_id = $user_id;
     $transaction->amount = $amount;
     $transaction->charge = $charges;
     $transaction->details = $details;
-    $transaction->trx =  $trx;
+    $transaction->trx = $trx;
     $transaction->country = User::where('id', $user_id)->first()->address->country;
     $transaction->remark = $remarks;
     $transaction->commission_id = $commission_id;
-    if($plan_trx){
-        $transaction->plan_trx =  $plan_trx;
+    if ($plan_trx) {
+        $transaction->plan_trx = $plan_trx;
     }
 
     $transaction->trx_type = $opration;
     $transaction->save();
 
-    
-
 
     return ['success', $details];
 }
 
-function checkPaidStatusDaily(){
+function checkPaidStatusDaily()
+{
     $users = User::where("status", 1)->where("plan_purchased", 0)->get();
-    foreach($users as $user){
+    foreach ($users as $user) {
         $days = 30;
         $join_date = Carbon::parse($user->created_at);
         $now = Carbon::now();
         $dif = $join_date->diffInDays($now);
-        if($dif >= 30){
+        if ($dif >= 30) {
             $user_wallets = UserWallet::where('user_id', $user->id)->where('wallet_id', '<', 6)->where('balance', '!=', 0)->get();
-            foreach($user_wallets as $user_wallet){
+            foreach ($user_wallets as $user_wallet) {
                 $details = 'Flushed-Off Amount due to none activation';
-                updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id , NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_flused", NULL);
-                updateWallet($user_wallet->user_id, getTrx(), 6 , NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_activation", NULL);
+                updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_flused", NULL);
+                updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_activation", NULL);
             }
-            
+
             $user_extra = UserExtra::where('user_id', $user->id)->first();
             $user_extra->bv_left = 0;
             $user_extra->bv_right = 0;
@@ -2303,29 +2303,30 @@ function checkPaidStatusDaily(){
             $user->total_bv = 0;
             $user->save();
         }
-        if($dif >= 90){
+        if ($dif >= 90) {
             $user->status = 0;
             $user->save();
         }
     }
 }
 
-function checkBlocks($user_id){
+function checkBlocks($user_id)
+{
     $count_block1 = 0;
     $count_block2 = 0;
     $count_block3 = 0;
 
     $user = User::find($user_id);
-    $user_block1 = UserFamily::whereRaw('user_id = ' . $user_id .' and level = 1 and plan_id != 0')->get();
-    if(count($user_block1) >= 2){
+    $user_block1 = UserFamily::whereRaw('user_id = ' . $user_id . ' and level = 1 and plan_id != 0')->get();
+    if (count($user_block1) >= 2) {
         $count_block1++;
-        foreach($user_block1 as $user1){
-            $user_block2 = UserFamily::whereRaw('user_id = ' . $user1->mem_id .' and level = 1 and plan_id != 0')->get();
-            if(count($user_block2) >= 2){
+        foreach ($user_block1 as $user1) {
+            $user_block2 = UserFamily::whereRaw('user_id = ' . $user1->mem_id . ' and level = 1 and plan_id != 0')->get();
+            if (count($user_block2) >= 2) {
                 $count_block2++;
-                foreach($user_block2 as $user2){
-                    $user_block3 = UserFamily::whereRaw('user_id = ' . $user2->mem_id .' and level = 1 and plan_id != 0')->get();
-                    if(count($user_block3) >= 2){
+                foreach ($user_block2 as $user2) {
+                    $user_block3 = UserFamily::whereRaw('user_id = ' . $user2->mem_id . ' and level = 1 and plan_id != 0')->get();
+                    if (count($user_block3) >= 2) {
                         $count_block3++;
                     }
                 }
@@ -2333,34 +2334,35 @@ function checkBlocks($user_id){
         }
     }
 
-    if($count_block1 > 0 && $user->block1 == 0){
+    if ($count_block1 > 0 && $user->block1 == 0) {
         $user->block1 = 1;
     }
 
-    if($count_block2 > 1 && $user->block2 == 0){
+    if ($count_block2 > 1 && $user->block2 == 0) {
         $user->block2 = 1;
     }
 
-    if($count_block3 > 3 && $user->block3 == 0){
+    if ($count_block3 > 3 && $user->block3 == 0) {
         $user->block3 = 1;
     }
 
     $user->save();
 }
 
-function release3Blocks(){
+function release3Blocks()
+{
     $commission = Commission::where('status', 1)->where('id', 6)->firstOrFail();
     $com = $commission->commissionDetail[0];
     $users_block1 = User::where('block1', 1)->get();
-    
-    foreach($users_block1 as $user){
+
+    foreach ($users_block1 as $user) {
         $user_plan = getUserHigherPlan($user->id);
-        if($user_plan){
-            $block1_package = UserFamily::whereRaw('user_id = ' . $user->id .' and level = 1 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
+        if ($user_plan) {
+            $block1_package = UserFamily::whereRaw('user_id = ' . $user->id . ' and level = 1 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
             $plan1 = Plan::find($block1_package);
             $amount = ($com->percent / 100) * $plan1->price;
-            updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id , 'Block 1', $com->commission_limit, $user_plan->trx);
-    
+            updateCommissionWithLimit($user->id, $amount, $com->commission->wallet_id, $commission->id, 'Block 1', $com->commission_limit, $user_plan->trx);
+
             $user->block1 = 2;
             $user->save();
         }
@@ -2368,14 +2370,14 @@ function release3Blocks(){
 
     $users_block2 = User::where('block2', 1)->get();
 
-    foreach($users_block2 as $user){
+    foreach ($users_block2 as $user) {
         $user_plan = getUserHigherPlan($user->id);
-        if($user_plan){
-            $block2_package = UserFamily::whereRaw('user_id = ' . $user->id .' and level = 2 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
+        if ($user_plan) {
+            $block2_package = UserFamily::whereRaw('user_id = ' . $user->id . ' and level = 2 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
             $plan2 = Plan::find($block2_package);
             $amount2 = ($com->percent / 100) * $plan2->price;
-            updateCommissionWithLimit($user->id, $amount2, $com->commission->wallet_id, $commission->id , 'Block 2', $com->commission_limit, $user_plan->trx);
-    
+            updateCommissionWithLimit($user->id, $amount2, $com->commission->wallet_id, $commission->id, 'Block 2', $com->commission_limit, $user_plan->trx);
+
             $user->block2 = 2;
             $user->save();
         }
@@ -2383,25 +2385,26 @@ function release3Blocks(){
 
     $users_block3 = User::where('block3', 1)->get();
 
-    foreach($users_block3 as $user){
+    foreach ($users_block3 as $user) {
         $user_plan = getUserHigherPlan($user->id);
-        if($user_plan){
-            $block3_package = UserFamily::whereRaw('user_id = ' . $user->id .' and level = 3 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
+        if ($user_plan) {
+            $block3_package = UserFamily::whereRaw('user_id = ' . $user->id . ' and level = 3 and plan_id != 0')->orderBy('plan_id', 'asc')->firstOrFail()->plan_id;
             $plan3 = Plan::find($block3_package);
             $amount3 = ($com->percent / 100) * $plan3->price;
-            updateCommissionWithLimit($user->id, $amount3, $com->commission->wallet_id, $commission->id , 'Block 3', $com->commission_limit, $user_plan->trx);
-    
+            updateCommissionWithLimit($user->id, $amount3, $com->commission->wallet_id, $commission->id, 'Block 3', $com->commission_limit, $user_plan->trx);
+
             $user->block3 = 2;
             $user->save();
         }
     }
 }
 
-function checkStatusNowPayments(){
-    
+function checkStatusNowPayments()
+{
+
     $deposits = Deposit::where('method_code', 507)->where('status', 0)->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
-    
-    foreach($deposits as $deposit){
+
+    foreach ($deposits as $deposit) {
 
         $nowpaymentsAcc = json_decode($deposit->gateway_currency()->gateway_parameter);
 
@@ -2412,43 +2415,43 @@ function checkStatusNowPayments(){
 
         $response = json_decode(curlGetContent("https://api.nowpayments.io/v1/payment/$deposit->try", $header));
 
-        if(count((array)$response) > 1){
-            if(@$response->payment_status == 'finished' || @$response->payment_status == 'paid'){
+        if (count((array)$response) > 1) {
+            if (@$response->payment_status == 'finished' || @$response->payment_status == 'paid') {
                 PaymentController::userDataUpdate($deposit->trx);
             }
         }
-            
+
     }
 }
 
-function flushWallets(){
+function flushWallets()
+{
     $user_wallets = UserWallet::where('wallet_id', '<', 6)->where('balance', '!=', 0)->get();
-    foreach($user_wallets as $user_wallet){
+    foreach ($user_wallets as $user_wallet) {
         $details = 'Flushed-Off Amount for Balance Adjustment';
-        updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id , NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_adjustment", NULL);
-        updateWallet($user_wallet->user_id, getTrx(), 6 , NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_adjustment", NULL);
+        updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_adjustment", NULL);
+        updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_adjustment", NULL);
     }
 }
 
-function UserExtrasAdjust(){
+function UserExtrasAdjust()
+{
     $users_extras = UserExtra::all();
-    foreach($users_extras as $user_extra){
-        if($user_extra->binary_active == 0){
+    foreach ($users_extras as $user_extra) {
+        if ($user_extra->binary_active == 0) {
             $user_extra->total_bv_left = $user_extra->bv_left;
             $user_extra->total_bv_right = $user_extra->bv_right;
             $user_extra->spill_bv_right = $user_extra->bv_right;
             $user_extra->spill_bv_left = $user_extra->bv_left;
-        }
-        else{
+        } else {
             $user = User::where('id', $user_extra->user_id)->first();
             $points = $user->total_bv;
-            if($user_extra->bv_left == 0){
+            if ($user_extra->bv_left == 0) {
                 $user_extra->total_bv_left = $points;
                 $user_extra->total_bv_right = $user_extra->bv_right;
                 $user_extra->spill_bv_right = $user_extra->bv_right;
                 $user_extra->spill_bv_left = $points;
-            }
-            elseif($user_extra->bv_right == 0){
+            } elseif ($user_extra->bv_right == 0) {
                 $user_extra->total_bv_left = $user_extra->bv_left;
                 $user_extra->total_bv_right = $points;
                 $user_extra->spill_bv_right = $points;
@@ -2459,87 +2462,88 @@ function UserExtrasAdjust(){
     }
 }
 
-function getRankPoints($user_id){
+function getRankPoints($user_id)
+{
     $user = User::find($user_id);
     return $user->total_bv;
 }
 
-function autoCompounding(){
+function autoCompounding()
+{
     $general = GeneralSetting::first();
     $release_date = getAmount($general->bal_trans_per_charge);
     $current_date = Carbon::now();
-    if($current_date->dayOfWeek == $release_date){
+    if ($current_date->dayOfWeek == $release_date) {
         $user_plans = PurchasedPlan::where('auto_compounding', 1)->where('is_roi', 1)->get();
-        foreach($user_plans as $user_plan){
+        foreach ($user_plans as $user_plan) {
             $roi_status = Transaction::where(['commission_id' => 1, 'user_id' => $user_plan->user_id, 'plan_trx' => $user_plan->trx])
-                    ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-                    ->count();
-            if($roi_status == 0){
+                ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                ->count();
+            if ($roi_status == 0) {
                 roiReturn($user_plan->user_id, 0, $user_plan->trx);
             }
         }
     }
 }
 
-function stormCommission($id = ''){
-	
+function stormCommission($id = '')
+{
+
     $total_level = CommissionDetail::where('commission_id', 9)->count();
     $family_users = UserFamily::where('mem_id', $id)->where('level', '<=', $total_level)->orderBy('level', 'desc')->get();
-    foreach($family_users as $family_user){
+    foreach ($family_users as $family_user) {
         $user = User::find($id);
         $user_plan = getUserHigherPlan($family_user->user_id);
-        if($user_plan){
+        if ($user_plan) {
             $storm_plan = Plan::where('id', 0)->first();
             $commission = CommissionDetail::where('commission_id', 9)->where('level', $family_user->level)->first();
             $amount = ($commission->percent / 100) * $storm_plan->price;
-            if($family_user->user->storm_plan){
+            if ($family_user->user->storm_plan) {
                 updateCommissionWithLimit($family_user->user_id, $amount, $commission->commission->wallet_id, $commission->commission->id, $user->username . ' at Level ' . $family_user->level, $commission->commission_limit, $user_plan->trx);
-            }
-            else{
-                updateWallet($family_user->user_id, getTrx(), 6 , 9, '+', getAmount($amount), 'Flushed Storm Commission From ' . $user->username . ' at Level ' . $family_user->level, 0, "flushed_storm", NULL);
+            } else {
+                updateWallet($family_user->user_id, getTrx(), 6, 9, '+', getAmount($amount), 'Flushed Storm Commission From ' . $user->username . ' at Level ' . $family_user->level, 0, "flushed_storm", NULL);
             }
         }
     }
 
 }
 
-function carShare($id = '', $direct_sale = '' , $date_today = ''){
+function carShare($id = '', $direct_sale = '', $date_today = '')
+{
     $user = User::find($id);
     $user_plan = getUserHigherPlan($user->id);
     $general = GeneralSetting::first();
     $commissions = CommissionDetail::where('commission_id', 7)->orderBy('id', 'desc')->get();
-    $transaction=Transaction::where('remark','Car_Bonus')->where('user_id',$user->id)
-    ->where(function($q) use($user ,&$date_today) {
-        $q->where('created_at', '>=', Carbon::parse($user->check_car)->format('Y-m-d'))
-        ->where('created_at', '<', Carbon::parse($date_today)->addDays(1)->format('Y-m-d'));
-    })
-    ->first();
+    $transaction = Transaction::where('remark', 'Car_Bonus')->where('user_id', $user->id)
+        ->where(function ($q) use ($user, &$date_today) {
+            $q->where('created_at', '>=', Carbon::parse($user->check_car)->format('Y-m-d'))
+                ->where('created_at', '<', Carbon::parse($date_today)->addDays(1)->format('Y-m-d'));
+        })
+        ->first();
 
     if (isset($transaction)) {
-        $user_wallet=UserWallet::where('user_id',$user->id)->where('wallet_id',4)->first();
+        $user_wallet = UserWallet::where('user_id', $user->id)->where('wallet_id', 4)->first();
         if ($direct_sale >= 25000 && $direct_sale < 50000) {
-            $transaction->amount=500;
-            $user_wallet->balance=500;
+            $transaction->amount = 500;
+            $user_wallet->balance = 500;
         }
         if ($direct_sale >= 50000 && $direct_sale < 100000) {
-            $transaction->amount=1000;
-            $user_wallet->balance=1000;
+            $transaction->amount = 1000;
+            $user_wallet->balance = 1000;
         }
         if ($direct_sale >= 100000) {
-            $transaction->amount=2000;
-            $user_wallet->balance=2000;
+            $transaction->amount = 2000;
+            $user_wallet->balance = 2000;
         }
         $transaction->update();
         $user_wallet->update();
-    }
-    else{
-        foreach($commissions as $commission){
-            if($commission->direct <= $direct_sale){
-                updateCommissionWithLimit($user->id, $commission->percent, $commission->commission->wallet_id, $commission->commission_id , $general->sitename, $commission->commission_limit, $user_plan->trx);
+    } else {
+        foreach ($commissions as $commission) {
+            if ($commission->direct <= $direct_sale) {
+                updateCommissionWithLimit($user->id, $commission->percent, $commission->commission->wallet_id, $commission->commission_id, $general->sitename, $commission->commission_limit, $user_plan->trx);
                 $user->check_car = NULL;
                 $user->save();
-            }
-            else{
+            } else {
                 $user->check_car = NULL;
                 $user->save();
             }
@@ -2547,27 +2551,26 @@ function carShare($id = '', $direct_sale = '' , $date_today = ''){
     }
 }
 
-function checkSponsorWithdraw($id = ''){
+function checkSponsorWithdraw($id = '')
+{
     $user = User::find($id);
     $general = GeneralSetting::first();
     $paid_account = PurchasedPlan::where('user_id', $id)->where('type', 'paid')->count();
-    if($paid_account > 0){
+    if ($paid_account > 0) {
         return 1;
-    }
-    else{
+    } else {
         $plan_price = PurchasedPlan::where('user_id', $id)->where('type', 'sponsor')->first()->amount;
         $direct_sales = UserFamily::whereRaw('user_id = ' . Auth::id() . ' and level = 1 ')->get();
         $total_direct_sale = 0;
-        foreach($direct_sales as $direct_sale){
+        foreach ($direct_sales as $direct_sale) {
             if ($direct_sale->plan_id != 0) {
                 $total_direct_sale += Plan::where('id', $direct_sale->plan_id)->firstOrFail()->price;
             }
         }
 
-        if(($general->user1_detail * $plan_price) <= $total_direct_sale){
+        if (($general->user1_detail * $plan_price) <= $total_direct_sale) {
             return 1;
-        }
-        else{
+        } else {
             return 0;
         }
     }

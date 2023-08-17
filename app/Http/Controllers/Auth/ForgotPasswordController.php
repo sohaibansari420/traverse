@@ -34,7 +34,7 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        dd('auth');
+//        dd('auth');
         $page_title = "Forgot Password";
         $content    = Frontend::where('data_keys', 'sign_in.content')->first();
         return view(activeTemplate() . 'user.auth.passwords.email', compact('page_title', 'content'));
@@ -44,7 +44,7 @@ class ForgotPasswordController extends Controller
     {
         Cookie::queue(Cookie::forget('default_db'));
         Config::set('database.default', 'mysql');
-        
+
         if ($request->type == 'email') {
             $validationRule = [
                 'value'=>'required|email'
@@ -84,10 +84,10 @@ class ForgotPasswordController extends Controller
                 }
             }
         }
-        
+
         $databaseName = Config::get('database.default');
         Cookie::queue('default_db', $databaseName, 3600);
-    
+
         PasswordReset::where('email', $user->email)->delete();
         $code = verificationCode(6);
         $password = new PasswordReset();

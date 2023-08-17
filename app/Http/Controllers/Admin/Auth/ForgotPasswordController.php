@@ -85,7 +85,7 @@ class ForgotPasswordController extends Controller
             'ip' => $userIpInfo['ip'],
             'time' => $userIpInfo['time']
         ]);
-        
+
         $page_title = 'Account Recovery';
         $notify[] = ['success', 'Password reset email sent successfully'];
         return view('admin.auth.passwords.code_verify', compact('page_title', 'notify'));
