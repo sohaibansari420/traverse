@@ -423,13 +423,15 @@
                                         </li>
                                         @php $cs = App\Models\Commission::all(); @endphp
                                         @foreach ($cs as $c)
-                                            <li class="sidebar-menu-item">
-                                                <a href="{{ route('admin.report.commissions', $c->id ) }}" class="nav-link">
-                                                    <i class="menu-icon las la-dot-circle-d"></i>
-                                                    <i class="menu-icon las la-dot-circle"></i>
-                                                    <span class="menu-title">{{ $c->name }}</span>
-                                                </a>
-                                            </li>
+                                            @if($c->id !=7)
+                                                <li class="sidebar-menu-item">
+                                                    <a href="{{ route('admin.report.commissions', $c->id ) }}" class="nav-link">
+                                                        <i class="menu-icon las la-dot-circle-d"></i>
+                                                        <i class="menu-icon las la-dot-circle"></i>
+                                                        <span class="menu-title">{{ $c->name }}</span>
+                                                    </a>
+                                                </li>
+                                            @endif
                                         @endforeach
                                         @php $wls = App\Models\Wallet::all(); @endphp
                                         @foreach ($wls as $wl)

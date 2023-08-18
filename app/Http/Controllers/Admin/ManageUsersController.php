@@ -68,8 +68,9 @@ class ManageUsersController extends Controller
     {
         $page_title = 'Email Verified Users';
         $empty_message = 'No email verified user found';
+        $data_type = 'emailVerified';
         $users = User::emailVerified()->latest()->paginate(getPaginate());
-        return view('admin.users.list', compact('page_title', 'empty_message', 'users'));
+        return view('admin.users.list', compact('page_title', 'empty_message', 'users','data_type'));
     }
 
     public function smsUnverifiedUsers()
@@ -125,6 +126,9 @@ class ManageUsersController extends Controller
         }elseif($id == "emailUnverified"){
             $totalData = User::emailUnverified()->count();
         }
+        elseif($id == "emailVerified"){
+            $totalData = User::emailUnverified()->count();
+        }
             
         $totalFiltered = $totalData; 
 
@@ -169,7 +173,15 @@ class ManageUsersController extends Controller
                          ->with('userWallet')
                          ->orderBy($order,$dir)
                          ->get();
-            }           
+            }elseif($id == "emailVerified"){
+                $records = User::emailVerified()
+                         ->offset($start)
+                         ->limit($limit)
+                         ->with('userWallet')
+                         ->orderBy($order,$dir)
+                         ->get();
+            }    
+
         }
         else {
             $search = $request->input('search.value'); 
@@ -288,6 +300,31 @@ class ManageUsersController extends Controller
                             ->get();
 
                 $totalFiltered = User::emailUnverified()
+                                ->where('id','LIKE',"%{$search}%")
+                                ->orWhere('username', 'LIKE',"%{$search}%")
+                                ->orWhere('email', 'like', "%$search%")
+                                ->orWhere('mobile', 'like', "%$search%")
+                                ->orWhere('firstname', 'like', "%$search%")
+                                ->orWhere('lastname', 'like', "%$search%")
+                                ->orWhere('created_at', 'like', "%$search%")
+                                ->with('userWallet')
+                                ->count();
+            }elseif($id == "emailVerified"){
+                $records =  User::emailVerified()
+                            ->where('id','LIKE',"%{$search}%")
+                            ->orWhere('username', 'LIKE',"%{$search}%")
+                            ->orWhere('email', 'like', "%$search%")
+                            ->orWhere('mobile', 'like', "%$search%")
+                            ->orWhere('firstname', 'like', "%$search%")
+                            ->orWhere('lastname', 'like', "%$search%")
+                            ->orWhere('created_at', 'like', "%$search%")
+                            ->offset($start)
+                            ->limit($limit)
+                            ->with('userWallet')
+                            ->orderBy($order,$dir)
+                            ->get();
+
+                $totalFiltered = User::emailVerified()
                                 ->where('id','LIKE',"%{$search}%")
                                 ->orWhere('username', 'LIKE',"%{$search}%")
                                 ->orWhere('email', 'like', "%$search%")

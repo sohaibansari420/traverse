@@ -725,8 +725,9 @@ class ReportController extends Controller
 
     }
 
-    public function wallet($id, Request $request)
+    public function wallet(Request $request)
     {
+        $id=$request->walletID;
         if ($id)
         {
             if($request->userID){
@@ -757,8 +758,9 @@ class ReportController extends Controller
         return view('admin.reports.transactions', compact('page_title', 'transactions', 'empty_message', 'type'));
     }
 
-    public function commission($id, Request $request)
+    public function commission(Request $request)
     {
+        $id = $request->commissionID;
         if ($id)
         {
             if($request->userID){

@@ -154,25 +154,27 @@
         </div>
 
         @foreach ($commissions as $key => $commission)
-            <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
-                <div class="dashboard-w1 bg--{{ $key + 1 }} b-radius--10 box-shadow">
-                    <div class="icon">
-                        <i class="fa fa-link"></i>
-                    </div>
-                    <div class="details">
-                        <div class="numbers">
-                            <span class="currency-sign">{{ $general->cur_sym }}</span>
-                            <span
-                                class="amount">{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->sum('amount')) }}</span>
+            @if($commission->id != 7)
+                <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
+                    <div class="dashboard-w1 bg--{{ $key + 1 }} b-radius--10 box-shadow">
+                        <div class="icon">
+                            <i class="fa fa-link"></i>
                         </div>
-                        <div class="desciption">
-                            <span class="text--small">{{ $commission->name }}</span>
+                        <div class="details">
+                            <div class="numbers">
+                                <span class="currency-sign">{{ $general->cur_sym }}</span>
+                                <span
+                                    class="amount">{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->sum('amount')) }}</span>
+                            </div>
+                            <div class="desciption">
+                                <span class="text--small">{{ $commission->name }}</span>
+                            </div>
+                            <a href="{{ route('admin.report.commission') }}?commissionID={{ $commission->id }}"
+                                class="btn btn-sm text--small bg--white text--black box--shadow3 mt-3">@lang('View All')</a>
                         </div>
-                        <a href="{{ route('admin.report.commission') }}?commissionID={{ $commission->id }}"
-                            class="btn btn-sm text--small bg--white text--black box--shadow3 mt-3">@lang('View All')</a>
                     </div>
                 </div>
-            </div>
+            @endif
         @endforeach
 
         <div class="col-xl-3 col-lg-4 col-sm-6 mb-30">
