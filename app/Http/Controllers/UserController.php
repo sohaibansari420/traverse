@@ -92,25 +92,25 @@ class UserController extends Controller
                 $user->save();
             }
 
-            $direct_sales    = UserFamily::whereRaw('user_id = ' . Auth::id() . ' and level = 1 ')
-                                        ->where('created_at','>=',Carbon::parse(Auth::user()->check_car)->subDays(1))
-                                        ->get();
-            $total_direct_sale = 0;
-            foreach($direct_sales as $direct_sale){
-                if ($direct_sale->plan_id != 0) {
-                    $total_direct_sale += Plan::where('id', $direct_sale->plan_id)->firstOrFail()->price;
-                }
-            }
+            // $direct_sales    = UserFamily::whereRaw('user_id = ' . Auth::id() . ' and level = 1 ')
+            //                             ->where('created_at','>=',Carbon::parse(Auth::user()->check_car)->subDays(1))
+            //                             ->get();
+            // $total_direct_sale = 0;
+            // foreach($direct_sales as $direct_sale){
+            //     if ($direct_sale->plan_id != 0) {
+            //         $total_direct_sale += Plan::where('id', $direct_sale->plan_id)->firstOrFail()->price;
+            //     }
+            // }
 
-            $data['direct_sale'] =  $total_direct_sale;
+            // $data['direct_sale'] =  $total_direct_sale;
 
-            $car_days = $data['commissions'][6]->commissionDetail[0]->days;
-            $car_days_date = Carbon::parse(Auth::user()->check_car)->addDays($car_days);
-            $now = Carbon::now();
+            // $car_days = $data['commissions'][6]->commissionDetail[0]->days;
+            // $car_days_date = Carbon::parse(Auth::user()->check_car)->addDays($car_days);
+            // $now = Carbon::now();
 
-            if($car_days_date->lte($now)){
-                carShare(Auth::id(), $total_direct_sale,$car_days_date);
-            }
+            // if($car_days_date->lte($now)){
+            //     carShare(Auth::id(), $total_direct_sale,$car_days_date);
+            // }
         }
         
         //updateRankStatus(Auth::id());

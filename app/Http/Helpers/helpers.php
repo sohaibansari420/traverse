@@ -2508,48 +2508,48 @@ function stormCommission($id = '')
 
 }
 
-function carShare($id = '', $direct_sale = '', $date_today = '')
-{
-    $user = User::find($id);
-    $user_plan = getUserHigherPlan($user->id);
-    $general = GeneralSetting::first();
-    $commissions = CommissionDetail::where('commission_id', 7)->orderBy('id', 'desc')->get();
-    $transaction = Transaction::where('remark', 'Car_Bonus')->where('user_id', $user->id)
-        ->where(function ($q) use ($user, &$date_today) {
-            $q->where('created_at', '>=', Carbon::parse($user->check_car)->format('Y-m-d'))
-                ->where('created_at', '<', Carbon::parse($date_today)->addDays(1)->format('Y-m-d'));
-        })
-        ->first();
+// function carShare($id = '', $direct_sale = '', $date_today = '')
+// {
+//     $user = User::find($id);
+//     $user_plan = getUserHigherPlan($user->id);
+//     $general = GeneralSetting::first();
+//     $commissions = CommissionDetail::where('commission_id', 7)->orderBy('id', 'desc')->get();
+//     $transaction = Transaction::where('remark', 'Car_Bonus')->where('user_id', $user->id)
+//         ->where(function ($q) use ($user, &$date_today) {
+//             $q->where('created_at', '>=', Carbon::parse($user->check_car)->format('Y-m-d'))
+//                 ->where('created_at', '<', Carbon::parse($date_today)->addDays(1)->format('Y-m-d'));
+//         })
+//         ->first();
 
-    if (isset($transaction)) {
-        $user_wallet = UserWallet::where('user_id', $user->id)->where('wallet_id', 4)->first();
-        if ($direct_sale >= 25000 && $direct_sale < 50000) {
-            $transaction->amount = 500;
-            $user_wallet->balance = 500;
-        }
-        if ($direct_sale >= 50000 && $direct_sale < 100000) {
-            $transaction->amount = 1000;
-            $user_wallet->balance = 1000;
-        }
-        if ($direct_sale >= 100000) {
-            $transaction->amount = 2000;
-            $user_wallet->balance = 2000;
-        }
-        $transaction->update();
-        $user_wallet->update();
-    } else {
-        foreach ($commissions as $commission) {
-            if ($commission->direct <= $direct_sale) {
-                updateCommissionWithLimit($user->id, $commission->percent, $commission->commission->wallet_id, $commission->commission_id, $general->sitename, $commission->commission_limit, $user_plan->trx);
-                $user->check_car = NULL;
-                $user->save();
-            } else {
-                $user->check_car = NULL;
-                $user->save();
-            }
-        }
-    }
-}
+//     if (isset($transaction)) {
+//         $user_wallet = UserWallet::where('user_id', $user->id)->where('wallet_id', 4)->first();
+//         if ($direct_sale >= 25000 && $direct_sale < 50000) {
+//             $transaction->amount = 500;
+//             $user_wallet->balance = 500;
+//         }
+//         if ($direct_sale >= 50000 && $direct_sale < 100000) {
+//             $transaction->amount = 1000;
+//             $user_wallet->balance = 1000;
+//         }
+//         if ($direct_sale >= 100000) {
+//             $transaction->amount = 2000;
+//             $user_wallet->balance = 2000;
+//         }
+//         $transaction->update();
+//         $user_wallet->update();
+//     } else {
+//         foreach ($commissions as $commission) {
+//             if ($commission->direct <= $direct_sale) {
+//                 updateCommissionWithLimit($user->id, $commission->percent, $commission->commission->wallet_id, $commission->commission_id, $general->sitename, $commission->commission_limit, $user_plan->trx);
+//                 $user->check_car = NULL;
+//                 $user->save();
+//             } else {
+//                 $user->check_car = NULL;
+//                 $user->save();
+//             }
+//         }
+//     }
+// }
 
 function checkSponsorWithdraw($id = '')
 {

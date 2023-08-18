@@ -72,17 +72,28 @@
             <div class="card-footer pt-0 pb-0 text-center">
                 <div class="row mt-4">
                 @foreach ($commissions as $commission)
-                    <div class="col-3 pt-3 pb-3 border-end">
-                        <h3 class="mb-1">
-                            @if($commission->id == 1)
-                            {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('user_id', Auth::id())->sum('amount')) }}
-                            @else
-                            {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('wallet_id', '!=', 6)->where('user_id', Auth::id())->sum('amount')) }}
-                            @endif
-                        </h3>
-                        <a href="{{ route('user.report.commission') }}?commissionID={{ $commission->id }}"><span>{{ $commission->name }}</span></a>
-                    </div>
+                    @if($commission->id != 7)
+                        <div class="col-3 pt-3 pb-3 border-end">
+                            <h3 class="mb-1">
+                                @if($commission->id == 1)
+                                {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('user_id', Auth::id())->sum('amount')) }}
+                                @else
+                                {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('wallet_id', '!=', 6)->where('user_id', Auth::id())->sum('amount')) }}
+                                @endif
+                            </h3>
+                            <a href="{{ route('user.report.commission') }}?commissionID={{ $commission->id }}"><span>{{ $commission->name }}</span></a>
+                        </div>
+                    @endif
                 @endforeach
+                <div class="col-3 pt-3 pb-3 border-end">
+                    <h3 class="mb-1">
+                        @php
+                            $founder=App\Models\Founder::where('status', 'paid')->where('user_id', Auth::id());
+                        @endphp
+                        {{ $general->cur_sym }}{{ getAmount($founder->sum('amount')) }}
+                    </h3>
+                    <a href=""><span>Founder Bonus</span></a>
+                </div>
                 </div>
             </div>
         </div>
@@ -214,7 +225,7 @@
                 $rem_day = 0;
             }
         @endphp
-        <div class="card overflow-hidden">
+        {{-- <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[5]->name }}</h3>
                 <p class="text-white mb-2">Luxurious Car Bonus from The Millionaire Metaverse based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
@@ -238,7 +249,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="row">

@@ -55,9 +55,11 @@
                     </li>
                     @php $cs = App\Models\Commission::where('status', 1)->get(); @endphp
                     @foreach ($cs as $c)
-                        <li><a href="{{ route('user.report.commission') }}?commissionID={{ $c->id }}">
-                                {{ $c->name }}</a>
-                        </li>
+                        @if($c->id != 7)
+                            <li><a href="{{ route('user.report.commission') }}?commissionID={{ $c->id }}">
+                                    {{ $c->name }}</a>
+                            </li>
+                        @endif
                     @endforeach
                     @php $wls = App\Models\Wallet::where('status', 1)->where('id', '<=', 4)->get(); @endphp
                     @foreach ($wls as $wl)
