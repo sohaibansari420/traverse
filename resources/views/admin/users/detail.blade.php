@@ -325,25 +325,27 @@
 
 
                 @foreach ($commissions as $key => $commission)
-                    <div class="col-xl-4 col-lg-6 col-sm-6 mb-30">
-                        <div class="dashboard-w1 bg--{{ $key + 1 }} b-radius--10 box-shadow has--link">
-                            <a href="{{ route('admin.report.commission') }}?commissionID={{ $commission->id }}&userID={{ $user->id }}"
-                                class="item--link"></a>
-                            <div class="icon">
-                                <i class="la la-link"></i>
-                            </div>
-                            <div class="details">
-                                <div class="numbers">
-                                    <span
-                                        class="amount">{{ getAmount(\App\Models\Transaction::where('commission_id', $commission->id)->where('user_id', $user->id)->sum('amount')) }}</span>
-                                    <span class="currency-sign">{{ $general->cur_text }}</span>
+                    @if($commission->id != 7)
+                        <div class="col-xl-4 col-lg-6 col-sm-6 mb-30">
+                            <div class="dashboard-w1 bg--{{ $key + 1 }} b-radius--10 box-shadow has--link">
+                                <a href="{{ route('admin.report.commission') }}?commissionID={{ $commission->id }}&userID={{ $user->id }}"
+                                    class="item--link"></a>
+                                <div class="icon">
+                                    <i class="la la-link"></i>
                                 </div>
-                                <div class="desciption">
-                                    <span>{{ $commission->name }}</span>
+                                <div class="details">
+                                    <div class="numbers">
+                                        <span
+                                            class="amount">{{ getAmount(\App\Models\Transaction::where('commission_id', $commission->id)->where('user_id', $user->id)->sum('amount')) }}</span>
+                                        <span class="currency-sign">{{ $general->cur_text }}</span>
+                                    </div>
+                                    <div class="desciption">
+                                        <span>{{ $commission->name }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
 
 
