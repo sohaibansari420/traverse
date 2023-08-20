@@ -130,7 +130,7 @@
                         <ul class="widget-link contact">
                             <li>
                                 <p>Address</p>
-                                <a href="#">291 Brighton Road, South Croydon, United Kingdom</a>
+                                <a href="#">Galla House 695 High Road, North Finchley, London, United Kingdom, N12 0BT</a>
                             </li>
                             <li>
                                 <p>Phone</p>
