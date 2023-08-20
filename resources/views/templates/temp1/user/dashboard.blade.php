@@ -250,6 +250,31 @@
                 </div>
             </div>
         </div> --}}
+        <div class="card overflow-hidden">
+            <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
+                <h3 class="mt-3 mb-1 text-white">Founder Club Bonus</h3>
+                <p class="text-white mb-2">Founder Club Bonus from The Millionaire Metaverse based on higher plan purchase. Get 1% of the Profit from Millionaire Multiverse.</p>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <p class="mb-0 fs-15">This bonus is a special incentive program offered by our Multi-level-Marketing company to reward the pioneering members who have contributed significantly to the growth and success of our buisness. As part of this program, eligible founders are entitled to receive a 1% share of the company's total profits.</p>
+                    </div>
+                    {{-- <div class="col-6 mt-4">
+                        <div class="bgl-primary rounded p-3">
+                            <h4 class="mb-0">${{ @$direct_sale }}</h4>
+                            <small>Current Direct Sale</small>
+                        </div>
+                    </div> --}}
+                    {{-- <div class="col-6 mt-4">
+                        <div class="bgl-primary rounded p-3">
+                            <h4 class="mb-0">{{ $rem_day }}</h4>
+                            <small>Remaining Days</small>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
