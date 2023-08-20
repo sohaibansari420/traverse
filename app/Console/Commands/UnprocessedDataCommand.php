@@ -28,6 +28,7 @@ class UnprocessedDataCommand extends Command
      */
     public function handle()
     {
+        info('This is Unprocessed Data command');
         $unprocessedDatas = UnprocessedData::where('is_processed', 0)->get();
 
         foreach ($unprocessedDatas as $unprocessedData) {

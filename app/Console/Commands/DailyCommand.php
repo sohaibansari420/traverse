@@ -27,6 +27,7 @@ class DailyCommand extends Command
      */
     public function handle()
     {
+        info('This is Daily command');
         rewardRelease();
 
         $this->info('Command run daily has been executed successfully');

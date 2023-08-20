@@ -28,6 +28,7 @@ class FiveMinCommand extends Command
      */
     public function handle()
     {
+        info('This is Five Min command');
         $gnl = GeneralSetting::first();
         $gnl->last_cron = \Carbon\Carbon::now()->toDateTimeString();
         $gnl->save();
