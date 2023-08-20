@@ -257,7 +257,7 @@
                 <div class="col-md-6">
                     <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Founder &amp; CEO
+                            CEO
                         </h2>
                         <p>I am honored to serve as the CEO of this innovative and dynamic company. With over thirty years of experience in sales and distribution network marketing, I have witnessed the industry's evolution and its tremendous potential. Millionaire Metaverse offers a range of applications, including an OTT platform, a 3D NFT game, an Online shopping mall application, and a Crypto Currency Exchange. Our team of gaming, blockchain, and entertainment experts is dedicated to pushing the boundaries of what is possible in the Metaverse.</p>
                         <p>Join us on this exciting journey as we redefine the future of entertainment in the Metaverse. With Millionaire Metaverse, the possibilities are endless, and we are committed to providing a unique and inclusive entertainment experience that is accessible to everyone.</p>
@@ -382,7 +382,7 @@
                         <div class="roadmap-wrapper" data-aos="fade-in" data-aos-duration="1000">
                             <div class="swiper-container slider-7">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
+                                    {{-- <div class="swiper-slide">
                                         <div class="roadmap-box active">
                                             <div class="icon">
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
@@ -398,41 +398,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="roadmap-box">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q4, 2023</h6>
-                                                <ul>
-                                                    <li><h6>MM Token</h6></li>
-                                                    <li>Launch MM token on multiple exchanges</li>
-                                                    <li>Integration of MM token for payments within The Millionaire Metaverse ecosystem</li>
-                                                    <li>Collaboration with other projects for increased use cases and adoption of MM</li>
-                                                    <li>Develop a mobile wallet for MM</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="roadmap-box">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q1, 2024</h6>
-                                                <ul>
-                                                    <li><h6>Online Shopping Mall</h6></li>
-                                                    <li>Onboard more merchants to the shopping mall</li>
-                                                    <li>Launch of an affiliate program for members to earn rewards for referring shoppers</li>
-                                                    <li>Integration of MM token for payments within the shopping mall</li>
-                                                    <li>Addition of more product categories and features</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
@@ -441,11 +407,10 @@
                                             <div class="content">
                                                 <h6 class="date">Q3, 2024</h6>
                                                 <ul>
-                                                    <li><h6>OTT Platform</h6></li>
-                                                    <li>Launch of original content series</li>
-                                                    <li>Integration of MM token for subscriptions and pay-per-view content</li>
-                                                    <li>Expansion of platform to more regions</li>
-                                                    <li>Partnership with content creators and studios for exclusive content</li>
+                                                    <li><h6>MM Token</h6></li>
+                                                    <li>Launch of the MM</li>
+                                                    <li>Token on Binance</li>
+                                                    <li>Smart Chain(BSC)</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -456,30 +421,59 @@
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
                                             </div>
                                             <div class="content">
-                                                <h6 class="date">Q1, 2025</h6>
+                                                <h6 class="date">Q4, 2024</h6>
+                                                <ul>
+                                                    <li><h6>OTT Platform</h6></li>
+                                                    <li>Release of the</li>
+                                                    <li>Millionaire Multiversel</li>
+                                                    <li>OTT platform</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="roadmap-box">
+                                            <div class="icon">
+                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
+                                            </div>
+                                            <div class="content">
+                                                <h6 class="date">Q2, 2025</h6>
+                                                <ul>
+                                                    <li><h6>Online Shopping Mall</h6></li>
+                                                    <li>Release of the online</li>
+                                                    <li>Shopping Mall Application</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="roadmap-box">
+                                            <div class="icon">
+                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
+                                            </div>
+                                            <div class="content">
+                                                <h6 class="date">Q4, 2025</h6>
+                                                <ul>
+                                                    <li><h6>Crypto Currency Exchange</h6></li>
+                                                    <li>Launch of the dedicated crypto</li>
+                                                    <li>currency exchange within</li>
+                                                    <li>Millionaire Metaverse</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="roadmap-box">
+                                            <div class="icon">
+                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
+                                            </div>
+                                            <div class="content">
+                                                <h6 class="date">Q2, 2026</h6>
                                                 <ul>
                                                     <li><h6>3D NFT Game</h6></li>
-                                                    <li>Launch of beta version for testing and feedback</li> 
-                                                    <li>Addition of more game modes and features</li>
-                                                    <li>Integration of MM token for in-game purchases and rewards</li>
-                                                    <li>Launch of esports tournaments with MM prize pools</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="roadmap-box">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q3, 2025</h6>
-                                                <ul>
-                                                    <li><h6>Crypto Exchange</h6></li>
-                                                    <li>Obtain necessary licenses and regulatory approvals</li>
-                                                    <li>Onboard more cryptocurrency pairs</li>
-                                                    <li>Integration of MM token for trading and fee discounts</li>
-                                                    <li>Partnership with other exchanges for increased liquidity and trading volume</li>
+                                                    <li>Launch of the 3D</li> 
+                                                    <li>NFT Metaverse Game</li>
+                                                    <li>on the MM Platform</li>
                                                 </ul>
                                             </div>
                                         </div>
