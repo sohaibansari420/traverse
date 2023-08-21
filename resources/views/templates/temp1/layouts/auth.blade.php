@@ -138,7 +138,7 @@
                             </li>
                             <li class="email">
                                 <p>Email</p>
-                                <a href="#">admin@millionairemetverse.com</a>
+                                <a href="#">admin@millionairemultiverse.com</a>
                             </li>
                         </ul>
                     </div>
