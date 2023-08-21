@@ -90,9 +90,9 @@
                 <div class="col-md-6">
                     <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Join The <br/>Millionaire Metaverse Community Today!
+                            Join The <br/>Millionaire Multiverse Community Today!
                         </h2>
-                        <p class="sub">Take the first step towards financial freedom in the metaverse. Join Millionaire Metaverse or contact us to learn more about our innovative products and earning opportunities.</p>
+                        <p class="sub">Take the first step towards financial freedom in the multiverse. Join Millionaire Multiverse or contact us to learn more about our innovative products and earning opportunities.</p>
                         <div class="wrap-btn">
                             <a href="#" class="tf-button style3">
                                 Join Now
@@ -117,7 +117,7 @@
                         <div class="logo_footers">
                             <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo">
                         </div>
-                        <p class="mt-4">The Millionaire Metaverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the metaverse and achieve financial freedom.</p>
+                        <p class="mt-4">The Millionaire Multiverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the multiverse and achieve financial freedom.</p>
                     </div>
                     <div class="widget">
                         
@@ -130,7 +130,7 @@
                         <ul class="widget-link contact">
                             <li>
                                 <p>Address</p>
-                                <a href="#">Galla House 695 High Road, North Finchley, London, United Kingdom, N12 0BT</a>
+                                <a href="#">124 City Road, London, United Kingdom, EC1V 2NX</a>
                             </li>
                             <li>
                                 <p>Phone</p>
@@ -149,7 +149,7 @@
             <div class="container">
                 <div class="wrap-fx">
                     <div class="Copyright">
-                        Copyright © Millionaire Metaverse. All Rights Reserved.
+                        Copyright © Millionaire Multiverse. All Rights Reserved.
                     </div>
                 </div>
             </div>

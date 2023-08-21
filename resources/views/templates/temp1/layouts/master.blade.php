@@ -45,7 +45,7 @@
         <div class="container">
             <div id="site-header-inner">
                 <div class="header_logo">
-                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metaverse Logo"></a>
+                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Multiverse Logo"></a>
                 </div>
                
                 <nav id="main-nav" class="main-nav">
@@ -92,8 +92,8 @@
                                 <div class="col-md-12">
                                     <div class="box-slider">
                                         <div class="content-box">
-                                            <h1 class="title" >Discover The <br/>Millionaire Metaverse</h1>
-                                            <p class="sub-title">Join our innovative platform today and explore the limitless possibilities of the metaverse</p>
+                                            <h1 class="title" >Discover The <br/>Millionaire Multiverse</h1>
+                                            <p class="sub-title">Join our innovative platform today and explore the limitless possibilities of the multiverse</p>
                                             <div class="wrap-btn">
                                                 <a href="{{route('user.register')}}" class="tf-button style2">
                                                     Join Now
@@ -158,7 +158,7 @@
                             </div>
                             <div class="content">
                                 <h5>Start Earning</h5>
-                                <p class="desc">Start earning and exploring the limitless potential of the metaverse with The Millionaire Metaverse.</p>
+                                <p class="desc">Start earning and exploring the limitless potential of the multiverse with The Millionaire Multiverse.</p>
                                 <p class="number">03</p>
                             </div>
                             <a href="#" class="btn_project">
@@ -191,10 +191,10 @@
                     <div class="content_technology" data-aos="fade-up" data-aos-duration="800">
                         <div class="tf-title left">
                             <h2 class="title mb20">
-                                Explore the Limitless Possibilities of Millionaire Metaverse
+                                Explore the Limitless Possibilities of Millionaire Multiverse
                             </h2>
                         </div>
-                        <p class="sub_technology">Millionaire Metaverse is a blockchain-powered platform that offers an immersive and seamless experience across a range of applications. Our ecosystem includes an OTT platform, 3D NFT game, Online shopping mall application, and Crypto Currency Exchange. Our goal is to create a unique and inclusive entertainment experience that is accessible to everyone. We have a team of experts in gaming, blockchain, and entertainment, who are passionate about innovation and pushing the boundaries of what is possible in the Metaverse. Whether you want to play a 3D NFT game, shop for physical goods using cryptocurrency, or exchange cryptocurrencies with other users, Millionaire Metaverse has exciting applications that are sure to keep you engaged and entertained. Join us on our journey to redefine the future of entertainment in the Metaverse. With Millionaire Metaverse, the possibilities are endless.
+                        <p class="sub_technology">Millionaire Multiverse is a blockchain-powered platform that offers an immersive and seamless experience across a range of applications. Our ecosystem includes an OTT platform, 3D NFT game, Online shopping mall application, and Crypto Currency Exchange. Our goal is to create a unique and inclusive entertainment experience that is accessible to everyone. We have a team of experts in gaming, blockchain, and entertainment, who are passionate about innovation and pushing the boundaries of what is possible in the Multiverse. Whether you want to play a 3D NFT game, shop for physical goods using cryptocurrency, or exchange cryptocurrencies with other users, Millionaire Multiverse has exciting applications that are sure to keep you engaged and entertained. Join us on our journey to redefine the future of entertainment in the Multiverse. With Millionaire Multiverse, the possibilities are endless.
                         </p>
                         {{-- <img class="move4 mt-4 mb-4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/site/legal.png') }}" alt="Legal Document"> --}}
                         <div class="swiper-container slider-6">
@@ -259,8 +259,8 @@
                         <h2 class="title">
                             CEO
                         </h2>
-                        <p>I am honored to serve as the CEO of this innovative and dynamic company. With over thirty years of experience in sales and distribution network marketing, I have witnessed the industry's evolution and its tremendous potential. Millionaire Metaverse offers a range of applications, including an OTT platform, a 3D NFT game, an Online shopping mall application, and a Crypto Currency Exchange. Our team of gaming, blockchain, and entertainment experts is dedicated to pushing the boundaries of what is possible in the Metaverse.</p>
-                        <p>Join us on this exciting journey as we redefine the future of entertainment in the Metaverse. With Millionaire Metaverse, the possibilities are endless, and we are committed to providing a unique and inclusive entertainment experience that is accessible to everyone.</p>
+                        <p>I am honored to serve as the CEO of this innovative and dynamic company. With over thirty years of experience in sales and distribution network marketing, I have witnessed the industry's evolution and its tremendous potential. Millionaire Multiverse offers a range of applications, including an OTT platform, a 3D NFT game, an Online shopping mall application, and a Crypto Currency Exchange. Our team of gaming, blockchain, and entertainment experts is dedicated to pushing the boundaries of what is possible in the Multiverse.</p>
+                        <p>Join us on this exciting journey as we redefine the future of entertainment in the Multiverse. With Millionaire Multiverse, the possibilities are endless, and we are committed to providing a unique and inclusive entertainment experience that is accessible to everyone.</p>
                         <div class="wrap-btn">
                             <a href="{{route('user.register')}}" class="tf-button style3">
                                 Join Now
@@ -285,7 +285,7 @@
                 <div class="col-md-12">
                     <div class="tf-title center" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Millionaire Metaverse Products
+                            Millionaire Multiverse Products
                         </h2>
                     </div>
                 </div>
@@ -302,7 +302,7 @@
                                 <h5 class="heading"><a href="#">MM Token</a></h5>
                             </div>
                             <div class="content">
-                                <p>MM Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Millionaire Metaverse ecosystem, it serves as a medium of exchange and store of value for users within the platform. MM can be used to purchase virtual land, goods, and services within the Metaverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. MM Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
+                                <p>MM Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Millionaire Multiverse ecosystem, it serves as a medium of exchange and store of value for users within the platform. MM can be used to purchase virtual land, goods, and services within the Multiverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. MM Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -316,7 +316,7 @@
                                 <h5 class="heading"><a href="#">Online Shopping Mall</a></h5>
                             </div>
                             <div class="content">
-                                <p>The online shopping mall application in Millionaire Metaverse is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the MM Token, allowing users to make purchases using the cryptocurrency.</p>
+                                <p>The online shopping mall application in Millionaire Multiverse is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the MM Token, allowing users to make purchases using the cryptocurrency.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -330,7 +330,7 @@
                                 <h5 class="heading"><a href="#">OTT Platform</a></h5>
                             </div>
                             <div class="content">
-                                <p>The OTT (Over-The-Top) platform in Millionaire Metaverse is a streaming service that provides users with access to a wide range of movies, TV shows, and other video content. It uses advanced streaming technology to deliver high-quality video content to users, and it is designed to be fast, reliable, and easy to use. The platform also includes features like personalized recommendations, user profiles, and social sharing, making it a truly immersive entertainment experience.</p>
+                                <p>The OTT (Over-The-Top) platform in Millionaire Multiverse is a streaming service that provides users with access to a wide range of movies, TV shows, and other video content. It uses advanced streaming technology to deliver high-quality video content to users, and it is designed to be fast, reliable, and easy to use. The platform also includes features like personalized recommendations, user profiles, and social sharing, making it a truly immersive entertainment experience.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -341,10 +341,10 @@
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div>
                                 </div>
-                                <h5 class="heading"><a href="#">3D NFT Metaverse Game</a></h5>
+                                <h5 class="heading"><a href="#">3D NFT Multiverse Game</a></h5>
                             </div>
                             <div class="content">
-                                <p>The 3D NFT Metaverse Game in Millionaire Metaverse is a cutting-edge gaming platform that allows users to enter a fully immersive virtual world where they can interact with other players, explore new environments, and complete quests and challenges. The game uses NFTs (Non-Fungible Tokens) to provide unique and collectible in-game items, such as weapons, armor, and special abilities, which players can use to enhance their gaming experience. The game is built on the latest blockchain technology, providing users with a secure and transparent gaming environment.</p>
+                                <p>The 3D NFT Multiverse Game in Millionaire Multiverse is a cutting-edge gaming platform that allows users to enter a fully immersive virtual world where they can interact with other players, explore new environments, and complete quests and challenges. The game uses NFTs (Non-Fungible Tokens) to provide unique and collectible in-game items, such as weapons, armor, and special abilities, which players can use to enhance their gaming experience. The game is built on the latest blockchain technology, providing users with a secure and transparent gaming environment.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -358,7 +358,7 @@
                                 <h5 class="heading"><a href="#">Crypto Currency Exchange</a></h5>
                             </div>
                             <div class="content">
-                                <p>The crypto currency exchange in Millionaire Metaverse is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the MM Token, allowing users to trade cryptocurrencies using the Millionaire Metaverse's native cryptocurrency.</p>
+                                <p>The crypto currency exchange in Millionaire Multiverse is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the MM Token, allowing users to trade cryptocurrencies using the Millionaire Multiverse's native cryptocurrency.</p>
                             </div>
                         </div>
                     </div>
@@ -391,7 +391,7 @@
                                                 <h6 class="date">Q3, 2023</h6>
                                                 <ul>
                                                     <li><h6>Launching</h6></li>
-                                                    <li>Launch of Millionaire Metaverse</li>
+                                                    <li>Launch of Millionaire Multiverse</li>
                                                     <li>Expansion of network marketing team/li>
                                                     <li>Launch of new promotional campaigns and incentives for network marketers</li>
                                                     <li>Continued expansion and growth of the network marketing team</li>
@@ -457,7 +457,7 @@
                                                     <li><h6>Crypto Currency Exchange</h6></li>
                                                     <li>Launch of the dedicated crypto</li>
                                                     <li>currency exchange within</li>
-                                                    <li>Millionaire Metaverse</li>
+                                                    <li>Millionaire Multiverse</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -472,7 +472,7 @@
                                                 <ul>
                                                     <li><h6>3D NFT Game</h6></li>
                                                     <li>Launch of the 3D</li> 
-                                                    <li>NFT Metaverse Game</li>
+                                                    <li>NFT Multiverse Game</li>
                                                     <li>on the MM Platform</li>
                                                 </ul>
                                             </div>
@@ -505,9 +505,9 @@
                 <div class="col-md-6">
                     <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Join The <br/>Millionaire Metaverse Community Today!
+                            Join The <br/>Millionaire Multiverse Community Today!
                         </h2>
-                        <p class="sub">Take the first step towards financial freedom in the metaverse. Join Millionaire Metaverse or contact us to learn more about our innovative products and earning opportunities.</p>
+                        <p class="sub">Take the first step towards financial freedom in the Multiverse. Join Millionaire Multiverse or contact us to learn more about our innovative products and earning opportunities.</p>
                         <div class="wrap-btn">
                             <a href="{{route('user.register')}}" class="tf-button style3">
                                 Join Now
@@ -532,7 +532,7 @@
                         <div class="logo_footers">
                             <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo">
                         </div>
-                        <p class="mt-4">The Millionaire Metaverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the metaverse and achieve financial freedom.</p>
+                        <p class="mt-4">The Millionaire Multiverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the Multiverse and achieve financial freedom.</p>
                     </div>
                     <div class="widget">
                         
@@ -545,7 +545,7 @@
                         <ul class="widget-link contact">
                             <li>
                                 <p>Address</p>
-                                <a href="#">Galla House 695 High Road, North Finchley, London, United Kingdom, N12 0BT</a>
+                                <a href="#">124 City Road, London, United Kingdom, EC1V 2NX</a>
                             </li>
                             <li>
                                 <p>Phone</p>
@@ -564,7 +564,7 @@
             <div class="container">
                 <div class="wrap-fx">
                     <div class="Copyright">
-                        Copyright © Millionaire Metaverse. All Rights Reserved.
+                        Copyright © Millionaire Multiverse. All Rights Reserved.
                     </div>
                 </div>
             </div>
