@@ -448,7 +448,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck2" name="send_roi">
-                                    <label class="form-check-label" for="exampleCheck1">With Roi</label>
+                                    <label class="form-check-label" for="exampleCheck1">With Daily</label>
                                 </div>
                             </div>
 

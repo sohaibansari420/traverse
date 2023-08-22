@@ -16,10 +16,10 @@
                                     <th scope="col">@lang('TRX')</th>
                                     <th scope="col">@lang('Amount')</th>
                                     <th scope="col">@lang('Compounding')</th>
-                                    <th scope="col">@lang('Roi Limit')</th>
+                                    <th scope="col">@lang('Daily Limit')</th>
                                     <th scope="col">@lang('Limit Consumed')</th>
-                                    <th scope="col">@lang('Roi Return')</th>
-                                    <th scope="col">@lang('Roi Status')</th>
+                                    <th scope="col">@lang('Daily Return')</th>
+                                    <th scope="col">@lang('Daily Status')</th>
                                     <th scope="col">@lang('Point Status')</th>
                                     <th scope="col">@lang('Auto Renew')</th>
                                     <th scope="col">@lang('Auto Compounding')</th>
@@ -39,11 +39,11 @@
                                             {{ $general->cur_text }}</td>
                                         <td data-label="@lang('Compunding')">{{ getAmount($plan->compunding) }}
                                             {{ $general->cur_text }}</td>
-                                        <td data-label="@lang('Roi Limit')">{{ $plan->roi_limit }}</td>
+                                        <td data-label="@lang('Daily Limit')">{{ $plan->roi_limit }}</td>
                                         <td data-label="@lang('Limit Consumed')">{{ $plan->limit_consumed }}</td>
-                                        <td data-label="@lang('Roi Return')">{{ $plan->roi_return }}</td>
+                                        <td data-label="@lang('Daily Return')">{{ $plan->roi_return }}</td>
 
-                                        <td data-label="@lang('Roi Status')">
+                                        <td data-label="@lang('Daily Status')">
                                             @if ($plan->is_roi == 1)
                                                 <span
                                                     class="text--small badge font-weight-normal badge--success">@lang('Active')</span>
@@ -139,7 +139,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12 is_roi">
-                                <label class="font-weight-bold">@lang('Roi Status')</label>
+                                <label class="font-weight-bold">@lang('Daily Status')</label>
                                 <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"
                                     data-toggle="toggle" data-on="@lang('Active')" data-off="@lang('Inactive')"
                                     name="is_roi" checked>

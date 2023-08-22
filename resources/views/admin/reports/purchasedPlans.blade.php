@@ -22,10 +22,10 @@
                                     <th scope="col">@lang('TRX')</th>
                                     <th scope="col">@lang('Amount')</th>
                                     <th scope="col">@lang('Compounding')</th>
-                                    <th scope="col">@lang('Roi Limit')</th>
+                                    <th scope="col">@lang('Daily Limit')</th>
                                     <th scope="col">@lang('Limit Consumed')</th>
-                                    <th scope="col">@lang('Roi Return')</th>
-                                    <th scope="col">@lang('Roi Status')</th>
+                                    <th scope="col">@lang('Daily Return')</th>
+                                    <th scope="col">@lang('Daily Status')</th>
                                     <th scope="col">@lang('Point Status')</th>
                                     <th scope="col">@lang('Auto Renew')</th>
                                     <th scope="col">@lang('Auto Compounding')</th>
@@ -62,7 +62,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12 is_roi">
-                                <label class="font-weight-bold">@lang('Roi Status')</label>
+                                <label class="font-weight-bold">@lang('Daily Status')</label>
                                 <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"
                                     data-toggle="toggle" data-on="@lang('Active')" data-off="@lang('Inactive')"
                                     name="is_roi" checked>

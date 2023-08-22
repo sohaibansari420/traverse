@@ -377,7 +377,7 @@ class ManageUsersController extends Controller
         $user->is_roi = $option;
         $user->save();
 
-        $notify[] = ['success', 'User roi has been updated'];
+        $notify[] = ['success', 'User daily income has been updated'];
         return redirect()->back()->withNotify($notify);
     }
 
@@ -832,7 +832,7 @@ class ManageUsersController extends Controller
         $commissions = Commission::with('trans')->get();
 
         foreach ($commissions as $key => $commission) {
-            if($commission->name == "ROI Income"){
+            if($commission->name == "Daily Income"){
                 $roi=$commission->trans->sum('amount');
             }
             else{

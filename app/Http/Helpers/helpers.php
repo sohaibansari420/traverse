@@ -996,11 +996,11 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
         ->count();
 
     if ($user_plan->is_roi == 0) {
-        return ['error', 'ROI is off for this Plan'];
+        return ['error', 'Daily is off for this Plan'];
     }
 
     if ($roi_status != 0) {
-        return ['error', 'Already received the ROI for this Plan'];
+        return ['error', 'Already received the Daily for this Plan'];
     }
 
     if ($commission->is_package == 1) {
@@ -1065,7 +1065,7 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
             ]);
     }
 
-    return ['success', 'Roi Return Successfully'];
+    return ['success', 'Daily Return Successfully'];
 }
 
 function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = '', $wallet_id = '', $network_limit = '', $plan_trx = '')

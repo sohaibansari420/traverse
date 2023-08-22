@@ -830,10 +830,10 @@ class ReportController extends Controller
         if ($request->userID)
         {
             $user = User::findOrFail($request->userID);
-            $page_title = $user->username . ' - ROI Income Logs';
+            $page_title = $user->username . ' - Daily Income Logs';
             $transactions = Transaction::where('user_id', $user->id)->where('remark', 'roi_income')->with('user')->latest()->paginate(getPaginate());
         }else {
-            $page_title = 'ROI Income Logs';
+            $page_title = 'Daily Income Logs';
             $transactions = Transaction::where('remark', 'roi_income')->with('user')->latest()->paginate(getPaginate());
         }
 

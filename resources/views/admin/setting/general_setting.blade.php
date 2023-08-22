@@ -46,7 +46,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group ">
-                                    <label class="form-control-label font-weight-bold">@lang('ROI Day')</label>
+                                    <label class="form-control-label font-weight-bold">@lang('Daily Day')</label>
                                     <input class="form-control  form-control-lg" type="text" name="bal_trans_per_charge"
                                         value="{{ getAmount($general->bal_trans_per_charge) }}">
                                 </div>

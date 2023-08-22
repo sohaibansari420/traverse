@@ -383,13 +383,13 @@
                                 <h5 class="mb-0">{{ $time }}</h5>
                             </div>
                             <div class="col-md-3 border-right mb-4 mb-md-0">
-                                <p class="mb-0 text-muted">Remaining ROI Days</p>
+                                <p class="mb-0 text-muted">Remaining Daily Days</p>
                                 <h5 class="mb-0">{{ $rem_days }}</h5>
                             </div>
                             <div class="col-md-3 text-center">
                                 @if ($current_date->dayOfWeek != \Carbon\Carbon::SATURDAY && $current_date->dayOfWeek != \Carbon\Carbon::SUNDAY && $roi_status == 0 && $plan->is_roi == 1 && $days > 0)
                                     <a href="javascript:void(0)" class="btn btn-primary"data-bs-target="#confROI{{ $plan->id }}" data-bs-toggle="modal">
-                                        Release ROI
+                                        Release Daily
                                     </a>
                                 @endif
                             </div>
@@ -495,7 +495,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="confROI{{ $plan->id }}">@lang('Confirm Release ROI for ' . $plan->plan->name)?
+                        <h5 class="modal-title" id="confROI{{ $plan->id }}">@lang('Confirm Release Daily for ' . $plan->plan->name)?
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal">
                         </button>
@@ -504,7 +504,7 @@
                         action="{{ route('user.roi.compound') }}?trx={{ $plan->trx }}">
                         @csrf
                         <div class="modal-body">
-                            <p class="text-center"> @lang('Do you want to Release ROI?')</p>
+                            <p class="text-center"> @lang('Do you want to Release Daily?')</p>
                         </div>
                         <div class="modal-footer myhide">
                             <button type="submit" name="compounding" class="btn btn-primary"
