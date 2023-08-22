@@ -47,14 +47,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-row mt-3">
+                            {{-- <div class="form-row mt-3">
                                 <div class="form-group col-md-6 offset-md-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="btc_wallet" autocomplete="off"
                                             placeholder="@lang('Enter your BTC Wallet')*" required>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row mt-3">
                                 <div class="form-group col-md-6 offset-md-3">

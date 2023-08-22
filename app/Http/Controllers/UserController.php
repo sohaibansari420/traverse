@@ -594,14 +594,14 @@ class UserController extends Controller
             'front' => 'mimes:png,jpg,jpeg,svg,gif',
             'selfie' => 'mimes:png,jpg,jpeg,svg,gif',
             'back' => 'mimes:png,jpg,jpeg,svg,gif',
-            'btc_wallet' => 'required',
+            // 'btc_wallet' => 'required',
             'trc20_wallet' => 'required',
         ]);
         
         $db_name = Config::get('database.default');
 
         $in['verify'] = 1;
-        $in['btc_wallet'] = $request->btc_wallet;
+        $in['btc_wallet'] = $request->btc_wallet ?? '';
         $in['trc20_wallet'] = $request->trc20_wallet;
 
         $user = Auth::user();
