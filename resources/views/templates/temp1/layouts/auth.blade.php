@@ -45,7 +45,7 @@
         <div class="container">
             <div id="site-header-inner">
                 {{-- <div class="header_logo">
-                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo"></a>
+                    <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaires Metvrse Logo"></a>
                 </div> --}}
                
                 {{-- <nav id="main-nav" class="main-nav">
@@ -90,9 +90,9 @@
                 <div class="col-md-6">
                     <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
                         <h2 class="title">
-                            Join The <br/>Millionaire Multiverse Community Today!
+                            Join The <br/>Millionaires Multiverse Community Today!
                         </h2>
-                        <p class="sub">Take the first step towards financial freedom in the multiverse. Join Millionaire Multiverse or contact us to learn more about our innovative products and earning opportunities.</p>
+                        <p class="sub">Take the first step towards financial freedom in the multiverse. Join Millionaires Multiverse or contact us to learn more about our innovative products and earning opportunities.</p>
                         <div class="wrap-btn">
                             <a href="#" class="tf-button style3">
                                 Join Now
@@ -115,9 +115,9 @@
                 <div class="row">
                     <div class="footer-logo">
                         <div class="logo_footers">
-                            <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo">
+                            <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaires Metvrse Logo">
                         </div>
-                        <p class="mt-4">The Millionaire Multiverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the multiverse and achieve financial freedom.</p>
+                        <p class="mt-4">The Millionaires Multiverse is a cutting-edge ecosystem that offers innovative digital asset products and limitless earning opportunities. Join us to explore the potential of the multiverse and achieve financial freedom.</p>
                     </div>
                     <div class="widget">
                         
@@ -138,7 +138,7 @@
                             </li>
                             <li class="email">
                                 <p>Email</p>
-                                <a href="#">admin@millionairemultiverse.com</a>
+                                <a href="#">admin@millionairesmultiverse.com</a>
                             </li>
                         </ul>
                     </div>
@@ -149,7 +149,7 @@
             <div class="container">
                 <div class="wrap-fx">
                     <div class="Copyright">
-                        Copyright © Millionaire Multiverse. All Rights Reserved.
+                        Copyright © Millionaires Multiverse. All Rights Reserved.
                     </div>
                 </div>
             </div>

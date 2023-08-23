@@ -4,7 +4,7 @@
 <!--**********************************
     Main wrapper start
 ***********************************-->
-<div id="main-wrapper" style="background:rgb(255, 255, 255);" class="wallet-open active">
+<div id="main-wrapper" style="background:rgb(94, 85, 213);" class="wallet-open active">
 
     @include($activeTemplate . 'user.partials.topnav')
     
@@ -33,7 +33,7 @@
     ***********************************-->
     <div class="footer out-footer style-1">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#">Millionaire Multiverse</a> 2023</p>
+            <p>Copyright © Designed &amp; Developed by <a href="#">Millionaires Multiverse</a> 2023</p>
         </div>
     </div>
 

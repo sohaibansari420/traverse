@@ -48,7 +48,7 @@
                     </li>
                     <li><a href="{{ route('user.report.withdraw') }}" >
                             @lang('Withdrawals')</a></li>
-                    <li><a href="{{ route('user.report.invest') }}" > @lang('Investments')</a>
+                    <li><a href="{{ route('user.report.invest') }}" > @lang('Options')</a>
                     </li>
                     <li><a href="{{ route('user.bv.log') }}" >
                             @lang('Business Volume')</a>
