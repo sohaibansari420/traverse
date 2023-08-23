@@ -4,7 +4,7 @@
 <!--**********************************
     Main wrapper start
 ***********************************-->
-<div id="main-wrapper" style="background:rgb(94, 85, 213);" class="wallet-open active">
+<div id="main-wrapper" style="background:rgb(255, 255, 255);" class="wallet-open active">
 
     @include($activeTemplate . 'user.partials.topnav')
     
