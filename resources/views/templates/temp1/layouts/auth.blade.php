@@ -44,11 +44,11 @@
     <header id="header_main" class="header">
         <div class="container">
             <div id="site-header-inner">
-                <div class="header_logo">
+                {{-- <div class="header_logo">
                     <a href="{{ url('/') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" width="231" height="44" alt="Millionaire Metvrse Logo"></a>
-                </div>
+                </div> --}}
                
-                <nav id="main-nav" class="main-nav">
+                {{-- <nav id="main-nav" class="main-nav">
                     <ul id="menu-primary-menu" class="menu">
                         <li class="menu-item">
                             <a href="#">Home</a>
@@ -66,10 +66,10 @@
                             <a href="#contact">Contact</a> 
                         </li>
                     </ul>
-                </nav><!-- /#main-nav -->
-                <a href="{{ route('user.login') }}" class="tf-button style1">
+                </nav><!-- /#main-nav --> --}}
+                {{-- <a href="{{ route('user.login') }}" class="tf-button style1">
                     Sign In
-                </a>
+                </a> --}}
                 <div class="mobile-button"><span></span></div><!-- /.mobile-button -->
             </div>
         </div>
