@@ -29,7 +29,7 @@ class PlanController extends Controller
 
     function planIndex()
     {
-        $data['page_title'] = "Options Plan";
+        $data['page_title'] = "Options";
         $data['plans'] = Plan::whereStatus(1)->get();
         $data['myPlans'] = PurchasedPlan::where('user_id', Auth::id())->get();
         $data['myPlansAmounts'] = PurchasedPlan::where('user_id', Auth::id())->pluck('amount')->toArray();
