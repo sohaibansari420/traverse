@@ -15,7 +15,7 @@ class MlmController extends Controller
 {
     public function plan()
     {
-        $page_title = 'MLM Investments';
+        $page_title = 'MLM Options';
         $empty_message = 'No Plan found';
         $plans = Plan::paginate(getPaginate());
         return view('admin.plan.index', compact('page_title', 'plans', 'empty_message'));
