@@ -24,7 +24,8 @@ body {
   line-height: 21px;
   font-weight: 500;
   color: #798DA3;
-  background: #09121D;
+  /* background: #09121D; */
+  background: linear-gradient(90deg, #7212b2, #7212b2, #3116c0);
 }
 body.home2 .bg_body {
   position: relative;
