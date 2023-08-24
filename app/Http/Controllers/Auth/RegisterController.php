@@ -61,9 +61,9 @@ class RegisterController extends Controller
         $content = Frontend::where('data_keys', 'sign_up.content')->first();
         $info = json_decode(json_encode(getIpInfo()), true);
         
-        if ($info == null) {
+        if ($info['code'] == null) {
             $notify[] = ['error', 'Please wait a while.'];
-            return redirect()->route('register')->withNotify($notify);
+            return redirect()->route('user.register')->withNotify($notify);
         }
 
         $country_code = @implode(',', $info['code']);
