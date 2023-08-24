@@ -63,7 +63,12 @@ class RegisterController extends Controller
         
         if ($info['code'] == null) {
             $notify[] = ['error', 'Please wait a while.'];
-            return redirect()->route('user.register')->withNotify($notify);
+            if ($request->ref && $request->position) {
+                return redirect()->route('user.register' , ['ref'=>$request->ref , 'position'=> $request->position])->withNotify($notify);
+            }
+            else{
+                return redirect()->route('user.register')->withNotify($notify);
+            }
         }
 
         $country_code = @implode(',', $info['code']);
