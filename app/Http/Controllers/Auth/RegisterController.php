@@ -62,6 +62,11 @@ class RegisterController extends Controller
         $info = json_decode(json_encode(getIpInfo()), true);
         $country_code = @implode(',', $info['code']);
 
+        if ($country_code == null) {
+            $notify[] = ['error', 'Please wait a while.'];
+            return redirect()->route('register')->withNotify($notify);
+        }
+
         if ($request->ref && $request->position) {
             $ref_user = User::where('username', $request->ref)->first();
             if ($ref_user == null) {

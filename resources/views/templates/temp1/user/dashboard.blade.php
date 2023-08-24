@@ -252,8 +252,8 @@
         </div> --}}
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
-                <h3 class="mt-3 mb-1 text-white">Founder Club Bonus</h3>
-                <p class="text-white mb-2">Founder Club Bonus from The Millionaires Multiverse based on higher plan purchase. Get 1% of the Profit from Millionaires Multiverse.</p>
+                <h3 class="mt-3 mb-1 text-white">FoundeSr Club Bonus</h3>
+                <p class="text-white mb-2">FounderS Club Bonus from The Millionaires Multiverse based on higher plan purchase. Get 1% of the Profit from Millionaires Multiverse.</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">
