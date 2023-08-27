@@ -387,7 +387,7 @@
                                 <h5 class="mb-0">{{ $rem_days }}</h5>
                             </div>
                             <div class="col-md-3 text-center">
-                                @if (($current_date->dayOfWeekIso != \Carbon\Carbon::SATURDAY || $current_date->dayOfWeekIso != \Carbon\Carbon::SUNDAY) && ($roi_status == 0 && $plan->is_roi == 1 && $days > 0))
+                                @if (($current_date->dayOfWeek != \Carbon\Carbon::SATURDAY && $current_date->dayOfWeek != \Carbon\Carbon::SUNDAY) && ($roi_status == 0 && $plan->is_roi == 1 && $days > 0))
                                     <a href="javascript:void(0)" class="btn btn-primary"data-bs-target="#confROI{{ $plan->id }}" data-bs-toggle="modal">
                                         Release Daily
                                     </a>
