@@ -1035,7 +1035,7 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
             ]);
     } else {
 
-        $percent = $roi->percent / 5;
+        $percent = $roi->percent;
         $network_limit = $roi->commission_limit;
         $weeks = $roi->days;
         $plan_price = $user_plan->amount;
