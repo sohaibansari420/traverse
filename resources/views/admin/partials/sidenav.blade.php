@@ -24,7 +24,7 @@
                 <li class="sidebar-menu-item {{ menuActive('admin.plan*') }}">
                     <a href="{{ route('admin.plan') }}" class="nav-link ">
                         <i class="menu-icon las la-paper-plane"></i>
-                        <span class="menu-title">@lang('Options')</span>
+                        <span class="menu-title">@lang('Packages')</span>
                     </a>
                 </li>
 
