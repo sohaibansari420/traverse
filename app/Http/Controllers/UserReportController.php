@@ -45,7 +45,7 @@ class UserReportController extends Controller
             $data['page_title'] = "Invest search : " . $search;
             $data['transactions'] = auth()->user()->transactions()->where('remark', 'purchased_plan')->where('trx', 'like', "%$search%")->latest()->paginate(getPaginate());
         } else {
-            $data['page_title'] = 'Options';
+            $data['page_title'] = 'Packages';
             $data['transactions'] = auth()->user()->transactions()->where('remark', 'purchased_plan')->latest()->paginate(getPaginate());
         }
         $data['search'] = $search;

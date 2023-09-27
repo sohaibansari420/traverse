@@ -488,7 +488,18 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
+                <div class="card overflow-hidden">
+                    <div class="text-center p-3" >
+                        <h2 class="mt-3 mb-1 text-white">MM OTT</h2>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="http://bit.ly/mmott223" target="_blank"><h3>Click to download the application.</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Modal -->
         <div class="modal" id="confROI{{ $plan->id }}" tabindex="-1" role="dialog"
             aria-labelledby="confROI{{ $plan->id }}" aria-hidden="true">
