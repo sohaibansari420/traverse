@@ -1701,8 +1701,8 @@ function showSingleUserinTreeUser($user)
         } else {
             $userType = "paid-user";
             $stShow = "Paid";
-            $planName = $user->plan[0]->plan->name;
-            $img = getImage('assets/images/user/profile/default.png', '120x120');
+            $planName = $user->plan[0]->plan->name ?? '';
+            $img = getImage('assets/images/user/profile/default.jpg', '120x120');
         }
 
         if ($user->storm_plan == 1) {
