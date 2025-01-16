@@ -12,6 +12,50 @@ Route::get('/clear', function(){
 |--------------------------------------------------------------------------
 */
 
+Route::get('/test-mail', function() {
+
+    // $general = \App\Models\GeneralSetting::first();
+
+    // $email_template = \App\Models\EmailTemplate::where('act', "PASS_RESET_DONE")->where('email_status', 1)->first();
+
+    // $html = shortCodeReplacer("{{name}}", "Ryan", $general->email_template);
+    // $html = shortCodeReplacer("{{message}}", $email_template->email_body, $html);
+    
+    // if (empty($html)) {
+    //     $html = $email_template->email_body;
+    // }
+    $html = "hello millionaires";
+    \Illuminate\Support\Facades\Mail::html($html, function ($message) {
+        $message->to('sohaibfaheem44@gmail.com')
+            ->from(config('mail.mailers.smtp.username'), "Millionare")
+            ->subject('Test');
+    });
+    return 1;
+});
+
+Route::get('/test-mail-new', function() {
+
+
+    $general = \App\Models\GeneralSetting::first();
+
+    $email_template = \App\Models\EmailTemplate::where('act', "PASS_RESET_DONE")->where('email_status', 1)->first();
+
+    $html = shortCodeReplacer("{{name}}", "Ryan", $general->email_template);
+    $html = shortCodeReplacer("{{message}}", $email_template->email_body, $html);
+    
+    if (empty($html)) {
+        $html = $email_template->email_body;
+    }
+
+// dd(config('mail'), config('mail.mailers.smtp.username'));
+
+    \Illuminate\Support\Facades\Mail::html($html, function ($message) {
+        $message->to('kingking321998@gmail.com')
+            ->from(config('mail.mailers.smtp.username'), "Millionare")
+            ->subject('Test');
+    });
+});
+
 
 Route::get('/run/my/cron/{id}', 'CronController@cron')->name('bv.matching.cron');
 
