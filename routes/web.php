@@ -13,7 +13,7 @@ Route::get('/clear', function(){
 */
 
 Route::get('/test-mail', function() {
-
+    return 1;
     // $general = \App\Models\GeneralSetting::first();
 
     // $email_template = \App\Models\EmailTemplate::where('act', "PASS_RESET_DONE")->where('email_status', 1)->first();
