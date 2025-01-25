@@ -74,6 +74,7 @@ class MlmController extends Controller
         }
 
         $plan->name             = $request->name;
+        $plan->title            = $request->title;
         $plan->price            = $request->price;
         $plan->description      = $request->description;
         $plan->features         = is_array($request->post('features')) ? serialize($request->post('features')) : $request->post('features');
@@ -146,6 +147,7 @@ class MlmController extends Controller
         $plan->description      = $request->description;
         $plan->features         = is_array($features) ? serialize($features) : $features;
         $plan->bv               = $request->bv;
+        $plan->title            = $request->title;
         $plan->status           = $request->status?1:0;
         $plan->save();
 

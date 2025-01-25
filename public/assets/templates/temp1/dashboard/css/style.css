@@ -9736,8 +9736,9 @@ label {
         width: calc(100% - 1.725rem);
         margin-right: 0.813rem; } }
     .footer.out-footer.style-1 {
-      width: calc(100% - 46.825rem);
-      margin-right: 26.375rem; }
+      /* width: calc(100% - 46.825rem);
+      margin-right: 26.375rem;  */
+    }
       @media only screen and (max-width: 100rem) {
         .footer.out-footer.style-1 {
           width: calc(100% - 22.025rem);
@@ -13672,7 +13673,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 .wallet-open.active .header .page-titles,
 .wallet-open.active .header .header-content {
-  padding-right: var(--right-space); }
+  /* padding-right: var(--right-space); */
+ }
   @media only screen and (max-width: 106.25rem) {
     .wallet-open.active .header .page-titles,
     .wallet-open.active .header .header-content {
@@ -13683,7 +13685,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       padding-right: 12px; } }
 
 .wallet-open.active .content-body {
-  padding-right: calc(var(--right-space) - 1.75rem);
+  /* padding-right: calc(var(--right-space) - 1.75rem); */
   -webkit-transition: all 0.5s;
   -ms-transition: all 0.5s;
   transition: all 0.5s; }

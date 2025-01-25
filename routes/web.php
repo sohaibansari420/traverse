@@ -13,7 +13,6 @@ Route::get('/clear', function(){
 */
 
 Route::get('/test-mail', function() {
-    return 1;
     // $general = \App\Models\GeneralSetting::first();
 
     // $email_template = \App\Models\EmailTemplate::where('act', "PASS_RESET_DONE")->where('email_status', 1)->first();
@@ -24,7 +23,7 @@ Route::get('/test-mail', function() {
     // if (empty($html)) {
     //     $html = $email_template->email_body;
     // }
-    $html = "hello millionaires";
+    $html = "hello Stealth Trade Bot";
     \Illuminate\Support\Facades\Mail::html($html, function ($message) {
         $message->to('sohaibfaheem44@gmail.com')
             ->from(config('mail.mailers.smtp.username'), "Millionare")

@@ -11,6 +11,7 @@
                                 <tr>
                                     <th scope="col">@lang('Sl')</th>
                                     <th scope="col">@lang('Name')</th>
+                                    <th scope="col">@lang('Title')</th>
                                     <th scope="col">@lang('Price')</th>
                                     <th scope="col">@lang('Business Volume (BV)')</th>
                                     <th scope="col">@lang('Status')</th>
@@ -22,6 +23,7 @@
                                     <tr>
                                         <td data-label="@lang('Sl')">{{ $key + 1 }}</td>
                                         <td data-label="@lang('Name')">{{ __($plan->name) }}</td>
+                                        <td data-label="@lang('Title')">{{ __($plan->title) }}</td>
                                         <td data-label="@lang('Price')">{{ getAmount($plan->price) }}
                                             {{ $general->cur_text }}</td>
                                         <td data-label="@lang('Bv')">{{ $plan->bv }}</td>
@@ -39,6 +41,7 @@
                                         <td data-label="@lang('Action')">
                                             <button type="button" class="icon-btn edit" data-toggle="tooltip"
                                                 data-id="{{ $plan->id }}" data-name="{{ $plan->name }}"
+                                                data-title="{{ $plan->title }}"
                                                 data-description="{{ $plan->description }}"
                                                 data-status="{{ $plan->status }}" data-bv="{{ $plan->bv }}"
                                                 data-image="{{ $plan->image }}"
@@ -105,6 +108,10 @@
 
 
                         <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="font-weight-bold"> @lang('Title')</label>
+                                <input class="form-control title" name="title" required>
+                            </div>
                             <div class="form-group col-md-4">
                                 <label class="font-weight-bold"> @lang('Business Volume (BV)')</label>
                                 <input class="form-control bv" name="bv" required>
@@ -193,6 +200,10 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
+                                <label class="font-weight-bold"> @lang('Title')</label>
+                                <input class="form-control" name="title" required>
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label class="font-weight-bold"> @lang('Business Volume (BV)')</label>
                                 <input class="form-control" name="bv" required>
                             </div>
@@ -274,6 +285,7 @@
         (function($) {
             $('.edit').on('click', function() {
                 var modal = $('#edit-plan');
+                modal.find('.title').val($(this).data('title'));
                 modal.find('.name').val($(this).data('name'));
                 modal.find('.description').val($(this).data('description'));
                 modal.find('.price').val($(this).data('price'));
