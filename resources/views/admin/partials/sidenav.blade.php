@@ -602,6 +602,23 @@
                     </div>
                 </li>
 
+                <li class="sidebar-menu-item sidebar-dropdown">
+                    <a href="javascript:void(0)" class="{{ menuActive('admin.promotion*', 3) }}">
+                        <i class="menu-icon las la-cash-register"></i>
+                        <span class="menu-title">@lang('Promotions')</span>
+                    </a>
+                    <div class="sidebar-submenu {{ menuActive('admin.promotion*', 2) }} ">
+                        <ul>
+                            <li class="sidebar-menu-item {{ menuActive('admin.promotion.index') }} ">
+                                <a href="{{ route('admin.promotion.index') }}" class="nav-link">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Promotions List')</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="sidebar__menu-header">@lang('Frontend Manager')</li>
 
                 <li class="sidebar-menu-item {{ menuActive('admin.frontend.templates') }}">

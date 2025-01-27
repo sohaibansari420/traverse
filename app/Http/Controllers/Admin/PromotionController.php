@@ -19,29 +19,14 @@ class PromotionController extends Controller
         return view('admin.promotions.index',compact('page_title','empty_message','promotions','users','country'));
     }
     public function saveUserPromotion(Request $request){
-        // return $request->all();
         $this->validate($request, [
             'name'                      => 'required',
             'image'                     => 'mimes:png,jpg,jpeg,svg'
         ]);
-        $add_pro=new Promotion();
-        $add_pro->name=$request->name;
-        $add_pro->detail=$request->detail;
-        if ($request->promotion_for == 'user') {
-            $add_pro->user_id=$request->user_id;
-        }
-        else if($request->promotion_for == 'country'){
-            $add_pro->country=$request->country;
-        }
-        $add_pro->start=$request->date;
-        $add_pro->end=$request->date;
-
-        if ($request->status == 'on') {
-            $add_pro->status='active';    
-        }
-        else{
-            $add_pro->status='inactive';
-        }
+        
+        $fileimage = '';
+        $user_id = '';
+        $country = '';
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -78,9 +63,39 @@ class PromotionController extends Controller
                 $image->save($location . '/' . $filename);                
             }
 
-            $add_pro->image = $filename;
+            $fileimage = $filename;
         }
-        return $add_pro;
-        // $add_pro->save();
+
+        if ($request->promotion_for == 'user') {
+            $user_id=$request->user_id;
+        }
+        else if($request->promotion_for == 'country'){
+            $country=$request->country;
+        }
+
+        if ($request->status == 'on') {
+            $status='1';    
+        }
+        else{
+            $status='0';
+        }
+
+        $data = [
+            'name' => $request->name,
+            'detail' => $request->detail,
+            'start' => $request->start_date,
+            'end' => $request->end_date,
+            'user_id' => json_encode($user_id),
+            'image' => $fileimage,
+            'status' => $status,
+            'country' => json_encode($country) ,
+        ];
+        Promotion::create($data);
+        return redirect()->route('admin.promotion.index')->with('message','Created Successfully');
+    }
+
+    public function deleteUserPromotion(Request $request){
+        Promotion::where('id',$request->subscriber)->update(['status'=>'0']);
+        return redirect()->route('admin.promotion.index')->with('message','Deleted Successfully');
     }
 }

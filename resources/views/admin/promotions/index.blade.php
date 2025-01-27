@@ -17,8 +17,8 @@
                             <thead>
                             <tr>
                                 <th scope="col">@lang('Name')</th>
-                                <th scope="col">@lang('Date')</th>
                                 <th scope="col">@lang('Detail')</th>
+                                <th scope="col">@lang('Date(Start/End)')</th>
                                 <th scope="col">@lang('Status')</th>
                                 <th scope="col">@lang('Action')</th>
                             </tr>
@@ -33,9 +33,9 @@
                                             @lang('Unknown')
                                         @endif
                                     </td>
-                                    <td data-label="@lang('Date')">{{ $promotion->date }}</td>
                                     <td data-label="@lang('Detail')">{{ $promotion->detail }}</td>
-                                    <td data-label="@lang('Status')">{{ $promotion->status }}</td>
+                                    <td data-label="@lang('Date')">{{ \Carbon\Carbon::parse($promotion->start)->format('d M Y') }} - {{ \Carbon\Carbon::parse($promotion->end)->format('d M Y') }}</td>
+                                    <td data-label="@lang('Status')">{{ ($promotion->status == '0') ? 'Not-Active' : 'Active' }}</td>
                                     <td data-label="@lang('Action')">
                                         <a href="javascript:void(0)"
                                            data-id="{{ $promotion->id }}"
@@ -85,10 +85,18 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="date" class="col-form-label">Start-End Date:</label>
-                                <input name="date" type="text" data-range="true" data-multiple-dates-separator=" - "
-                                    data-language="en" class="datepicker-here form-control bg-white text--black"
-                                    data-position='bottom right' placeholder="@lang('Min Date - Max date')" autocomplete="off" readonly>
+                                <label for="start_date" class="col-form-label">Start Date:</label>
+                                <input name="start_date" type="date"
+                                    data-language="en" class="form-control bg-white text--black"
+                                    data-position='bottom right' placeholder="@lang('Min Date')" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="end_date" class="col-form-label">End Date:</label>
+                                <input name="end_date" type="date"
+                                    data-language="en" class=" form-control bg-white text--black"
+                                    data-position='bottom right' placeholder="@lang('Max date')" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-row">
@@ -162,7 +170,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.subscriber.remove') }}" method="POST">
+                <form action="{{ route('admin.delete.promotion') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="subscriber">

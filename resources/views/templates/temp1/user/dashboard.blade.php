@@ -157,12 +157,12 @@
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img1.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[3]->name }}</h3>
-                <p class="text-white mb-2">Join The Millionaires Multiverse, earn cash back, sponsor 5 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
+                <p class="text-white mb-2">Join The Stealth Trade Bot, earn cash back, sponsor 5 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="mb-0 fs-15">The Millionaires Multiverse Speed Bonus rewards new members of The Millionaires Multiverse ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
+                        <p class="mb-0 fs-15">The Stealth Trade Bot Speed Bonus rewards new members of The Stealth Trade Bot ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
                     </div>
                     <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -204,7 +204,7 @@
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="mb-0 fs-15">The Global Share Bonus is a unique bonus offered by The Millionaires Multiverse that allows all qualified members to earn a 2% share in the company's global turnover. This bonus is available to members who have achieved the rank of Emerald or above.</p>
+                        <p class="mb-0 fs-15">The Global Share Bonus is a unique bonus offered by The Stealth Trade Bot that allows all qualified members to earn a 2% share in the company's global turnover. This bonus is available to members who have achieved the rank of Emerald or above.</p>
                     </div>
                     <div class="col-12 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -228,7 +228,7 @@
         {{-- <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[5]->name }}</h3>
-                <p class="text-white mb-2">Luxurious Car Bonus from The Millionaires Multiverse based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
+                <p class="text-white mb-2">Luxurious Car Bonus from The Stealth Trade Bot based on 30 days production. Earn up to $2,000. Achieve production targets for well-deserved reward.</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">
@@ -253,7 +253,7 @@
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
                 <h3 class="mt-3 mb-1 text-white">Founder's Club Bonus</h3>
-                <p class="text-white mb-2">Founder's Club Bonus from The Millionaires Multiverse based on higher plan purchase. Get 1% of the Profit from Millionaires Multiverse.</p>
+                <p class="text-white mb-2">Founder's Club Bonus from The Stealth Trade Bot based on higher plan purchase. Get 1% of the Profit from Stealth Trade Bot.</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">

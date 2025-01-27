@@ -33,7 +33,7 @@
     ***********************************-->
     <div class="footer out-footer style-1">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#">Millionaires Multiverse</a> 2023</p>
+            <p>Copyright © Designed &amp; Developed by <a href="#">Stealth Trade Bot</a> 2023</p>
         </div>
     </div>
 
