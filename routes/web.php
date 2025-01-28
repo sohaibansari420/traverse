@@ -486,6 +486,7 @@ Route::name('user.')->prefix('user')->group(function () {
 
             //plan
             Route::get('/plan', 'PlanController@planIndex')->name('plan.index');
+            Route::get('/plan/details', 'PlanController@planDetails')->name('plan.details');
             Route::post('/plan', 'PlanController@planStore')->name('plan.purchase');
             Route::post('/plan-upgrade', 'PlanController@planUpgrade')->name('plan.upgrade.purchase');
             Route::post('/plan-renew', 'PlanController@planRenew')->name('plan.renew');

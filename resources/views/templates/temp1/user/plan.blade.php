@@ -15,129 +15,13 @@
                 <div class="card-body">
                     <div class="row">
                         @foreach ($plans as $data)
-                            <div class="col-md-4 col-sm-6 mt-3">
+                            <div class="col-md-12 col-sm-12 mt-3">
                                 <div class="pricingTable">
                                     <div class="pricingTable-header">
-                                        <h3 class="title">{{$data->name}}</h3>
-                                        <div class="price-value">
-                                            <span class="amount">${{getAmount($data->price)}}</span>
-                                        </div>
+                                        <h3 class="title">{{$data}}</h3>
                                     </div>
-                                    <ul class="pricing-content">
-                                        @if (@unserialize($data->features))
-                                            @foreach (@unserialize($data->features) as $feature)
-                                                <li>{{ $feature }}</li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
                                     <div class="pricingTable-signup">
-                                        <button data-bs-target="#confBuyModal{{ $data->id }}"
-                                                data-bs-toggle="modal">Buy Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Modal -->
-                            <div class="modal" id="confBuyModal{{ $data->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="confBuyModal{{ $data->id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="confBuyModal{{ $data->id }}">
-                                                @lang('Confirm Purchase ' . $data->name)?
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                            </button>
-                                        </div>
-                                        <form method="post" action="{{ route('user.plan.purchase') }}">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <p class="text-center">{{ getAmount($data->price) }}
-                                                    {{ $general->cur_text }} @lang('will subtract from your balance')</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" name="plan_id" value="{{ $data->id }}"
-                                                    class="btn btn-primary float-end">
-                                                    @lang('Confirm')</button>
-                                                <button type="button" class="btn btn-success" data-bs-target="#confUpgradeModal{{ $data->id }}"
-                                                    data-bs-toggle="modal">Upgrade Plan</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal" id="confUpgradeModal{{ $data->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="confUpgradeModal{{ $data->id }}" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="confBuyModal{{ $data->id }}">
-                                                @lang('Confirm Purchase ' . $data->name)?
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                            </button>
-                                        </div>
-                                        <form method="post" action="{{ route('user.plan.upgrade.purchase') }}">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <table class="table">
-                                                    <thead>
-                                                      <tr>
-                                                        <th scope="col">id</th>
-                                                        <th scope="col">Plan</th>
-                                                        <th scope="col">Amount</th>
-                                                        <th scope="col">Plans</th>
-                                                        <th scope="col">Upgrade</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($myPlans as $key => $plan)
-                                                            @if (number_format($plan->amount,2,'.',"") ==  number_format($data->price,2,'.',""))
-                                                                <tr>
-                                                                    <th scope="row">{{$plan->id}}</th>
-                                                                    <td>{{$data->name}}</td>
-                                                                    <td>{{$plan->amount}}</td>
-                                                                    <td>
-                                                                        <select name="plans_select[]">
-                                                                            @foreach ($plans as $plan_v)
-                                                                                @if($plan_v->id > $data->id)
-                                                                                    <option value="{{$plan_v->id}}-{{$plan->id}}">{{$plan_v->name}}</option>
-                                                                                @endif
-                                                                            @endforeach    
-                                                                        </select>
-                                                                    </td>
-                                                                    <td><input type="radio" name="upgrade" value="{{$plan->id}}"/></td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
-                                                    </tbody>
-                                                  </table>
-                                                <p class="text-center">{{ getAmount($data->price) }}
-                                                    {{ $general->cur_text }} @lang('will subtract from your balance')</p>
-                                                    <input type="hidden" name="plan_amount" value="{{$data->price}}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                    @php
-                                                        if(in_array($data->price ,$myPlansAmounts)) {
-                                                            $plan_found=true;
-                                                        }
-                                                        else{
-                                                            $plan_found=false;
-                                                        }
-                                                    @endphp
-                                                @if($data->id != $planCount && $plan_found==true)
-                                                    <button type="submit" name="plan_upgrade_id" value="{{ $data->id }}"
-                                                        class="btn btn-primary float-end">
-                                                        @lang('Upgrade Plan')</button>
-                                                @endif
-                                            </div>
-                                        </form>
+                                        <a href="{{ route('user.plan.details', ['title' => $data]) }}" class="btn btn-lg btn-primary">Details</a>
                                     </div>
                                 </div>
                             </div>

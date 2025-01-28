@@ -30,12 +30,21 @@ class PlanController extends Controller
     function planIndex()
     {
         $data['page_title'] = "Packages";
-        $data['plans'] = Plan::whereStatus(1)->orderBy('price')->get();
+        $data['plans'] = Plan::whereStatus(1)->orderBy('price')->distinct()->pluck('title');
         $data['myPlans'] = PurchasedPlan::where('user_id', Auth::id())->get();
         $data['myPlansAmounts'] = PurchasedPlan::where('user_id', Auth::id())->pluck('amount')->toArray();
         $data['planCount']=count($data['plans']);
         return view($this->activeTemplate . '.user.plan', $data);
 
+    }
+
+    public function planDetails(Request $request){
+        $data['page_title'] = "Packages Details";
+        $data['plans'] = Plan::whereStatus(1)->where('title',$request->title)->orderBy('price')->get();
+        $data['myPlans'] = PurchasedPlan::where('user_id', Auth::id())->get();
+        $data['myPlansAmounts'] = PurchasedPlan::where('user_id', Auth::id())->pluck('amount')->toArray();
+        $data['planCount']=count($data['plans']);
+        return view($this->activeTemplate . '.user.plan_details', $data);
     }
 
     function planStore(Request $request)

@@ -92,14 +92,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="form-group ">
                                             <label class="form-control-label font-weight-bold">@lang('BTC Wallet')<span
                                                     class="text-danger">*</span></label>
                                             <input class="form-control form-control-lg" type="text"
                                                 placeholder="BTC Wallet" value="{{ auth()->user()->btc_wallet }}" readonly>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-6">
                                         <div class="form-group">

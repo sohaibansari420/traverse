@@ -488,7 +488,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
                 <div class="card overflow-hidden">
                     <div class="text-center p-3" >
@@ -499,7 +499,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Modal -->
         <div class="modal" id="confROI{{ $plan->id }}" tabindex="-1" role="dialog"
             aria-labelledby="confROI{{ $plan->id }}" aria-hidden="true">

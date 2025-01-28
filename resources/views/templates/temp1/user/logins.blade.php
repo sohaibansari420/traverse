@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">@lang('SL')</th>
-                                    <th scope="col">@lang('Date')</th>
+                                    <th scope="col">@lang('Date/Time')</th>
                                     <th scope="col">@lang('IP')</th>
                                     <th scope="col">@lang('Location')</th>
                                     <th scope="col">@lang('Browser')</th>
@@ -31,7 +31,7 @@
                                     <tr>
                                         <td data-label="@lang('SL')">{{ $key + 1 }}</td>
                                         <td data-label="@lang('Date')">
-                                            {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}</td>
+                                            {{ \Carbon\Carbon::parse($log->created_at)->format('d M Y H:i') }} ({{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }})</td>
                                         <td data-label="@lang('IP')">{{ $log->user_ip }}</td>
                                         <td data-label="@lang('Location')">{{ $log->location }}</td>
                                         <td data-label="@lang('Browser')">{{ $log->browser }}</td>
