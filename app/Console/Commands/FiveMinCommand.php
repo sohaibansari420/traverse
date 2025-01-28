@@ -84,7 +84,7 @@ class FiveMinCommand extends Command
                 familyTreeAdjust($cron->user_id);
                 if ($gnl->promo_account == 1) {
                     $id = $cron->user_id;
-                    $plan = 5;
+                    $plan = 1;
                     $send_bv = 0;
                     $send_roi = 1;
                     $res = 1;
