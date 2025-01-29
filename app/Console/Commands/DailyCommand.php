@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
 class DailyCommand extends Command
 {
@@ -11,14 +12,16 @@ class DailyCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'daily:cron';
+    protected $signature = 'hit:route {id}'; // Accepting an ID parameter
+    protected $description = 'Hit the /run/my/cron/{id} route';
+    // protected $signature = 'daily:cron';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command run daily';
+    // protected $description = 'Command run daily';
 
     /**
      * Execute the console command.
@@ -27,9 +30,25 @@ class DailyCommand extends Command
      */
     public function handle()
     {
-        info('This is Daily command');
-        rewardRelease();
+        $id = $this->argument('id');
+        $url = url('/run/my/cron/{$id}'); // Replace with your actual route
+        try {
+            // $url = 'http://127.0.0.1:8000/run/my/cron/'.$id;
+            $response = Http::get($url);
+            \Log::info($url);
 
-        $this->info('Command run daily has been executed successfully');
+            if ($response->successful()) {
+                $this->info("Route hit successfully for ID: {$id}");
+            } else {
+                $this->error("Failed to hit route for ID: {$id}. Status: " . $response->status());
+            }
+        } catch (\Exception $e) {
+            $this->error("Exception: " . $e->getMessage());
+        }
+
+        // info('This is Daily command');
+        // rewardRelease();
+
+        // $this->info('Command run daily has been executed successfully');
     }
 }

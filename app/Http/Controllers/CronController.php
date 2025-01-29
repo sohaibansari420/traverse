@@ -27,7 +27,23 @@ class CronController extends Controller
         $gnl = GeneralSetting::first();
         $gnl->last_cron = Carbon::now()->toDateTimeString();
 		$gnl->save();
-		
+		if ($id == '1min') {
+            \Log::info('... and now cron has ended 🤩'.$id);
+            return 123;
+        }
+        if ($id == '5min') {
+            \Log::info('... and now cron has ended 🤩'.$id);
+            return 123;
+        }
+        if ($id == '24hours') {
+            \Log::info('... and now cron has ended 🤩'.$id);
+            return 123;
+        }
+        if ($id == 'unprocessed_data') {
+            \Log::info('... and now cron has ended 🤩'.$id);
+            return 123;
+        }
+        return ;
         if($id == "5min"){
             $crons = CronUpdate::where('status', 0)->get();
             foreach($crons as $cron){

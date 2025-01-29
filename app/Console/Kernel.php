@@ -7,13 +7,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $signature = '/run/my/cron/{id}';
+
     /**
      * The Artisan commands provided by your application.
      *
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\DailyCommand'
     ];
 
     /**
@@ -24,7 +27,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // $schedule->command('daily:cron')->everyMinute();
+        $schedule->command('hit:route 1min')->everyMinute(); 
+        $schedule->command('hit:route 5min')->everyFiveMinutes();
+        $schedule->command('hit:route 24hours')->daily();
+        $schedule->command('hit:route unprocessed_data')->daily();
     }
 
     /**
