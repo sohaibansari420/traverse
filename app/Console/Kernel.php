@@ -28,7 +28,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('daily:cron')->everyMinute();
-        $schedule->command('hit:route 1min')->everyMinute(); 
         $schedule->command('hit:route 5min')->everyFiveMinutes();
         $schedule->command('hit:route 24hours')->daily();
         $schedule->command('hit:route unprocessed_data')->daily();

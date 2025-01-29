@@ -31,9 +31,8 @@ class DailyCommand extends Command
     public function handle()
     {
         $id = $this->argument('id');
-        $url = url('/run/my/cron/{$id}'); // Replace with your actual route
+        $url = url("/run/my/cron/{$id}"); // Replace with your actual route
         try {
-            // $url = 'http://127.0.0.1:8000/run/my/cron/'.$id;
             $response = Http::get($url);
             \Log::info($url);
 
