@@ -226,6 +226,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('subscriber/remove', 'SubscriberController@remove')->name('subscriber.remove');
         Route::post('subscriber/send-email', 'SubscriberController@sendEmail')->name('subscriber.sendEmail');
 
+        //Regions Details
+        Route::get('region/details', 'RegionController@index')->name('region.detail');
+        Route::get('subscriber/send-email', 'SubscriberController@sendEmailForm')->name('subscriber.sendEmail');
+        Route::post('subscriber/remove', 'SubscriberController@remove')->name('subscriber.remove');
+        Route::post('subscriber/send-email', 'SubscriberController@sendEmail')->name('subscriber.sendEmail');        
+
         // Promotions
         Route::get('promotion','PromotionController@userPromotion')->name('promotion.index');
         Route::post('save-promotion','PromotionController@saveUserPromotion')->name('save.promotion');
