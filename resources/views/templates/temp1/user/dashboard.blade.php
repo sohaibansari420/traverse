@@ -1,64 +1,6 @@
 @extends($activeTemplate . 'user.layouts.app')
 
 @section('panel')
-<style>
-    /* Container Styling */
-    .bonus-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    /* Bonus Card */
-    .bonus-card {
-        background-color: black;
-        color: white;
-        padding: 20px;
-        width: 300px;
-        text-align: center;
-        position: relative;
-        clip-path: polygon(10% 0%, 90% 0%, 100% 20%, 100% 80%, 90% 100%, 10% 100%, 0% 80%, 0% 20%);
-        border: none;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    /* Border Outline Effect */
-    .bonus-card::before {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        z-index: -1;
-        clip-path: polygon(10% 0%, 90% 0%, 100% 20%, 100% 80%, 90% 100%, 10% 100%, 0% 80%, 0% 20%);
-        background: transparent;
-        border: 3px solid #ff7300; /* Orange Border */
-    }
-
-    /* Hover Effect */
-    .bonus-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 115, 0, 0.8);
-    }
-
-    /* Bonus Title */
-    .bonus-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    /* Bonus Price */
-    .bonus-price {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #ff7300; /* Orange */
-        margin-top: 10px;
-    }
-</style>
 <div class="swiper mySwiper-counter position-relative overflow-hidden">
     <div class="swiper-wrapper ">
         <!--swiper-slide-->
@@ -151,7 +93,7 @@
             </div> --}}
             <div class="card-footer pt-0 pb-0 text-center">
                 <div class="row mt-4">
-                @foreach ($commissions as $commission)
+                {{-- @foreach ($commissions as $commission)
                     @if($commission->id != 7)
                         <div class="bonus-card m-3 col-md-6">
                             <div class="bonus-title">
@@ -168,7 +110,7 @@
                             </div>
                         </div>
                     @endif
-                @endforeach
+                @endforeach --}}
                 {{-- <div class="col-3 pt-3 pb-3 border-end">
                     <h3 class="mb-1">
                         @php
@@ -178,7 +120,7 @@
                     </h3>
                     
                 </div> --}}
-                <div class="bonus-card m-3 col-md-6">
+                {{-- <div class="bonus-card m-3 col-md-6">
                     <div class="bonus-title">
                         <div class="bonus-price">
                             <a href=""><span>Founder Bonus</span></a>
@@ -190,7 +132,65 @@
                             {{ $general->cur_sym }}{{ getAmount($founder->sum('amount')) }}
                         </h3>
                     </div>
+                </div> --}}
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div clsss=" row">
+    <div class="col-xl-12 row wow fadeInUp" data-wow-delay="1.2s">
+        @foreach ($commissions as $commission)
+            @if($commission->id != 7)
+                <div class="col-md-3">
+                    <div class="card counter">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="card-box-icon">
+                                1
+                            </div>
+                            <div  class="chart-num">
+                                <h2 class="font-w600 mb-0">@if($commission->id == 1)
+                                        {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('user_id', Auth::id())->sum('amount')) }}
+                                    @else
+                                        {{ $general->cur_sym }}{{ getAmount(App\Models\Transaction::where('commission_id', $commission->id)->where('wallet_id', '!=', 6)->where('user_id', Auth::id())->sum('amount')) }}
+                                    @endif
+                                </h2>
+                                <p>
+                                    <a href="{{ route('user.report.commission') }}?commissionID={{ $commission->id }}"><span>{{ $commission->name }}</span></a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12 text-center">
+                                <a href="{{ route('user.report.wallet') }}?walletID="
+                                    class="btn btn-primary btn-sm">Logs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+        <div class="card counter col-md-3">
+            <div class="card-body d-flex align-items-center">
+                <div class="card-box-icon">
+                    1
+                </div>
+                <div  class="chart-num">
+                    <h2 class="font-w600 mb-0">
+                        @php
+                            $founder=App\Models\Founder::where('status', 'paid')->where('user_id', Auth::id());
+                        @endphp
+                        {{ $general->cur_sym }}{{ getAmount($founder->sum('amount')) }}
+                    </h2>
+                    <p>
+                        <a href=""><span>Founder Bonus</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12 text-center">
+                    <a href="{{ route('user.report.wallet') }}?walletID="
+                        class="btn btn-primary btn-sm">Logs</a>
                 </div>
             </div>
         </div>

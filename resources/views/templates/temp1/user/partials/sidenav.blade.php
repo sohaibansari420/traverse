@@ -10,11 +10,18 @@
                 </a>
             </li>
             @if (Auth::user()->status && Auth::user()->ev && Auth::user()->sv && Auth::user()->tv)
-                <li><a href="{{ route('user.plan.index') }}" aria-expanded="false">
+                <li>
+                    <a href="{{ route('user.plan.index') }}" aria-expanded="false">
                         <i class="material-icons">insert_drive_file</i>
                         <span class="nav-text">Packages</span>
                     </a>
                 </li>
+                {{-- <li>
+                    <a href="{{ route('user.plan.index') }}" aria-expanded="false">
+                        <i class="material-icons">insert_drive_file</i>
+                        <span class="nav-text">ROI Operations</span>
+                    </a>
+                </li> --}}
                 <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                     <i class="material-icons">table_chart</i>	
                     <span class="nav-text">Networking</span>

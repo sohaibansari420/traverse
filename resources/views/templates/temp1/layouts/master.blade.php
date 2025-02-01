@@ -305,7 +305,7 @@
                                 <p>MM Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Stealth Trade Bot ecosystem, it serves as a medium of exchange and store of value for users within the platform. MM can be used to purchase virtual land, goods, and services within the Multiverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. MM Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
                             </div>
                         </div>
-                        <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
+                        {{-- <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
                             <div class="header_project">
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_555.png') }}" alt="">
@@ -318,8 +318,8 @@
                             <div class="content">
                                 <p>The online shopping mall application in Stealth Trade Bot is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the MM Token, allowing users to make purchases using the cryptocurrency.</p>
                             </div>
-                        </div>
-                        <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
+                        </div> --}}
+                        {{-- <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
                             <div class="header_project">
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_222.png') }}" alt="">
@@ -332,7 +332,7 @@
                             <div class="content">
                                 <p>The OTT (Over-The-Top) platform in Stealth Trade Bot is a streaming service that provides users with access to a wide range of movies, TV shows, and other video content. It uses advanced streaming technology to deliver high-quality video content to users, and it is designed to be fast, reliable, and easy to use. The platform also includes features like personalized recommendations, user profiles, and social sharing, making it a truly immersive entertainment experience.</p>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
                             <div class="header_project">
                                 <div class="image">
@@ -380,7 +380,7 @@
                 <div class="col-md-12">
                     <div class="container_inner roadmap_boder">
                         <div class="roadmap-wrapper" data-aos="fade-in" data-aos-duration="1000">
-                            <div class="swiper-container slider-7">
+                            <div class="swiper-container slider-6">
                                 <div class="swiper-wrapper">
                                     {{-- <div class="swiper-slide">
                                         <div class="roadmap-box active">
@@ -415,7 +415,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide">
+                                    {{-- <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
@@ -430,8 +430,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="swiper-slide">
+                                    </div> --}}
+                                    {{-- <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
@@ -445,7 +445,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
