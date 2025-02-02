@@ -499,7 +499,7 @@ Route::name('user.')->prefix('user')->group(function () {
             Route::get('/referral-log', 'UserController@referralCom')->name('referral.log');
 
             //ROI Operations
-            Route::get('/roi', 'PlanController@roi')->name('plan.index');
+            Route::get('/roi', 'PlanController@roi')->name('plan.roi.index');
 
             Route::post('/plan/storm/active', 'UserController@stormPlan')->name('storm.plan.active');
 
