@@ -28,7 +28,7 @@ class CronController extends Controller
         $gnl->last_cron = Carbon::now()->toDateTimeString();
 		$gnl->save();
         if($id == "5min"){
-            return 123;
+            // return 123;
             $crons = CronUpdate::where('status', 0)->get();
             foreach($crons as $cron){
                 $cron->status = 1;
@@ -121,7 +121,7 @@ class CronController extends Controller
             //release3Blocks();
         }
         elseif($id == "24hours"){
-            return 1234;
+            // return 1234;
             $crons = CronUpdate::where('status', 0)->get();
             foreach($crons as $cron){
                 
@@ -133,7 +133,7 @@ class CronController extends Controller
             //autoCompounding();
         }
         elseif($id == "unprocessed_data"){
-            return 12345;
+            // return 12345;
             $unprocessedDatas = UnprocessedData::where('is_processed', 0)->get();
 
             foreach ($unprocessedDatas as $unprocessedData) {
