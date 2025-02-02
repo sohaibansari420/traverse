@@ -162,7 +162,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12 text-center">
-                                <a href="{{ route('user.report.wallet') }}?walletID="
+                                <a href="{{ route('user.report.commission') }}?commissionID={{ $commission->id }}"
                                     class="btn btn-primary btn-sm">Logs</a>
                             </div>
                         </div>
@@ -189,8 +189,8 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-12 text-center">
-                    <a href="{{ route('user.report.wallet') }}?walletID="
-                        class="btn btn-primary btn-sm">Logs</a>
+                    {{-- <a href="{{ route('user.report.wallet') }}?walletID="
+                        class="btn btn-primary btn-sm">Logs</a> --}}
                 </div>
             </div>
         </div>

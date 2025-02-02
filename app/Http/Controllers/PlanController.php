@@ -395,4 +395,11 @@ class PlanController extends Controller
 
     }
 
+    public function roi(Request $request){
+        $data['page_title'] = "ROI Operations";
+        $data['myPLans'] = PurchasedPlan::where('user_id', auth()->id())->get();
+
+        return view($this->activeTemplate . '.user.roi.list', $data);
+    }
+
 }
