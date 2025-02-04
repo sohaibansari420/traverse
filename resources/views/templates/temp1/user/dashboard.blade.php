@@ -468,7 +468,7 @@
                 ->whereBetween('created_at', [$updated, $now])
                 ->sum('amount');
         @endphp
-        <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
+        {{-- <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
             <div class="card">
                 <div class="card-body">
                     <div class="row mt-3 text-center">
@@ -588,7 +588,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- <div class="row">
             <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
                 <div class="card overflow-hidden">
@@ -602,7 +602,7 @@
             </div>
         </div> --}}
         <!-- Modal -->
-        <div class="modal" id="confROI{{ $plan->id }}" tabindex="-1" role="dialog"
+        {{-- <div class="modal" id="confROI{{ $plan->id }}" tabindex="-1" role="dialog"
             aria-labelledby="confROI{{ $plan->id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -625,7 +625,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     @endforeach
 </div>
 <!--End row-->

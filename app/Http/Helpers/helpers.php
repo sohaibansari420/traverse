@@ -985,7 +985,7 @@ function updatePaidCount($id)
 
 }
 
-function roiReturn($user_id = '', $is_compounding = '', $trx = '')
+function roiReturn($user_id = '', $is_compounding = '', $trx = '', $plan_purchase = '')
 {
     $commission = Commission::where('status', 1)->where('id', 1)->firstOrFail();
     $user = User::find($user_id);
@@ -1035,7 +1035,8 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
             ]);
     } else {
 
-        $percent = $roi->percent;
+        // $percent = $roi->percent;
+        $percent = $plan_purchase;
         $network_limit = $roi->commission_limit;
         $weeks = $roi->days;
         $plan_price = $user_plan->amount;
@@ -1043,7 +1044,7 @@ function roiReturn($user_id = '', $is_compounding = '', $trx = '')
         $amount = ($plan_price / 100) * $percent;
 
         if ($user_plan->is_expired == 0) {
-            updateCommissionWithLimit($user->id, $amount, $commission->wallet_id, $commission->id, $user_plan->plan->name . ' Plan', $network_limit, $trx);
+            updateCommissionWithLimit($user->id, $amount, $commission->wallet_id, $commission->id, $user_plan->plan->name . ' Plan', $network_limit, $trx , $plan_purchase);
         }
 
         if ($weeks >= $user_plan->roi_limit) {
@@ -1866,7 +1867,7 @@ function createWallets($id = '')
     }
 }
 
-function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '')
+function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '', $percentROI)
 {
 
     $user = User::findOrFail($user_id);
@@ -1881,6 +1882,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
     $transaction->country = User::where('id', $user_id)->first()->address->country;
     $transaction->remark = $remarks;
     $transaction->commission_id = $commission_id;
+    $transaction->roi_percent = $percentROI;
 
     $wallet = UserWallet::where(['user_id' => $user_id, 'wallet_id' => $wallet_id])->first();
 
@@ -1910,6 +1912,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
             $transaction2->post_balance = getAmount($passive_wallet->balance);
             $transaction2->trx_type = '+';
             $transaction2->wallet_id = 9;
+            $transaction2->roi_percent = $percentROI;
             $transaction2->save();
 
             $transaction->amount = $amount;
@@ -1917,6 +1920,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
 
         $wallet->balance += $amount;
         $transaction->trx_type = '+';
+        $transaction->roi_percent = $percentROI;
         $transaction->wallet_id = $wallet_id;
 
         $wallet->save();
@@ -2082,7 +2086,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
     }
 }
 
-function updateCommissionWithLimit($id = '', $amount = '', $wallet_id = '', $commission_id = '', $from = '', $network_limit = '', $trx = '')
+function updateCommissionWithLimit($id = '', $amount = '', $wallet_id = '', $commission_id = '', $from = '', $network_limit = '', $trx = '' ,$percentROI = '')
 {
     $plan = PurchasedPlan::where('trx', $trx)->firstOrFail();
     $nl = $network_limit;
@@ -2095,14 +2099,14 @@ function updateCommissionWithLimit($id = '', $amount = '', $wallet_id = '', $com
 
                 //update commission
                 $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
-                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx , $percentROI);
             } else {
                 //set limit
                 $remaining_amount = setLimit($amount, $network_limit, $plan);
 
                 //update commission
                 $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
-                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+                updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount - $remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx, $percentROI);
 
                 while ($remaining_amount != 0) {
                     $remaining_amount = limitRemaining($id, $remaining_amount, $wallet_id, $commission_id, $from, $network_limit, $plan);
@@ -2113,7 +2117,7 @@ function updateCommissionWithLimit($id = '', $amount = '', $wallet_id = '', $com
         } else {
             //update commission
             $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
-            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx);
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $trx, $percentROI);
         }
     }
 

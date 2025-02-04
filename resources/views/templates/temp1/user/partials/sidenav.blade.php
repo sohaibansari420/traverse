@@ -16,12 +16,12 @@
                         <span class="nav-text">Packages</span>
                     </a>
                 </li>
-                {{-- <li>
+                <li>
                     <a href="{{ route('user.plan.roi.index') }}" aria-expanded="false">
                         <i class="material-icons">insert_drive_file</i>
                         <span class="nav-text">ROI Operations</span>
                     </a>
-                </li> --}}
+                </li>
                 <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                     <i class="material-icons">table_chart</i>	
                     <span class="nav-text">Networking</span>

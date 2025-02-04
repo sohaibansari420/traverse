@@ -500,6 +500,8 @@ Route::name('user.')->prefix('user')->group(function () {
 
             //ROI Operations
             Route::get('/roi', 'PlanController@roi')->name('plan.roi.index');
+        Route::get('/roi-plan/details', 'PlanController@roiPlanDetails')->name('plan.roi.details');
+            
 
             Route::post('/plan/storm/active', 'UserController@stormPlan')->name('storm.plan.active');
 
