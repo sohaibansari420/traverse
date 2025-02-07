@@ -1886,6 +1886,16 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
 
     $wallet = UserWallet::where(['user_id' => $user_id, 'wallet_id' => $wallet_id])->first();
 
+    if(!isset($wallet)){
+        $wallet = UserWallet::create([
+            'user_id' => $user_id,
+            'wallet_id' => $wallet_id,
+            'balance' => '0',
+            'status' => 1,
+            'user_id' => $user_id,
+        ]);
+    }
+
     $transaction->post_balance = getAmount($wallet->balance);
 
 

@@ -519,11 +519,11 @@ class ManageUsersController extends Controller
 
         if ($request->act) {
 
-            $notify[] = updateWallet($id, $trx, 1, NULL, '+', $amount, 'Added Balance By ' . $general->sitename, 0, 'balance_add', NULL);
+            $notify[] = updateWallet($id, $trx, 1, NULL, '+', $amount, 'Added Balance By ' . $general->sitename, 0, 'balance_add', NULL,'');
 
         } else {
             
-            $notify[] = updateWallet($id, $trx, 1, NULL, '-', $amount, 'Subtracted Balance By ' . $general->sitename, 0, 'balance_sub', NULL);
+            $notify[] = updateWallet($id, $trx, 1, NULL, '-', $amount, 'Subtracted Balance By ' . $general->sitename, 0, 'balance_sub', NULL,'');
             
         }
         return back()->withNotify($notify);
