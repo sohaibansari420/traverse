@@ -193,7 +193,7 @@ class DepositController extends Controller
 
         $user = User::find($deposit->user_id);
 
-        $notify[] = updateWallet($deposit->user_id, $deposit->trx, 1, NULL, '+', getAmount($deposit->amount), 'Deposit Via ' . $deposit->gateway_currency()->name, getAmount($deposit->charge), 'deposit_approve', NULL);
+        $notify[] = updateWallet($deposit->user_id, $deposit->trx, 1, NULL, '+', getAmount($deposit->amount), 'Deposit Via ' . $deposit->gateway_currency()->name, getAmount($deposit->charge), 'deposit_approve', NULL,NULL);
 
         $gnl = GeneralSetting::first();
         notify($user, 'DEPOSIT_APPROVE', [

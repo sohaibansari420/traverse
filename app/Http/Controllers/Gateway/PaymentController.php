@@ -157,7 +157,7 @@ class PaymentController extends Controller
 
             $user = User::find($data->user_id);
 
-            $notify[] = updateWallet($data->user_id, $data->trx, 1, NULL, '+', getAmount($data->amount), 'Deposit Via ' . $data->gateway_currency()->name, getAmount($data->charge), 'deposit_complete', NULL);
+            $notify[] = updateWallet($data->user_id, $data->trx, 1, NULL, '+', getAmount($data->amount), 'Deposit Via ' . $data->gateway_currency()->name, getAmount($data->charge), 'deposit_complete', NULL,NULL);
 
             $adminNotification = new AdminNotification();
             $adminNotification->user_id = $user->id;

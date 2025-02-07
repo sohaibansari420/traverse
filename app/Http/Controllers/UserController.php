@@ -144,7 +144,7 @@ class UserController extends Controller
         if ($user_wallet->balance >= $amount) {
 
             $trx = getTrx();
-            $notify[] = updateWallet($user->id, $trx, $user_wallet->wallet_id, NULL, '-', getAmount($amount), 'Subscribed To ' . $storm_plan->name, 0, 'storm_plan', NULL);
+            $notify[] = updateWallet($user->id, $trx, $user_wallet->wallet_id, NULL, '-', getAmount($amount), 'Subscribed To ' . $storm_plan->name, 0, 'storm_plan', NULL,'');
 
             $user->storm_plan = 1;
             $user->save();
@@ -164,7 +164,7 @@ class UserController extends Controller
             foreach($flushed_storms as $data){
                 $trx = getUserHigherPlan($user->id)->trx;
             $details = 'Return Flushed '. getCommissionName($data->commission_id);
-                updateWallet($user->id, getTrx(), 6 , $data->commission_id, '-', getAmount($data->amount), $details, 0, str_replace(' ', '_', getCommissionName($data->commission_id)), $trx); 
+                updateWallet($user->id, getTrx(), 6 , $data->commission_id, '-', getAmount($data->amount), $details, 0, str_replace(' ', '_', getCommissionName($data->commission_id)), $trx,''); 
                 $commission = getCommission($data->commission_id);
                 $commission_detail = $commission->commissionDetail[0];
                 updateCommissionWithLimit($user->id, $data->amount, $commission->wallet_id, $data->commission_id, $details, $commission_detail->commission_limit, $trx);
@@ -453,7 +453,7 @@ class UserController extends Controller
             $withdraw['withdraw_information'] = null;
         }
 
-        $notify[] = updateWallet($user->id, $withdraw->trx, $withdraw->wallet_id, NULL, '-', getAmount($withdraw->amount), getAmount($withdraw->final_amount) . ' ' . $withdraw->currency . ' Withdraw Via ' . $withdraw->method->name, getAmount($withdraw->charge), 'withdraw_request', NULL);
+        $notify[] = updateWallet($user->id, $withdraw->trx, $withdraw->wallet_id, NULL, '-', getAmount($withdraw->amount), getAmount($withdraw->final_amount) . ' ' . $withdraw->currency . ' Withdraw Via ' . $withdraw->method->name, getAmount($withdraw->charge), 'withdraw_request', NULL,NULL);
         
         $withdraw->status = 2;
         $withdraw->save();
@@ -719,10 +719,10 @@ class UserController extends Controller
 
         $details = $user->username . ' Purchased E-Pin';
         
-        $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($cash_amount), $details, 0, 'purchased_epin', NULL);
+        $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($cash_amount), $details, 0, 'purchased_epin', NULL,NULL);
         
         if($transaction_amount != 0){
-            $notify[] = updateWallet($user->id, $trx, 3, NULL, '-', getAmount($transaction_amount), $details, 0, 'purchased_epin', NULL);
+            $notify[] = updateWallet($user->id, $trx, 3, NULL, '-', getAmount($transaction_amount), $details, 0, 'purchased_epin', NULL,NULL);
         }
 
         $epin = 'epin_'.Str::random(12);
@@ -764,9 +764,9 @@ class UserController extends Controller
 
             $trx = getTrx();
 
-            $notify[] = updateWallet($user->id, $trx, $user_wallet->wallet_id, NULL, '-', getAmount($amount), 'Balance Transferred To ' . $transfer_wallet->wallet->name, 0, 'transfer_balance', NULL);
+            $notify[] = updateWallet($user->id, $trx, $user_wallet->wallet_id, NULL, '-', getAmount($amount), 'Balance Transferred To ' . $transfer_wallet->wallet->name, 0, 'transfer_balance', NULL,NULL);
 
-            $notify[] = updateWallet($user->id, $trx, $transfer_wallet->wallet_id, NULL, '+', getAmount($total), 'Balance Received From ' . $user_wallet->wallet->name, $charge, 'receive_balance', NULL);
+            $notify[] = updateWallet($user->id, $trx, $transfer_wallet->wallet_id, NULL, '+', getAmount($total), 'Balance Received From ' . $user_wallet->wallet->name, $charge, 'receive_balance', NULL,NULL);
 
             $notify[] = ['success', 'Balance Transferred Successfully.'];
             return back()->withNotify($notify);

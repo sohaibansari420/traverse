@@ -70,7 +70,7 @@ class PlanController extends Controller
             
             $details = $user->username . ' Subscribed to ' . $package->name . ' plan';
         
-            $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($package->price), $details, 0, 'purchased_plan', NULL);
+            $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($package->price), $details, 0, 'purchased_plan', NULL,'');
     
             $oldPlan = $user->plan_purchased;
             $user->plan_purchased = 1;
@@ -202,7 +202,7 @@ class PlanController extends Controller
             
             $details = $user->username . ' Upgraded to ' . $package->name . ' plan';
             
-            $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($remainig_price), $details, 0, 'upgrade_purchased_plan', NULL);
+            $notify[] = updateWallet($user->id, $trx, 1, NULL, '-', getAmount($remainig_price), $details, 0, 'upgrade_purchased_plan', NULL,'');
             
             $oldPlan = $user->plan_purchased;
             $user->plan_purchased = 1;
@@ -248,7 +248,7 @@ class PlanController extends Controller
 
         $details = $user->username . ' Renewal ' . $package->plan->name . ' plan';
     
-        $notify[] = updateWallet($user->id, $trx, $request->wallet_id, NULL, '-', getAmount($package->plan->price), $details, 0, 'renew_plan', NULL);
+        $notify[] = updateWallet($user->id, $trx, $request->wallet_id, NULL, '-', getAmount($package->plan->price), $details, 0, 'renew_plan', NULL,'');
 
         $user->plan_purchased = 1;
         $user->save();
@@ -267,7 +267,7 @@ class PlanController extends Controller
 
             foreach($flused_income as $data){
                 $details = 'Return Flushed-Off '. getCommissionName($data->commission_id) . ' After Package Renewal';
-                updateWallet($user->id, getTrx(), 6 , $data->commission_id, '-', getAmount($data->amount), $details, 0, str_replace(' ', '_', getCommissionName($data->commission_id)), $trx); 
+                updateWallet($user->id, getTrx(), 6 , $data->commission_id, '-', getAmount($data->amount), $details, 0, str_replace(' ', '_', getCommissionName($data->commission_id)), $trx,''); 
                 $commission = getCommission($data->commission_id);
                 if($commission){
                     if($commission->is_package == 1){

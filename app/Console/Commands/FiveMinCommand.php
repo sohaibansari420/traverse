@@ -103,7 +103,7 @@ class FiveMinCommand extends Command
 
                     $details = $user->username . ' Subscribed to ' . $package->name . ' plan';
 
-                    $notify[] = updateWallet($user->id, $trx, 7, NULL, '+', getAmount($package->price), $details, 0, 'purchased_plan', NULL);
+                    $notify[] = updateWallet($user->id, $trx, 7, NULL, '+', getAmount($package->price), $details, 0, 'purchased_plan', NULL,'');
 
                     if ($oldPlan == 0) {
                         updatePaidCount($user->id);

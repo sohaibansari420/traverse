@@ -209,7 +209,7 @@ class WithdrawalController extends Controller
 
         $details = getAmount($withdraw->amount) . ' ' . $general->cur_text . ' Refunded from Withdrawal Rejection';
 
-        $notify[] = updateWallet($withdraw->user_id, $withdraw->trx, $withdraw->wallet_id, NULL, '+', $withdraw->amount, $details , 0, 'WITHDRAW_REJECT', NULL);
+        $notify[] = updateWallet($withdraw->user_id, $withdraw->trx, $withdraw->wallet_id, NULL, '+', $withdraw->amount, $details , 0, 'WITHDRAW_REJECT', NULL,NULL);
 
 
         notify($user, 'WITHDRAW_REJECT', [

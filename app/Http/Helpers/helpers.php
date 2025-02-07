@@ -1096,7 +1096,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
 
                     //update flused off
                     $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                     $mem->bv_right = 0;
                     $mem->bv_left = $lp;
@@ -1105,7 +1105,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
             } else {
                 //update flused off
                 $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                 $mem->bv_right = 0;
                 $mem->bv_left = $lp;
@@ -1131,7 +1131,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
 
                     //update flused off
                     $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                     $mem->bv_right = $rp;
                     $mem->bv_left = 0;
@@ -1140,7 +1140,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
             } else {
                 //update flused off
                 $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                 $mem->bv_right = $rp;
                 $mem->bv_left = 0;
@@ -1166,7 +1166,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
 
                     //update flused off
                     $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                    updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($flush_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                     $mem->bv_right = 0;
                     $mem->bv_left = 0;
@@ -1175,7 +1175,7 @@ function cutPoints($posid = '', $capping = '', $plan_amount = '', $binary_per = 
             } else {
                 //update flused off
                 $details = 'Flushed-Off ' . getCommissionName(2) . ' Due to Capping';
-                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL);
+                updateWallet($mem->user_id, getTrx(), 7, 2, '+', getAmount($cut_point), $details, 0, str_replace(' ', '_', getCommissionName(2)), NULL,NULL);
 
                 $mem->bv_right = 0;
                 $mem->bv_left = 0;
@@ -1404,7 +1404,7 @@ function referralCommission($user_id, $wallet_id, $percent, $commission_id, $nam
             updateCommissionWithLimit($refer->id, $amount, $wallet_id, $commission_id, $user->username, $limit, $ref_plan->trx);
         } else {
             $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $user->username;
-            updateWallet($refer->id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), NULL);
+            updateWallet($refer->id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), NULL,NULL);
         }
     }
 }
@@ -2001,7 +2001,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                 $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
             }
 
-            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx,NULL);
 
             return 0;
         } else {
@@ -2014,7 +2014,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
             } else {
                 $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
             }
-            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx);
+            updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $new_trx,NULL);
 
             return $remaining_amount;
 
@@ -2031,7 +2031,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                 $plan_trx = getTrx();
                 $details = $user->username . ' Renew ' . $plan->plan->name . ' plan';
 
-                updateWallet($id, $plan_trx, $wallet_id, $commission_id, '-', getAmount($plan->plan->price), $details, 0, 'auto_renew_plan', NULL);
+                updateWallet($id, $plan_trx, $wallet_id, $commission_id, '-', getAmount($plan->plan->price), $details, 0, 'auto_renew_plan', NULL,NULL);
 
                 $plan->limit_consumed = 0;
                 $plan->is_expired = 0;
@@ -2058,7 +2058,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                         $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
                     }
 
-                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx,NULL);
 
                     return 0;
                 } else {
@@ -2071,7 +2071,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                     } else {
                         $details = 'Received ' . getCommissionName($commission_id) . ' From ' . $from;
                     }
-                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+                    updateWallet($id, getTrx(), $wallet_id, $commission_id, '+', getAmount($remaining_amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx,NULL);
 
                     return $remaining_amount;
 
@@ -2081,7 +2081,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
                 //if not auto renew flush the amount
                 //update flused off
                 $details = 'Flushed-Off ' . getCommissionName($commission_id) . ' Due to Network Limit';
-                updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+                updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx,NULL);
 
                 return 0;
             }
@@ -2089,7 +2089,7 @@ function limitRemaining($id = '', $amount = '', $wallet_id = '', $commission_id 
             //if not renew flush the amount
             //update flused off
             $details = 'Flushed-Off ' . getCommissionName($commission_id) . ' Due to Network Limit';
-            updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx);
+            updateWallet($id, getTrx(), 6, $commission_id, '+', getAmount($amount), $details, 0, str_replace(' ', '_', getCommissionName($commission_id)), $plan->trx,NULL);
 
             return 0;
         }
@@ -2305,8 +2305,8 @@ function checkPaidStatusDaily()
             $user_wallets = UserWallet::where('user_id', $user->id)->where('wallet_id', '<', 6)->where('balance', '!=', 0)->get();
             foreach ($user_wallets as $user_wallet) {
                 $details = 'Flushed-Off Amount due to none activation';
-                updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_flused", NULL);
-                updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_activation", NULL);
+                updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_flused", NULL,NULL);
+                updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_activation", NULL,NULL);
             }
 
             $user_extra = UserExtra::where('user_id', $user->id)->first();
@@ -2443,8 +2443,8 @@ function flushWallets()
     $user_wallets = UserWallet::where('wallet_id', '<', 6)->where('balance', '!=', 0)->get();
     foreach ($user_wallets as $user_wallet) {
         $details = 'Flushed-Off Amount for Balance Adjustment';
-        updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_adjustment", NULL);
-        updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_adjustment", NULL);
+        updateWallet($user_wallet->user_id, getTrx(), $user_wallet->wallet_id, NULL, '-', getAmount($user_wallet->balance), $details, 0, "wallet_adjustment", NULL,NULL);
+        updateWallet($user_wallet->user_id, getTrx(), 6, NULL, '+', getAmount($user_wallet->balance), $details, 0, "flushed_adjustment", NULL,NULL);
     }
 }
 
@@ -2515,7 +2515,7 @@ function stormCommission($id = '')
             if ($family_user->user->storm_plan) {
                 updateCommissionWithLimit($family_user->user_id, $amount, $commission->commission->wallet_id, $commission->commission->id, $user->username . ' at Level ' . $family_user->level, $commission->commission_limit, $user_plan->trx);
             } else {
-                updateWallet($family_user->user_id, getTrx(), 6, 9, '+', getAmount($amount), 'Flushed Storm Commission From ' . $user->username . ' at Level ' . $family_user->level, 0, "flushed_storm", NULL);
+                updateWallet($family_user->user_id, getTrx(), 6, 9, '+', getAmount($amount), 'Flushed Storm Commission From ' . $user->username . ' at Level ' . $family_user->level, 0, "flushed_storm", NULL,NULL);
             }
         }
     }
