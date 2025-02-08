@@ -1351,14 +1351,14 @@ function treeAdjust($id = '', $user_id = '', $position = '')
     $user = User::find($user_id);
     $user_tree = UserNetwork::where('user_id', $mem->user_id)->where('mem_id', $user->id)->count();
     if ($user_tree > 0) {
-        UserNetwork::where('user_id', $mem->user_id)->where('mem_id', $user->id)
+        UserNetwork::where('user_id', $mem->user_id ?? 0)->where('mem_id', $user->id)
             ->update([
                 'is_roi' => 0,
                 'is_point' => 0,
             ]);
     } else {
         UserNetwork::Create([
-            'user_id' => $mem->user_id,
+            'user_id' => $mem->user_id ?? 0,
             'mem_id' => $user->id,
             'position' => $user->position,
             'team' => $position,

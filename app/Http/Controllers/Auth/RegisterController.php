@@ -60,7 +60,7 @@ class RegisterController extends Controller
     {
         $content = Frontend::where('data_keys', 'sign_up.content')->first();
         $info = json_decode(json_encode(getIpInfo()), true);
-        
+
         if ($info['code'] == null) {
             $notify[] = ['error', 'Please wait a while.'];
             if ($request->ref && $request->position) {
@@ -154,7 +154,7 @@ class RegisterController extends Controller
             'firstname'     => 'sometimes|required|string|max:60',
             'lastname'      => 'sometimes|required|string|max:60',
             'email'         => 'required|string|email|max:160|unique:users',
-            'legacy_email'  => 'required|string|email|max:160|unique:users',
+            // 'legacy_email'  => 'required|string|email|max:160|unique:users',
             'mobile'        => 'required|string|max:30',
             'password'      => 'required|string|min:6|confirmed',
             'username'      => 'required|alpha_num|unique:users|min:3',
@@ -227,7 +227,7 @@ class RegisterController extends Controller
         $user->firstname    = isset($data['firstname']) ? $data['firstname'] : null;
         $user->lastname     = isset($data['lastname']) ? $data['lastname'] : null;
         $user->email        = strtolower(trim($data['email']));
-        $user->legacy_email = strtolower(trim($data['legacy_email']));
+        // $user->legacy_email = strtolower(trim($data['legacy_email']));
         $user->password     = Hash::make($data['password']);
         $user->username     = trim($data['username']);
         $user->ref_id       = $userCheck->id;

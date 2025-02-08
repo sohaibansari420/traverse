@@ -97,12 +97,12 @@
                                     <input type="email" name="email" value="{{ old('email') }}" placeholder="@lang('Enter your email')" required>
                                 </fieldset> 
 
-                                <fieldset>
+                                {{-- <fieldset>
                                     <label>
                                         Legacy Email *
                                     </label>
                                     <input type="email" name="legacy_email" value="{{ old('legacy_email') }}" placeholder="@lang('Enter your Legacy email')" required>
-                                </fieldset> 
+                                </fieldset>  --}}
 
                                 <div class="row mb-0 d-none">
                                     <div class="col-md-12 mb-3">

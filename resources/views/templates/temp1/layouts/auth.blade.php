@@ -82,7 +82,7 @@
 
     @yield('content')
 
-    <section id="contact" class="tf-section tf_CTA">
+    {{-- <section id="contact" class="tf-section tf_CTA">
         <div class="container relative">
             <div class="overlay">
             </div>
@@ -155,7 +155,7 @@
             </div>
             
         </div>
-    </footer>
+    </footer> --}}
     </div>
     <a id="scroll-top"></a>
     <script src="{{ asset($activeTemplateTrue . 'frontend/app/js/jquery.min.js') }}"></script>

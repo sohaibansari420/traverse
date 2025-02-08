@@ -184,7 +184,7 @@
                             $('#plan_price').val(data.price);
                             $('#plan_purchase').val(data.percentage);
                             $('#trx').val(data.trx);
-                            if ((day === 0 || day === 6) && (data.roi_status !== 0 && data.is_roi !== 1)) {
+                            if ((day === 0 || day === 6) && (data.roi_status == 0 && data.plan_roi == 1)) {
                                 $('#compounding').prop('disabled', false);
                             }else{
                                 $('#compounding').prop('disabled', true);   

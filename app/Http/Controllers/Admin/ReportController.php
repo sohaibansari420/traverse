@@ -734,7 +734,7 @@ class ReportController extends Controller
                 $wallet = Wallet::where('id', $id)->first();
                 $user = User::findOrFail($request->userID);
                 $page_title = $user->username . ' - ' . $wallet->name . ' Logs';
-                $transactions = Transaction::where('user_id', $user->id)->where('wallet_id', $wallt->id)->with('user')->latest()->paginate(getPaginate());
+                $transactions = Transaction::where('user_id', $user->id)->where('wallet_id', $wallet->id)->with('user')->latest()->paginate(getPaginate());
             }
             else{
                 $wallet = Wallet::where('id', $id)->first();
