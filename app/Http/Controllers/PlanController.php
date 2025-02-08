@@ -410,6 +410,15 @@ class PlanController extends Controller
         $dailyIncome = isset($matches[1]) ? floatval($matches[1]) : 0.0;
         $randomIncome = round(mt_rand(0, $dailyIncome * 100) / 100, 2);
 
+        $currentTime = Carbon::now();
+        $createPlan = Carbon::parse($plan->created_at)->format('y-m-d H:i');
+        $timeDiff = $currentTime->diffInHours($createPlan);
+        if ($timeDiff >= 24) {
+            $planStartHours = 1;
+        } else {
+            $planStartHours = 0;
+        }
+
         $roi_status = Transaction::where(['commission_id' => 1, 'user_id' => Auth::id(), 'plan_trx' => $plan->trx])
                 ->whereDate('created_at', \Carbon\Carbon::today())
                 ->count();
@@ -420,6 +429,7 @@ class PlanController extends Controller
             'trx' => $plan->trx,
             'roi_status' => $roi_status,
             'plan_roi' => $plan->is_roi,
+            'planStartHours' => $planStartHours,
         ];
         return $data;
     }

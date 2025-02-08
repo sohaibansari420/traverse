@@ -24,6 +24,7 @@ class PurchasedPlan extends Model
         'with_point',
         'auto_renew',
         'auto_compounding',
+        'plan_limit',
     ];
     public function plan()
     {

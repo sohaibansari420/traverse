@@ -740,6 +740,7 @@ class ManageUsersController extends Controller
         
         $roi_status = 0;
         $point_status = 0;
+        $plan_limit = 0;
 
         $package = Plan::where('id', $plan)->where('status', 1)->firstOrFail();
         $gnl = GeneralSetting::first();
@@ -766,6 +767,10 @@ class ManageUsersController extends Controller
             $point_status = 1;
         }
 
+        if ($request->plan_limit != ""){
+            $plan_limit = $request->plan_limit;
+        }
+
         PurchasedPlan::create([
             'user_id' => $id,
             'plan_id' => $package->id,
@@ -778,6 +783,7 @@ class ManageUsersController extends Controller
             'roi_return' => 0,
             'is_roi' => $roi_status,
             'with_point' => $point_status,
+            'plan_limit' => $plan_limit,
         ]);
 
         if ($send_bv == 'on'){
