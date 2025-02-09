@@ -259,8 +259,11 @@
                         <h2 class="title">
                             CEO
                         </h2>
-                        <p>I am honored to serve as the CEO of this innovative and dynamic company. With over thirty years of experience in sales and distribution network marketing, I have witnessed the industry's evolution and its tremendous potential. Stealth Trade Bot offers a range of applications, including an OTT platform, a 3D NFT game, an Online shopping mall application, and a Crypto Currency Exchange. Our team of gaming, blockchain, and entertainment experts is dedicated to pushing the boundaries of what is possible in the Multiverse.</p>
-                        <p>Join us on this exciting journey as we redefine the future of entertainment in the Multiverse. With Stealth Trade Bot, the possibilities are endless, and we are committed to providing a unique and inclusive entertainment experience that is accessible to everyone.</p>
+                        <h6>Dear Stealth Trader Community,</h6>
+                        <p>Welcome to Stealth Traderbot—where innovation meets opportunity in the world of automated trading. Our mission is to empower you with cutting-edge technology that enhances your trading experience, maximizes profitability, and simplifies the complexities of the market.</p>
+                        <p>In today’s fast-paced financial landscape, success requires agility, precision, and the right tools. That’s why we’ve developed a robust ecosystem of AI-driven trading bots designed to help you capitalize on opportunities 24/7. Whether you’re a seasoned trader or just starting out, Stealth Traderbot provides the resources you need to grow and thrive.</p>
+                        <p>But beyond technology, what truly sets us apart is our community. We are a collective of visionaries, entrepreneurs, and traders who believe in financial freedom through smart, automated solutions. Your success is our success, and we are committed to continuously improving our platform to serve you better.</p>
+                        <p>Thank you for being part of this journey. We’re excited for what the future holds, and together, we will redefine the way trading is done.</p>
                         <div class="wrap-btn">
                             <a href="{{route('user.register')}}" class="tf-button style3">
                                 Join Now
@@ -271,7 +274,60 @@
                 
                 <div class="col-md-6">
                   <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
-                    {{-- <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ceo.png') }}" alt="CEO"> --}}
+                    <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ceo.png') }}" alt="CEO">
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
+                    <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/director.png') }}" alt="DIRECTOR">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
+                        <h2 class="title">
+                            Anderson Chester
+                        </h2>
+                        <h6>Director of Business Development | Stealth Traderbot</h6>
+                        <p>As the Director of Business Development at Stealth Traderbot, Anderson Chester is at the forefront of driving growth, strategic partnerships, and market expansion. With a keen eye for emerging opportunities, he is committed to positioning Stealth Traderbot as a leader in automated trading solutions.</p>
+                        <p>Anderson brings a wealth of experience in business growth, cryptocurrency trading, and financial technology, leveraging innovative strategies to scale operations and enhance user engagement. His focus is on developing strong industry relationships, optimizing revenue streams, and ensuring that Stealth Traderbot delivers cutting-edge trading solutions to its clients.</p>
+                        <p>Passionate about empowering traders and investors, Anderson is dedicated to making automated trading more accessible, efficient, and profitable. Under his leadership, Stealth Traderbot continues to evolve, offering advanced trading tools that redefine market possibilities.</p>
+                        <div class="wrap-btn">
+                            <a href="{{route('user.register')}}" class="tf-button style3">
+                                Join Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tf-title left mt58" data-aos="fade-up" data-aos-duration="800">
+                        <h2 class="title">
+                            Clive Williams
+                        </h2>
+                        <h6>Vice President of Sales, StealthBotTrader</h6>
+                        <p>Clive Williams serves as the Vice President of Sales at StealthBotTrader, bringing a wealth of experience in strategic sales, business development, and leadership. With a strong background in financial technology and trading, Clive plays a pivotal role in expanding StealthBotTrader’s reach, driving growth, and empowering individuals to capitalize on arbitrage trading opportunities.</p>
+                        <p>His expertise in sales strategy, client relations, and market expansion has positioned him as a key figure in the company’s mission to revolutionize automated trading solutions. Clive is passionate about helping people achieve financial success, leveraging cutting-edge technology to create new income streams.</p>
+                        <p>Under his leadership, StealthBotTrader continues to thrive as a premier platform for traders looking to maximize profits with precision and efficiency.</p>
+                        <div class="wrap-btn">
+                            <a href="{{route('user.register')}}" class="tf-button style3">
+                                Join Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
+                    <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/vice_president.png') }}" alt="VICEPRESIDENT">
                   </div>
                 </div>
                 
@@ -299,10 +355,10 @@
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div>
                                 </div>
-                                <h5 class="heading"><a href="#">MM Token</a></h5>
+                                <h5 class="heading"><a href="#">S Token</a></h5>
                             </div>
                             <div class="content">
-                                <p>MM Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Stealth Trade Bot ecosystem, it serves as a medium of exchange and store of value for users within the platform. MM can be used to purchase virtual land, goods, and services within the Multiverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. MM Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
+                                <p>S Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Stealth Trade Bot ecosystem, it serves as a medium of exchange and store of value for users within the platform. S can be used to purchase virtual land, goods, and services within the Multiverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. S Token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
                             </div>
                         </div>
                         {{-- <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -316,7 +372,7 @@
                                 <h5 class="heading"><a href="#">Online Shopping Mall</a></h5>
                             </div>
                             <div class="content">
-                                <p>The online shopping mall application in Stealth Trade Bot is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the MM Token, allowing users to make purchases using the cryptocurrency.</p>
+                                <p>The online shopping mall application in Stealth Trade Bot is a state-of-the-art e-commerce platform that allows users to browse and purchase products from a wide range of merchants. The platform is designed to be user-friendly and intuitive, with features like personalized recommendations, easy checkout, and secure payment processing. The application is integrated with the S Token, allowing users to make purchases using the cryptocurrency.</p>
                             </div>
                         </div> --}}
                         {{-- <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
@@ -358,7 +414,7 @@
                                 <h5 class="heading"><a href="#">Crypto Currency Exchange</a></h5>
                             </div>
                             <div class="content">
-                                <p>The crypto currency exchange in Stealth Trade Bot is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the MM Token, allowing users to trade cryptocurrencies using the Stealth Trade Bot's native cryptocurrency.</p>
+                                <p>The crypto currency exchange in Stealth Trade Bot is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the S Token, allowing users to trade cryptocurrencies using the Stealth Trade Bot's native cryptocurrency.</p>
                             </div>
                         </div>
                     </div>
@@ -407,7 +463,7 @@
                                             <div class="content">
                                                 <h6 class="date">Q3, 2024</h6>
                                                 <ul>
-                                                    <li><h6>MM Token</h6></li>
+                                                    <li><h6>S Token</h6></li>
                                                     <li>Launch of the MM</li>
                                                     <li>Token on Binance</li>
                                                     <li>Smart Chain(BSC)</li>
@@ -473,7 +529,7 @@
                                                     <li><h6>3D NFT Game</h6></li>
                                                     <li>Launch of the 3D</li> 
                                                     <li>NFT Multiverse Game</li>
-                                                    <li>on the MM Platform</li>
+                                                    <li>on the S Platform</li>
                                                 </ul>
                                             </div>
                                         </div>
