@@ -268,8 +268,8 @@ function removeElement($array, $value)
 
 function cryptoQR($wallet, $amount, $crypto = null)
 {
-
     $varb = $wallet . "?amount=" . $amount;
+    return "https://quickchart.io/qr?text=$varb";
     return "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$varb&choe=UTF-8";
 }
 
@@ -1922,7 +1922,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
             $transaction2->post_balance = getAmount($passive_wallet->balance);
             $transaction2->trx_type = '+';
             $transaction2->wallet_id = 9;
-            $transaction2->roi_percent = $percentROI;
+            $transaction2->roi_percent = $percentROI ?? 0;
             $transaction2->save();
 
             $transaction->amount = $amount;
@@ -1930,7 +1930,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
 
         $wallet->balance += $amount;
         $transaction->trx_type = '+';
-        $transaction->roi_percent = $percentROI;
+        $transaction->roi_percent = $percentROI ?? 0;
         $transaction->wallet_id = $wallet_id;
 
         $wallet->save();
