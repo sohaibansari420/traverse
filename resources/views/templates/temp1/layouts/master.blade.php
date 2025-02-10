@@ -196,7 +196,7 @@
                         </div>
                         <p class="sub_technology">Stealth Trade Bot is a blockchain-powered platform that offers an immersive and seamless experience across a range of applications. Our ecosystem includes an OTT platform, 3D NFT game, Online shopping mall application, and Crypto Currency Exchange. Our goal is to create a unique and inclusive entertainment experience that is accessible to everyone. We have a team of experts in gaming, blockchain, and entertainment, who are passionate about innovation and pushing the boundaries of what is possible in the Multiverse. Whether you want to play a 3D NFT game, shop for physical goods using cryptocurrency, or exchange cryptocurrencies with other users, Stealth Trade Bot has exciting applications that are sure to keep you engaged and entertained. Join us on our journey to redefine the future of entertainment in the Multiverse. With Stealth Trade Bot, the possibilities are endless.
                         </p>
-                        <img class="move4 mt-4 mb-4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/site/legal.png') }}" alt="Legal Document">
+                        {{-- <img class="move4 mt-4 mb-4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/site/legal.png') }}" alt="Legal Document"> --}}
                         <div class="swiper-container slider-6">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
@@ -461,7 +461,7 @@
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
                                             </div>
                                             <div class="content">
-                                                <h6 class="date">Q3, 2024</h6>
+                                                <h6 class="date">Q3, 2025</h6>
                                                 <ul>
                                                     <li><h6>S Token</h6></li>
                                                     <li>Launch of the S</li>
@@ -508,7 +508,7 @@
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
                                             </div>
                                             <div class="content">
-                                                <h6 class="date">Q4, 2025</h6>
+                                                <h6 class="date">Q2, 2026</h6>
                                                 <ul>
                                                     <li><h6>Crypto Currency Exchange</h6></li>
                                                     <li>Launch of the dedicated crypto</li>
@@ -524,7 +524,7 @@
                                                 <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
                                             </div>
                                             <div class="content">
-                                                <h6 class="date">Q2, 2026</h6>
+                                                <h6 class="date">Q1, 2027</h6>
                                                 <ul>
                                                     <li><h6>3D NFT Game</h6></li>
                                                     <li>Launch of the 3D</li> 
