@@ -273,7 +273,7 @@
                 </div>
                 
                 <div class="col-md-6">
-                  <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
+                  <div class="image_cta mt-2" data-aos="fade-left" data-aos-duration="1200">
                     <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ceo.png') }}" alt="CEO">
                   </div>
                 </div>
@@ -283,7 +283,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                  <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
+                  <div class="image_cta mt-2" data-aos="fade-left" data-aos-duration="1200">
                     <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/director.png') }}" alt="DIRECTOR">
                   </div>
                 </div>
@@ -326,7 +326,7 @@
                 </div>
                 
                 <div class="col-md-6">
-                  <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
+                  <div class="image_cta mt-2" data-aos="fade-left" data-aos-duration="1200">
                     <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/vice_president.png') }}" alt="VICEPRESIDENT">
                   </div>
                 </div>
@@ -464,7 +464,7 @@
                                                 <h6 class="date">Q3, 2024</h6>
                                                 <ul>
                                                     <li><h6>S Token</h6></li>
-                                                    <li>Launch of the MM</li>
+                                                    <li>Launch of the S</li>
                                                     <li>Token on Binance</li>
                                                     <li>Smart Chain(BSC)</li>
                                                 </ul>
