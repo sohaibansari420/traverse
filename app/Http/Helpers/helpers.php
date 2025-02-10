@@ -1867,7 +1867,7 @@ function createWallets($id = '')
     }
 }
 
-function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '', $percentROI)
+function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id = '', $opration = '', $amount = '', $details = '', $charges = '', $remarks = '', $plan_trx = '', $percentROI = 0)
 {
 
     $user = User::findOrFail($user_id);
