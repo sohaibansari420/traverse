@@ -1258,33 +1258,34 @@ function updateBV($id, $bv, $details)
                 $extra = UserExtra::where('user_id', $posid)->first();
                 $bvlog = new BvLog();
                 $bvlog->user_id = $posid;
+                if(isset($extra)){
+                    if ($position == 1) {
+                        $extra->bv_left += $bv;
+                        $extra->total_bv_left += $bv;
+                        $bvlog->position = '1';
+                        $details = 'Received Business Volume From ' . $user->username;
+                        if ($posid <= $user->ref_id) {
+                            $extra->spill_bv_left += $bv;
+                        }
+                    } else {
+                        $extra->bv_right += $bv;
+                        $extra->total_bv_right += $bv;
+                        $bvlog->position = '2';
+                        $details = 'Received Business Volume From ' . $user->username;
+                        if ($posid <= $user->ref_id) {
+                            $extra->spill_bv_right += $bv;
+                        }
+                    }
+                    $extra->save();
+                
+                    $bvlog->amount = $bv;
+                    $bvlog->trx_type = '+';
+                    $bvlog->details = $details;
+                    $bvlog->save();
 
-                if ($position == 1) {
-                    $extra->bv_left += $bv;
-                    $extra->total_bv_left += $bv;
-                    $bvlog->position = '1';
-                    $details = 'Received Business Volume From ' . $user->username;
-                    if ($posid <= $user->ref_id) {
-                        $extra->spill_bv_left += $bv;
-                    }
-                } else {
-                    $extra->bv_right += $bv;
-                    $extra->total_bv_right += $bv;
-                    $bvlog->position = '2';
-                    $details = 'Received Business Volume From ' . $user->username;
-                    if ($posid <= $user->ref_id) {
-                        $extra->spill_bv_right += $bv;
-                    }
+                    binaryActivation($posid, $user->id, $position);
+                    treeAdjust($posid, $user->id, $position);
                 }
-                $extra->save();
-                $bvlog->amount = $bv;
-                $bvlog->trx_type = '+';
-                $bvlog->details = $details;
-                $bvlog->save();
-
-                binaryActivation($posid, $user->id, $position);
-                treeAdjust($posid, $user->id, $position);
-
                 if ($posUser->plan_purchased != 0) {
 
                     $user_plan = getUserHigherPlan($posid);
