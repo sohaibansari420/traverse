@@ -96,11 +96,11 @@
                 </li>			
             </ul>
             </li>
-            <li><a href="{{ route('user.media.index') }}" aria-expanded="false">
+            {{-- <li><a href="{{ route('user.media.index') }}" aria-expanded="false">
                     <i class="material-icons">extension</i>
                     <span class="nav-text">Media</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
         <div class="support-box">
             <div class="media"> 
