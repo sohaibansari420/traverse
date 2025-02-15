@@ -1,0 +1,136 @@
+.mgt-container {
+  flex-grow: 1;
+  overflow: auto;
+  justify-content: center;
+}
+.basic-style {
+  background-color: #efe6e2;
+}
+.mgt-item-parent p {
+  font-weight: 400;
+  color: #17a2b8;
+}
+
+.management-tree .person {
+  text-align: center;
+}
+.management-tree .person img {
+  max-width: 80px;
+  border: 2px solid #17a2b8;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.management-tree .person img:hover {
+  -webkit-transform: rotate(15deg) scale(1.4);
+  transform: rotate(15deg) scale(1.4);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.management-tree .person p.name {
+  background: linear-gradient(to right, #4a32 0%, #17a2b8 100%);
+  padding: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #fff;
+  margin: 0;
+  position: relative;
+}
+.management-tree .person p.name:hover {
+  background: #4a32;
+  color: #efe6e2;
+}
+.management-tree .person p.name:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #17a2b8;
+  left: 50%;
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.mgt-wrapper {
+  display: flex;
+}
+.mgt-wrapper .mgt-item {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.mgt-wrapper .mgt-item .mgt-item-parent {
+  margin-bottom: 50px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.mgt-wrapper .mgt-item .mgt-item-parent:after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 25px;
+  bottom: 0;
+  left: 50%;
+  background-color: #17a2b8;
+  transform: translateY(100%);
+}
+.mgt-wrapper .mgt-item .mgt-item-children {
+  display: flex;
+  justify-content: center;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child {
+  padding: 0 1%;
+  position: relative;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:before,
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:after {
+  content: "";
+  position: absolute;
+  background-color: #17a2b8;
+  left: 0;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:before {
+  left: 50%;
+  top: 0;
+  transform: translateY(-100%);
+  width: 2px;
+  height: 25px;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:after {
+  top: -23px;
+  transform: translateY(-100%);
+  height: 2px;
+  width: 100%;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:first-child:after {
+  left: 50%;
+  width: 50%;
+}
+.mgt-wrapper .mgt-item .mgt-item-children .mgt-item-child:last-child:after {
+  width: calc(50% + 1px);
+}
+
+@media (max-width: 1218px) and (min-width: 767px) {
+  .management-tree .person img {
+    max-width: 50px;
+  }
+  .management-tree .person p.name {
+    font-size: 10px;
+  }
+}
+@media (max-width: 766px) and (min-width: 480px) {
+  .management-tree .person img {
+    max-width: 30px;
+  }
+  .management-tree .person p.name {
+    font-size: 8px;
+  }
+}
+@media (max-width: 479px) and (min-width: 200px) {
+  .management-tree .person img {
+    max-width: 20px;
+  }
+  .management-tree .person p.name {
+    font-size: 6px;
+  }
+}
