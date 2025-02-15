@@ -11,7 +11,7 @@
                             <h6 class="title">Register</h6>
                             <h6 class="title show-mobie"><a href="{{route('user.login')}}">Login</a></h6>
                             <h6 class="title link"><a href="{{route('user.login')}}">Login</a></h6>
-                            <p>Welcome to Stealth Trade Bot, please enter your details</p>
+                            <p>Welcome to Traverse Bot, please enter your details</p>
                             <div class="form-inner"> 
         
                                 @if ($ref_user == null)

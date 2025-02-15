@@ -33,7 +33,7 @@
     ***********************************-->
     <div class="footer out-footer style-1">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#">Stealth Trade Bot</a> 2025</p>
+            <p>Copyright © Designed &amp; Developed by <a href="#">Traverse Bot</a> 2025</p>
         </div>
     </div>
 

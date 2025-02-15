@@ -23,7 +23,7 @@ Route::get('/test-mail', function() {
     // if (empty($html)) {
     //     $html = $email_template->email_body;
     // }
-    $html = "hello Stealth Trade Bot";
+    $html = "hello Traverse Bot";
     \Illuminate\Support\Facades\Mail::html($html, function ($message) {
         $message->to('sohaibfaheem44@gmail.com')
             ->from(config('mail.mailers.smtp.username'), "Millionare")
