@@ -260,10 +260,10 @@
                             CEO
                         </h2>
                         <h6>Dear Traverse Trader Community,</h6>
-                        <p>Welcome to Traverse Traderbot—where innovation meets opportunity in the world of automated trading. Our mission is to empower you with cutting-edge technology that enhances your trading experience, maximizes profitability, and simplifies the complexities of the market.</p>
+                        {{-- <p>Welcome to Traverse Traderbot—where innovation meets opportunity in the world of automated trading. Our mission is to empower you with cutting-edge technology that enhances your trading experience, maximizes profitability, and simplifies the complexities of the market.</p>
                         <p>In today’s fast-paced financial landscape, success requires agility, precision, and the right tools. That’s why we’ve developed a robust ecosystem of AI-driven trading bots designed to help you capitalize on opportunities 24/7. Whether you’re a seasoned trader or just starting out, Traverse Traderbot provides the resources you need to grow and thrive.</p>
                         <p>But beyond technology, what truly sets us apart is our community. We are a collective of visionaries, entrepreneurs, and traders who believe in financial freedom through smart, automated solutions. Your success is our success, and we are committed to continuously improving our platform to serve you better.</p>
-                        <p>Thank you for being part of this journey. We’re excited for what the future holds, and together, we will redefine the way trading is done.</p>
+                        <p>Thank you for being part of this journey. We’re excited for what the future holds, and together, we will redefine the way trading is done.</p> --}}
                         <div class="wrap-btn">
                             <a href="{{route('user.register')}}" class="tf-button style3">
                                 Join Now
@@ -274,7 +274,7 @@
                 
                 <div class="col-md-6">
                   <div class="image_cta mt-2" data-aos="fade-left" data-aos-duration="1200">
-                    <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ceo.png') }}" alt="CEO">
+                    {{-- <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ceo.png') }}" alt="CEO"> --}}
                   </div>
                 </div>
                 
