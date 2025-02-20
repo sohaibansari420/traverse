@@ -172,7 +172,7 @@
                 </div>
             @endif
         @endforeach
-        <div class="card counter col-md-3">
+        {{-- <div class="card counter col-md-3">
             <div class="card-body d-flex align-items-center">
                 <div class="card-box-icon">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,11 +193,11 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-12 text-center">
-                    {{-- <a href="{{ route('user.report.wallet') }}?walletID="
-                        class="btn btn-primary btn-sm">Logs</a> --}}
+                    <a href="{{ route('user.report.wallet') }}?walletID="
+                        class="btn btn-primary btn-sm">Logs</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="row">
@@ -257,13 +257,13 @@
         @endphp
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img1.png);">
-                <h3 class="mt-3 mb-1 text-white">{{ $commissions[3]->name }}</h3>
+                <h3 class="mt-3 mb-1 text-white">@if($commissions[3]->name == "Speed Bonus") Flash Bonus @endif</h3>
                 <p class="text-white mb-2">Join The Traverse Bot, earn cash back, sponsor 5 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
             </div>
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="mb-0 fs-15">The Traverse Bot Speed Bonus rewards new members of The Traverse Bot ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
+                        <p class="mb-0 fs-15">The Traverse Bot Flash Bonus rewards new members of The Traverse Bot ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
                     </div>
                     <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -351,7 +351,7 @@
                 </div>
             </div>
         </div> --}}
-        <div class="card overflow-hidden">
+        {{-- <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img4.png);">
                 <h3 class="mt-3 mb-1 text-white">Founder's Club Bonus</h3>
                 <p class="text-white mb-2">Founder's Club Bonus from The Traverse Bot based on higher plan purchase. Get 1% of the Profit from Traverse Bot.</p>
@@ -361,72 +361,73 @@
                     <div class="col-12">
                         <p class="mb-0 fs-15">This bonus is a special incentive program offered by our Multi-level-Marketing company to reward the pioneering members who have contributed significantly to the growth and success of our buisness. As part of this program, eligible founders are entitled to receive a 1% share of the company's total profits.</p>
                     </div>
-                    {{-- <div class="col-6 mt-4">
+                    <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
                             <h4 class="mb-0">${{ @$direct_sale }}</h4>
                             <small>Current Direct Sale</small>
                         </div>
-                    </div> --}}
-                    {{-- <div class="col-6 mt-4">
+                    </div>
+                    <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
                             <h4 class="mb-0">{{ $rem_day }}</h4>
                             <small>Remaining Days</small>
                         </div>
-                    </div> --}}
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        @php
+            if ($next_rank) {
+                $rem_points = $next_rank->points - getRankPoints(Auth::id());
+                if ($rem_points < 0) {
+                    $rem_points = 0;
+                }
+            } else {
+                $rem_points = 0;
+            }
+            
+            if (getRankPoints(Auth::id()) < $next_rank->points) {
+                $pt = (getRankPoints(Auth::id()) / $next_rank->points) * 100;
+            } else {
+                $pt = 100;
+            }
+            
+            $tt = round($pt, 1);
+            $ts = round($tt / 100, 2);
+        @endphp
+        <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
+            <div class="card overflow-hidden">
+                <div class="text-center p-3" >
+                    <h2 class="mt-3 mb-1 text-white">{{ $commissions[6]->name }}</h2>
+                </div>
+                <div class="card-body text-center">
+                    <p><strong class="text-success">{{ $rem_points }} BV</strong> Remaining to Achieve Next Rank</p>
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <h5 class="font-weight-semibold mb-1">Current Rank</h5>
+                            <p class="mb-2">{{ $rank->name }}</p>
+                        </div><!-- col -->
+                        <div class="col border-left text-center">
+                            <h5 class="font-weight-semibold  mb-1">Next Rank</h5>
+                            <p class="mb-2">{{ $next_rank->name }}</p>
+                        </div><!-- col -->
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <h6>{{ $tt }}%</h6>
+                            <span>{{ $next_rank->name }}</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" style="width: {{ $ts }}%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    @php
-        if ($next_rank) {
-            $rem_points = $next_rank->points - getRankPoints(Auth::id());
-            if ($rem_points < 0) {
-                $rem_points = 0;
-            }
-        } else {
-            $rem_points = 0;
-        }
-        
-        if (getRankPoints(Auth::id()) < $next_rank->points) {
-            $pt = (getRankPoints(Auth::id()) / $next_rank->points) * 100;
-        } else {
-            $pt = 100;
-        }
-        
-        $tt = round($pt, 1);
-        $ts = round($tt / 100, 2);
-    @endphp
-    <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
-        <div class="card overflow-hidden">
-            <div class="text-center p-3" >
-                <h2 class="mt-3 mb-1 text-white">{{ $commissions[6]->name }}</h2>
-            </div>
-            <div class="card-body text-center">
-                <p><strong class="text-success">{{ $rem_points }} BV</strong> Remaining to Achieve Next Rank</p>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <h5 class="font-weight-semibold mb-1">Current Rank</h5>
-                        <p class="mb-2">{{ $rank->name }}</p>
-                    </div><!-- col -->
-                    <div class="col border-left text-center">
-                        <h5 class="font-weight-semibold  mb-1">Next Rank</h5>
-                        <p class="mb-2">{{ $next_rank->name }}</p>
-                    </div><!-- col -->
-                </div>
-                <div class="col-12">
-                    <div class="d-flex justify-content-between">
-                        <h6>{{ $tt }}%</h6>
-                        <span>{{ $next_rank->name }}</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar bg-primary" style="width: {{ $ts }}%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 <!--Row-->
 <div class="row">

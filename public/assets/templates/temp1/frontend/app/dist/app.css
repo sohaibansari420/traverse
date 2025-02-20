@@ -25,7 +25,7 @@ body {
   font-weight: 500;
   color: #798DA3;
   /* background: #09121D; */
-  background: linear-gradient(90deg, #7212b2, #7212b2, #3116c0);
+  background: linear-gradient(90deg, #362158, #2F1E4F, #000000);
 }
 body.home2 .bg_body {
   position: relative;

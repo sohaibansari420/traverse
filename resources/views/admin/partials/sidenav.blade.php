@@ -3,7 +3,7 @@
 
 
     <button class="res-sidebar-close-btn"><i class="las la-times"></i></button>
-    <div class="sidebar__inner" style="background: linear-gradient(90deg, #7212b2, #7212b2, #3116c0);">
+    <div class="sidebar__inner" style="background: linear-gradient(90deg, #362158, #2F1E4F, #000000);">
         <div class="sidebar__logo">
             <a href="{{ route('admin.dashboard') }}" class="sidebar__main-logo"><img
                     src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png') }}" alt="@lang('image')"></a>

@@ -351,9 +351,9 @@
                             <div class="header_project">
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_8.png') }}" alt="">
-                                    <div class="shape">
+                                    {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <h5 class="heading"><a href="#">T Token</a></h5>
                             </div>
@@ -393,9 +393,9 @@
                             <div class="header_project">
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_444.png') }}" alt="">
-                                    <div class="shape">
+                                    {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <h5 class="heading"><a href="#">3D NFT Multiverse Game</a></h5>
                             </div>
@@ -407,9 +407,9 @@
                             <div class="header_project">
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_333.png') }}" alt="">
-                                    <div class="shape">
+                                    {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <h5 class="heading"><a href="#">Crypto Currency Exchange</a></h5>
                             </div>

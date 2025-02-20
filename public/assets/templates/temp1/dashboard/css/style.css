@@ -17224,7 +17224,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     border: 0.0625rem solid rgba(255, 255, 255, 0.1) !important; }
 
 [data-theme-version="dark"] .card {
-  background-color: #2D2D37;
+  background-color: #2F1E4F;
   box-shadow: none; }
 
 [data-theme-version="dark"] .dropdown-menu {
@@ -30968,7 +30968,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: 0.0625rem solid rgba(255, 255, 255, 0.1) !important; }
 
 [data-theme-version="dark"] .card {
-  background-color: #2D2D37;
+  background-color: #362158;
   box-shadow: none; }
 
 [data-theme-version="dark"] .dropdown-menu {

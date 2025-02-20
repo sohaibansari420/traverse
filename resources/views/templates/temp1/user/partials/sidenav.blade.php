@@ -1,7 +1,7 @@
 <!--**********************************
         Sidebar start
 ***********************************-->
-<div class="dlabnav">
+<div class="dlabnav" style="background: linear-gradient(90deg, #362158, #2F1E4F, #000000);">
     <div class="dlabnav-scroll">	
         <ul class="metismenu" id="menu">
             <li><a href="{{ route('user.home') }}" aria-expanded="false">
