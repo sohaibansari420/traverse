@@ -343,9 +343,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('report/login/ipHistory/{ip}', 'ReportController@loginIpHistory')->name('report.login.ipHistory');
 
         // Founder Bonus
-        Route::get('founder-list', 'ManageUsersController@founderList')->name('founder.list');
-        Route::get('get-founder-users', 'ManageUsersController@GetFounderUsers')->name('get.founders');
-        Route::post('save-founder-users', 'ManageUsersController@SaveFounderUsers')->name('save.founders');
+        // Route::get('founder-list', 'ManageUsersController@founderList')->name('founder.list');
+        // Route::get('get-founder-users', 'ManageUsersController@GetFounderUsers')->name('get.founders');
+        // Route::post('save-founder-users', 'ManageUsersController@SaveFounderUsers')->name('save.founders');
 
         // Admin Support
         Route::get('tickets', 'SupportTicketController@tickets')->name('ticket');

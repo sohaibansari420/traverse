@@ -63,6 +63,7 @@ class UserController extends Controller
         $data['totalBvCut']         = getAmount(Auth::user()->total_bv);
         $data['user_extras']        = UserExtra::where('user_id', Auth::user()->id)->first();
         $data['plans']              = PurchasedPlan::where(["user_id" => Auth::user()->id])->orderBy('id', 'desc')->get();
+        $data['purchased_plans']    = PurchasedPlan::where(["user_id" => Auth::user()->id])->where('type','sponsor')->orderBy('id', 'desc')->get();
         $data['wallets']            = UserWallet::where(["user_id" => Auth::user()->id])->where('status', 1)->get();
         $data['commissions']        = Commission::where('status', 1)->get();
         $data['rank']               = Rank::where(["id" => Auth::user()->rank_id])->first();

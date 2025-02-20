@@ -20,7 +20,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdminNotification;
 use App\Models\Commission;
 use App\Models\CommissionDetail;
-use App\Models\Founder;
+// use App\Models\Founder;
 use App\Models\UserWallet;
 use App\Models\Wallet;
 
@@ -120,11 +120,11 @@ class AdminController extends Controller
 
         $latestUser = User::latest()->limit(6)->get();
 
-        $founderBonus=Founder::whereNotNull('amount')->sum('amount');
+        // $founderBonus=Founder::whereNotNull('amount')->sum('amount');
 
         return view('admin.dashboard', compact('page_title',
             'widget', 'report', 'withdrawals', 'chart','payment',
-            'paymentWithdraw','latestUser', 'bv', 'depositsMonth', 'withdrawalMonth', 'wallets', 'commissions','founderBonus'));
+            'paymentWithdraw','latestUser', 'bv', 'depositsMonth', 'withdrawalMonth', 'wallets', 'commissions'));
     }
 
 

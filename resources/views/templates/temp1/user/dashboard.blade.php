@@ -142,7 +142,7 @@
     <div class="col-xl-12 row wow fadeInUp" data-wow-delay="1.2s">
         @foreach ($commissions as $commission)
             @if($commission->id != 7)
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card counter">
                         <div class="card-body d-flex align-items-center">
                             <div class="card-box-icon">
@@ -296,7 +296,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-6 wow fadeInUp" data-wow-delay="1.7s">
+    <div class="col-xl-8 wow fadeInUp" data-wow-delay="1.7s">
         <div class="card overflow-hidden">
             <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img3.png);">
                 <h3 class="mt-3 mb-1 text-white">{{ $commissions[4]->name }}</h3>
@@ -317,7 +317,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-6 wow fadeInUp" data-wow-delay="1.6s">
+    <div class="col-xl-4 wow fadeInUp" data-wow-delay="1.6s">
         @php
             $now = \Carbon\Carbon::now();
             $created = new \Carbon\Carbon(auth()->user()->check_car);
@@ -630,7 +630,45 @@
     @endforeach
 </div>
 <!--End row-->
-
+@if(count($purchased_plans) > 0)
+    <div class="row">
+        <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
+            
+            <div class="card overflow-hidden">
+                <div class="card-header" style="display:block;">
+                    <h1 class="text-center">Support Plans</h1>
+                </div>
+                <div class="card-body pb-0 mb-4">
+                    <div class="row text-center">
+                        @foreach ($plans as $plan)
+                        @if ($plan->type == "sponsor")
+                            {{-- <div class="col-md-4 mt-4 mb-2">
+                                <div class="bgl-primary rounded p-2 pt-4">
+                                    <p class="text-white"><strong>{{ $plan->plan->name }}</strong>: {{ $general->cur_sym }}{{ $plan->amount }}</p>
+                                </div>
+                            </div> --}}
+                            <div class="row mt-4">
+                                <div class="col text-center">
+                                    <h5 class="font-weight-semibold mb-1">Plan Name</h5>
+                                    <p class="mb-2">{{ $plan->plan->name }}</p>
+                                </div><!-- col -->
+                                <div class="col border-left text-center">
+                                    <h5 class="font-weight-semibold  mb-1">Plan Amount</h5>
+                                    <p class="mb-2">{{ $general->cur_sym }}{{ $plan->amount }}</p>
+                                </div><!-- col -->
+                            </div>
+                        @endif
+                        @endforeach
+                    </div>
+                    {{-- <div class="card-footer pt-0 pb-0 text-center">
+                        <div class="row mt-4">
+                        </div>
+                    </div> --}}
+                </div>  
+            </div>
+        </div>
+    </div>
+@endif
 @endsection
 
 @push('script')

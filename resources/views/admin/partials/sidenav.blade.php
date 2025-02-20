@@ -443,13 +443,13 @@
                                                 </a>
                                             </li>
                                         @endforeach
-                                        <li class="sidebar-menu-item">
+                                        {{-- <li class="sidebar-menu-item">
                                             <a href="{{ route('admin.founder.list') }}" class="nav-link">
                                                 <i class="menu-icon las la-dot-circle-d"></i>
                                                 <i class="menu-icon las la-dot-circle"></i>
                                                 <span class="menu-title">@lang('Founder Bonus')</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
                             </li>

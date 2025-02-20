@@ -37,7 +37,7 @@
         </div><!-- end col -->
     </div>
     <!-- end row -->
-    <div id="founder_bonus" class="modal fade" tabindex="-1" role="dialog">
+    {{-- <div id="founder_bonus" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,13 +64,13 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('breadcrumb-plugins')
-    <a href="javascript:void(0)" onclick="SendFounderBonus()" class="btn btn-sm btn--success add-commission" style = "cursor: pointer;">
+    {{-- <a href="javascript:void(0)" onclick="SendFounderBonus()" class="btn btn-sm btn--success add-commission" style = "cursor: pointer;">
         <i class="fa fa-fw fa-plus"></i>@lang('Send Bonus to Founders')
-    </a>
+    </a> --}}
 @endpush
 
 @push('script')
@@ -78,41 +78,41 @@
         $(document).ready( function () {
             $('.table').DataTable();
         } );
-        function SendFounderBonus(){
-            $('#founder_bonus').find('.modal-body .founder_members').html('');
+        // function SendFounderBonus(){
+        //     $('#founder_bonus').find('.modal-body .founder_members').html('');
 
-            $.ajax({
-                url: "{{ route('admin.get.founders') }}",
-                type: 'GET',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                success: function(data) {
-                    console.log(data);
+        //     $.ajax({
+        //         url: "{{ route('admin.get.founders') }}",
+        //         type: 'GET',
+        //         data: {
+        //             _token: "{{ csrf_token() }}",
+        //         },
+        //         success: function(data) {
+        //             console.log(data);
 
-                    var table_html='';
+        //             var table_html='';
                     
-                    if (data.length <= 0) {
-                        alert('There is no founder member');
-                        return ;
-                    }
+        //             if (data.length <= 0) {
+        //                 alert('There is no founder member');
+        //                 return ;
+        //             }
                     
-                    data.forEach(function(value,key){
-                        if (value.active_plan.length > 0) {   
-                            table_html ='<div>'+
-                                            '<div class="row">'+
-                                                '<input type="text" class="col-md-1" name="id[]" value="'+value.id+'" readonly>'+
-                                                '<input type="text" class="col-md-3" name="username[]" value="'+value.username+'" readonly>'+
-                                                '<input type="text" class="col-md-4" name="email[]" value="'+value.email+'" readonly>'+
-                                            '</div>'+
-                                        '</div>';
+        //             data.forEach(function(value,key){
+        //                 if (value.active_plan.length > 0) {   
+        //                     table_html ='<div>'+
+        //                                     '<div class="row">'+
+        //                                         '<input type="text" class="col-md-1" name="id[]" value="'+value.id+'" readonly>'+
+        //                                         '<input type="text" class="col-md-3" name="username[]" value="'+value.username+'" readonly>'+
+        //                                         '<input type="text" class="col-md-4" name="email[]" value="'+value.email+'" readonly>'+
+        //                                     '</div>'+
+        //                                 '</div>';
                             
-                            $('#founder_bonus').find('.modal-body .founder_members').append(table_html);
-                        }
-                    })
-                    $('#founder_bonus').modal('show');
-                }
-            });
-        }
+        //                     $('#founder_bonus').find('.modal-body .founder_members').append(table_html);
+        //                 }
+        //             })
+        //             $('#founder_bonus').modal('show');
+        //         }
+        //     });
+        // }
     </script>
 @endpush
