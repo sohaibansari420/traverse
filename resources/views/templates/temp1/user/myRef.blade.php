@@ -25,7 +25,7 @@
                                     <th scope="col">@lang('Referral')</th>
                                     <th scope="col">@lang('Level')</th>
                                     <th scope="col">@lang('Email')</th>
-                                    <th scope="col">@lang('Mobile')</th>
+                                    {{-- <th scope="col">@lang('Mobile')</th> --}}
                                     <th scope="col">@lang('Join Date')</th>
                                 </tr>
                             </thead>
@@ -49,7 +49,7 @@
                                         </td>
                                         <td data-label="@lang('Level')">{{ $data->level }}</td>
                                         <td data-label="@lang('Email')">{{ $mem_user->email }}</td>
-                                        <td data-label="@lang('Mobile')">{{ $mem_user->mobile }}</td>
+                                        {{-- <td data-label="@lang('Mobile')">{{ $mem_user->mobile }}</td> --}}
                                         <td data-label="@lang('Join Date')">
                                             @if ($data->created_at != '')
                                                 {{ showDateTime($mem_user->created_at) }}

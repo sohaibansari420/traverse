@@ -346,8 +346,7 @@ class PlanController extends Controller
             $data['page_title'] = "Business Volume";
             $data['logs'] = BvLog::where('user_id', auth()->id())->orderBy('id', 'desc')->get();
         }
-        $data['summery'] = UserExtra::where('user_id', auth()->id())->firstOrFail();
-
+        $data['summery'] = UserExtra::where('user_id', auth()->id())->firstOrFail() ?? '';
         $data['empty_message'] = 'No data found';
         return view($this->activeTemplate . '.user.bvLog', $data);
     }

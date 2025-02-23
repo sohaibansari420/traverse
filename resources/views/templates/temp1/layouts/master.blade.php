@@ -28,6 +28,231 @@
     @stack('css')
 
     @stack('style')
+    <style>
+        /* body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #004663;
+    color: #c7d5e0;
+    margin: 0;
+    padding: 20px;
+} */
+/* Стили модального окна */
+/* Стили модального окна */
+.modal {
+    display: none; /* Скрываем модальное окно по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+}
+
+.modal-content {
+    max-width: 90%; /* Максимальная ширина изображения */
+    max-height: 90%; /* Максимальная высота изображения */
+}
+
+
+
+/* Кнопка закрытия */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Изменение цвета кнопки закрытия при наведении */
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Увеличиваем только конкретное изображение при наведении */
+.enlarge-on-hover {
+    transition: transform 0.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+    max-width: 100%; /* Ограничиваем ширину изображений по контейнеру */
+    height: auto; /* Сохраняем пропорции изображения */
+    object-fit: contain; /* Обеспечиваем, что изображение будет масштабироваться внутри контейнера без искажений */
+}
+
+
+/* Контейнер для временной шкалы */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+/* Центральная вертикальная линия временной шкалы */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: #66c0f4;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Элементы временной шкалы */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item.left.visible {
+    transform: translateX(-6px);
+}
+
+.timeline-item.right.visible {
+    transform: translateX(6px);
+}
+
+/* Содержимое временной шкалы */
+.timeline-content {
+    background-color: rgba(42, 71, 94, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(102, 192, 244, 0.7), 0 0 50px rgba(102, 192, 244, 0.4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.5s ease, transform 0.3s ease;
+    z-index: 1;
+}
+
+/* Уменьшение тени и небольшое сжатие при наведении */
+.timeline-content:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(0.98);
+    z-index: 1;
+}
+
+/* Стили аватара */
+.timeline-avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 2px solid #66c0f4;
+}
+
+/* Дата на временной шкале */
+.timeline-date {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1b2838;
+    color: #66c0f4;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    z-index: 2; /* Устанавливаем более высокий z-index, чтобы дата отображалась поверх содержимого */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Заголовок временной шкалы */
+.timeline-title {
+    font-size: 22px;
+    color: #66c0f4;
+    margin-bottom: 10px;
+}
+
+/* Описание временной шкалы */
+.timeline-description {
+    font-size: 15px;
+    color: #d4e0e6;
+    line-height: 1.6;
+}
+
+/* Стрелка, соединяющая элементы с центральной линией */
+.timeline-item.left::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    right: -12px;
+    width: 12px;
+    height: 12px;
+    background-color: #66c0f4;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.timeline-item.right::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: -12px;
+    width: 12px;
+    height: 12px;
+    background-color: #66c0f4;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .timeline-item {
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-container::before {
+        left: 20px;
+    }
+
+    .timeline-item.left::before,
+    .timeline-item.right::before {
+        left: 20px;
+        right: auto;
+    }
+
+    .timeline-date {
+        left: 20px;
+        transform: translateX(0);
+    }
+}
+    </style>
 </head>
 
 <body class="header-fixed main home1 counter-scroll">
@@ -75,7 +300,6 @@
         </div>
     </header>
     <!-- end Header -->
-
     <section class="page-title">
         <div class="icon_bg">
             <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/backgroup/bg_inner_slider.png') }}" alt="">
@@ -101,7 +325,7 @@
                                             </div>
                                         </div>
                                         <div class="image">
-                                            <img class="img_main" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/slider/Furore.png') }}" alt="">
+                                            {{-- <img class="img_main" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/slider/Furore.png') }}" alt=""> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +394,6 @@
             </div>
         </div>
     </section>
-
     <section id="about" class="tf-section technology">
         <div class="container w_1490">
             <div class="row">
@@ -178,12 +401,12 @@
                     <div class="tf-title" data-aos="fade-right" data-aos-duration="800">
                         <div class="img_technology">
                             <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/img_technology1.png') }}" alt="">
-                            <img class="coin coin_1" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin1.png') }}" alt="">
+                            {{-- <img class="coin coin_1" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin1.png') }}" alt="">
                             <img class="coin coin_2" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin2.png') }}" alt="">
                             <img class="coin coin_3" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin3.png') }}" alt="">
                             <img class="coin coin_4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin4.png') }}" alt="">
                             <img class="coin coin_5" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin5.png') }}" alt="">
-                            <img class="coin coin_6" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin6.png') }}" alt="">
+                            <img class="coin coin_6" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/coin6.png') }}" alt=""> --}}
                         </div>
                     </div>
                 </div>
@@ -245,9 +468,6 @@
             </div>
         </div>
     </section>
-    
-    
-
     <section class="tf-section tf_CTA">
         <div class="overlay">
             <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/backgroup/bg_team_section.png') }}" alt="">
@@ -334,7 +554,6 @@
             </div>
         </div> --}} 
     </section>
-
     <section id="products" class="tf-section project_4">
         <div class="container">
             <div class="row">
@@ -348,14 +567,14 @@
                 <div class="col-md-12">
                     <div class="project-box-style3_wrapper">
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
-                            <div class="header_project">
+                            <div class="header_project text-right d-flex justify-content-end">
+                                <h5 class="heading"><a href="#" style="color: #a688d7;">T Token</a></h5>
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_8.png') }}" alt="">
                                     {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div> --}}
                                 </div>
-                                <h5 class="heading"><a href="#">T Token</a></h5>
                             </div>
                             <div class="content">
                                 <p>T Token is a cryptocurrency built on the Binance Smart Chain using the BEP-20 token protocol. As the native token of the Traverse Bot ecosystem, it serves as a medium of exchange and store of value for users within the platform. S can be used to purchase virtual land, goods, and services within the Multiverse, as well as participate in community governance and decision-making processes. The token is designed to be deflationary, with a maximum supply of 100 million and regular burn events to decrease the circulating supply over time. T token also offers staking and yield farming opportunities, allowing users to earn rewards for providing liquidity and participating in the ecosystem.</p>
@@ -390,28 +609,28 @@
                             </div>
                         </div> --}}
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
-                            <div class="header_project">
+                            <div class="header_project text-right d-flex justify-content-end">
+                                <h5 class="heading"><a href="#" style="color: #a688d7;">3D NFT Multiverse Game</a></h5>
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_444.png') }}" alt="">
                                     {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div> --}}
                                 </div>
-                                <h5 class="heading"><a href="#">3D NFT Multiverse Game</a></h5>
                             </div>
                             <div class="content">
                                 <p>The 3D NFT Multiverse Game in Traverse Bot is a cutting-edge gaming platform that allows users to enter a fully immersive virtual world where they can interact with other players, explore new environments, and complete quests and challenges. The game uses NFTs (Non-Fungible Tokens) to provide unique and collectible in-game items, such as weapons, armor, and special abilities, which players can use to enhance their gaming experience. The game is built on the latest blockchain technology, providing users with a secure and transparent gaming environment.</p>
                             </div>
                         </div>
                         <div class="project-box-style3" data-aos="fade-in" data-aos-duration="800">
-                            <div class="header_project">
+                            <div class="header_project text-right d-flex justify-content-end">
+                                <h5 class="heading"><a href="#" style="color: #a688d7;">Crypto Currency Exchange</a></h5>
                                 <div class="image">
                                     <img class="mask" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/project_333.png') }}" alt="">
                                     {{-- <div class="shape">
                                         <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/shape_2.png') }}" alt="">
                                     </div> --}}
                                 </div>
-                                <h5 class="heading"><a href="#">Crypto Currency Exchange</a></h5>
                             </div>
                             <div class="content">
                                 <p>The crypto currency exchange in Traverse Bot is a platform that allows users to buy, sell, and trade cryptocurrencies like Bitcoin, Ethereum, and MM. The exchange is built on the latest blockchain technology, providing users with a secure and transparent trading environment. It is designed to be user-friendly, with features like advanced charting, real-time market data, and customizable trading interfaces. The exchange is integrated with the T Token, allowing users to trade cryptocurrencies using the Traverse Bot's native cryptocurrency.</p>
@@ -422,8 +641,7 @@
             </div>
         </div>
     </section>
-
-    <section id="roadmap" class="tf-section roadmap">
+    {{-- <section id="roadmap" class="tf-section roadmap">
         <div class="container w_1850">
             <div class="row">
                 <div class="col-md-12">
@@ -438,23 +656,6 @@
                         <div class="roadmap-wrapper" data-aos="fade-in" data-aos-duration="1000">
                             <div class="swiper-container slider-6">
                                 <div class="swiper-wrapper">
-                                    {{-- <div class="swiper-slide">
-                                        <div class="roadmap-box active">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q3, 2023</h6>
-                                                <ul>
-                                                    <li><h6>Launching</h6></li>
-                                                    <li>Launch of Traverse Bot</li>
-                                                    <li>Expansion of network marketing team/li>
-                                                    <li>Launch of new promotional campaigns and incentives for network marketers</li>
-                                                    <li>Continued expansion and growth of the network marketing team</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
@@ -471,37 +672,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="swiper-slide">
-                                        <div class="roadmap-box">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q4, 2024</h6>
-                                                <ul>
-                                                    <li><h6>OTT Platform</h6></li>
-                                                    <li>Release of the</li>
-                                                    <li>Traverse Botl</li>
-                                                    <li>OTT platform</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="swiper-slide">
-                                        <div class="roadmap-box">
-                                            <div class="icon">
-                                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/icon_roadmap.svg') }}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="date">Q2, 2025</h6>
-                                                <ul>
-                                                    <li><h6>Online Shopping Mall</h6></li>
-                                                    <li>Release of the online</li>
-                                                    <li>Shopping Mall Application</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="swiper-slide">
                                         <div class="roadmap-box">
                                             <div class="icon">
@@ -551,8 +721,65 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+    <section id="roadmap" class="tf-section roadmap">
+        <div class=" container w_1850">
+            <center><h2 class="title">Roadmap</h2></center>
+            <div class="timeline-container">
+                <div class="timeline-item left">
+                    <div class="timeline-date">Q3, 2025</div>
+                    <div class="timeline-content">
+                        <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/road_token.png') }}" alt="Avatar 1" class="timeline-avatar">
+                        <div>
+                            <h2 class="timeline-title">T Token</h2>
+                            <p class="timeline-description">
+                                <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ss-token.png') }}" width="340" height="260" class="enlarge-on-hover"><br>
+                                <ul>
+                                    <li>Launch of the T</li>
+                                    <li>Token on Binance</li>
+                                    <li>Smart Chain(BSC)</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-date">Q2, 2026</div>
+                    <div class="timeline-content">
+                        <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/road_crpto.png') }}" alt="Avatar 2" class="timeline-avatar">
+                        <div>
+                            <h2 class="timeline-title">Crypto Currency Exchange</h2>
+                            <p class="timeline-description"><img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ss-crypto.png') }}" width="340" height="260" class="enlarge-on-hover"><br>
+                                <ul>
+                                    <li>Launch of the dedicated crypto</li>
+                                    <li>currency exchange within</li>
+                                    <li>Traverse Bot</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item left">
+                        <div class="timeline-date">Q1, 2027</div>
+                        <div class="timeline-content">
+                            <img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/road_nft.png') }}" alt="Avatar 1" class="timeline-avatar">
+                            <div>
+                                <h2 class="timeline-title">3D NFT Game</h2>
+                                <p class="timeline-description"><img src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/ss-nft.png') }}" width="340" height="260" class="enlarge-on-hover"><br>
+                                    <ul>
+                                        <li>Launch of the 3D</li> 
+                                        <li>NFT Multiverse Game</li>
+                                        <li>on the S Platform</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
     <section id="contact" class="tf-section tf_CTA">
         <div class="container relative">
             <div class="overlay">
@@ -573,13 +800,12 @@
                 </div>
                 <div class="col-md-6">
                   <div class="image_cta" data-aos="fade-left" data-aos-duration="1200">
-                    <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/img_cta.png') }}" alt="">
+                    {{-- <img class="move4" src="{{ asset($activeTemplateTrue . 'frontend/assets/images/common/img_cta.png') }}" alt=""> --}}
                   </div>
                 </div>
             </div>
         </div>
     </section>
-
     <footer id="footer">
         <div class="footer-main">
             <div class="container">
@@ -627,7 +853,7 @@
             
         </div>
     </footer>
-    </div>
+</div>
     <a id="scroll-top"></a>
     <script src="{{ asset($activeTemplateTrue . 'frontend/app/js/jquery.min.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'frontend/app/js/swiper-bundle.min.js') }}"></script>
@@ -649,9 +875,22 @@
     @include('partials.plugins')
 
     <script>
-    $(document).on("change", ".langSel", function() {
-        window.location.href = "{{ url('/') }}/change/" + $(this).val();
-    });
+        $(document).on("change", ".langSel", function() {
+            window.location.href = "{{ url('/') }}/change/" + $(this).val();
+        });
+        function revealTimelineItems() {
+            var items = document.querySelectorAll('.timeline-item');
+            items.forEach(function(item) {
+                var position = item.getBoundingClientRect().top;
+                var windowHeight = window.innerHeight;
+                if (position < windowHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealTimelineItems);
+        revealTimelineItems();
+        const images = document.querySelectorAll(".enlarge-on-hover");
     </script>
 
     @stack('script')

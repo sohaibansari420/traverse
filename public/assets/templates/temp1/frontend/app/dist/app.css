@@ -49,7 +49,7 @@ p {
   font-size: 15px;
   line-height: 21px;
   font-weight: 500;
-  color: #798DA3;
+  color: #d9dee4;
 }
 
 img {
@@ -3543,10 +3543,10 @@ form button {
 }
 .project-box-style3 .content {
   margin-top: -45px;
-  background: #1E2835;
+  /* background: #1E2835; */
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.0784313725);
-  padding: 20px 20px 17px 129px;
+  padding: 20px 60px 17px 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
