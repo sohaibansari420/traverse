@@ -827,11 +827,11 @@
                         <ul class="widget-link contact">
                             <li>
                                 <p>Address</p>
-                                <a href="#">124 City Road, London, United Kingdom, EC1V 2NX</a>
+                                <a href="#">49 Featherstone Street, London, United Kingdom, EC1Y 8SY</a>
                             </li>
                             <li>
                                 <p>Phone</p>
-                                <a href="#">+44 20 3435 4354</a>
+                                <a href="#">+44 20 7123 4567</a>
                             </li>
                             <li class="email">
                                 <p>Email</p>
