@@ -51,9 +51,9 @@
 <div class="row">
     <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
         <div class="card overflow-hidden">
-            <div class="card-header" style="display:block;">
+            {{-- <div class="card-header" style="display:block;">
                 <h1 class="text-center">Balances & Bonuses!!!</h1>
-            </div>
+            </div> --}}
             <div class="card-body pb-0 mb-2">
                 <div class="row text-center">
                     <div class="col-6 mt-4">
