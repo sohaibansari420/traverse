@@ -10,6 +10,7 @@ use App\Models\Withdrawal;
 use App\Models\WithdrawMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Rank;
 
 class UserReportController extends Controller
 {
@@ -115,6 +116,7 @@ class UserReportController extends Controller
             {
                 $commission = Commission::where('id', $request->commissionID)->first();
                 $user = User::findOrFail(Auth::id());
+                $data['commissions'] = Commission::where('status', 1)->get();
                 $data['page_title'] = $user->username . ' - ' . $commission->name . ' Logs';
                 $data['transactions'] = Transaction::where('user_id', $user->id)->where('commission_id', $commission->id)->where('trx', 'like', "%$search%")->with('user')->latest()->paginate(getPaginate());
                 
@@ -129,6 +131,7 @@ class UserReportController extends Controller
             {
                 $commission = Commission::where('id', $request->commissionID)->first();
                 $user = User::findOrFail(Auth::id());
+                $data['commissions'] = Commission::where('status', 1)->get();
                 $data['page_title'] = $user->username . ' - ' . $commission->name . ' Logs';
                 $data['transactions'] = Transaction::where('user_id', $user->id)->where('commission_id', $commission->id)->with('user')->latest()->paginate(getPaginate());
                 

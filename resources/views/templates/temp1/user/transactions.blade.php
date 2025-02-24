@@ -2,7 +2,33 @@
 
 @section('panel')
     @include($activeTemplate . 'user.partials.breadcrumb')
-
+    @isset($commissions)
+        @if ($page_title == "traversebot - Global Share Bonus Logs")
+            <div class="row">
+                <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.7s">
+                    <div class="card overflow-hidden">
+                        <div class="text-center p-3 overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img3.png);">
+                            <h3 class="mt-3 mb-1 text-white">{{ $commissions[4]->name }}</h3>
+                            <p class="text-white mb-2">Earn 2% share in company's turnover. Qualify as Emerald or above. Monthly payout based on sales volume.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-12">
+                                    <p class="mb-0 fs-15">The Global Share Bonus is a unique bonus offered by The Traverse Bot that allows all qualified members to earn a 2% share in the company's global turnover. This bonus is available to members who have achieved the rank of Emerald or above.</p>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <div class="bgl-primary rounded p-3">
+                                        <h4 class="mb-0">Emerald Rank</h4>
+                                        <small>Requirement</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endisset
     <div class="row">
         <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
             <div class="card">

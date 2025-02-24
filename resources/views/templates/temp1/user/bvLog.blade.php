@@ -27,14 +27,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td data-label="@lang('Paid left')">{{ $summery->paid_left }}</td>
-                                    <td data-label="@lang('Paid right')">{{ $summery->paid_right }}</td>
-                                    <td data-label="@lang('Free left')">{{ $summery->free_left }}</td>
-                                    <td data-label="@lang('Free right')">{{ $summery->free_right }}</td>
-                                    <td data-label="@lang('Bv left')">{{ getAmount($summery->bv_left) }}</td>
-                                    <td data-label="@lang('Bv right')">{{ getAmount($summery->bv_right) }}</td>
-                                </tr>
+                                @if ($summery != null)
+                                    <tr>
+                                        <td data-label="@lang('Paid left')">{{ $summery->paid_left }}</td>
+                                        <td data-label="@lang('Paid right')">{{ $summery->paid_right }}</td>
+                                        <td data-label="@lang('Free left')">{{ $summery->free_left }}</td>
+                                        <td data-label="@lang('Free right')">{{ $summery->free_right }}</td>
+                                        <td data-label="@lang('Bv left')">{{ getAmount($summery->bv_left) }}</td>
+                                        <td data-label="@lang('Bv right')">{{ getAmount($summery->bv_right) }}</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
