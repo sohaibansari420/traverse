@@ -171,7 +171,7 @@
                 <div class="card-body">
                     <div class="row text-center">
                         <div class="col-12">
-                            <p class="mb-0 fs-15">The Traverse Bot Flash Bonus rewards new members of The Traverse Bot ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
+                            <p class="mb-0 fs-15">The Traverse Bot Cash Back Bonus rewards new members of The Traverse Bot ecosystem who sponsor 5 members within the first 15 days of joining. These members must have the same or greater value than your joining package.</p>
                         </div>
                         <div class="col-6 mt-4">
                             <div class="bgl-primary rounded">
