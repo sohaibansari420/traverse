@@ -57,7 +57,7 @@
                 @if (@$user_extras->binary_active == 1)
                     <h3 class="badge badge-success mt-2">Active</h3>
                 @else
-                    <h3 class="badge badge-danger mt-2">In-Active</h3>
+                    <h3 class="badge badge-danger mt-2">inactive</h3>
                 @endif
             </div>
             <div class="card-body">
