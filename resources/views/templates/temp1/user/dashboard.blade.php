@@ -109,7 +109,7 @@
             </div>
             <div class="card-footer pt-0 pb-0 text-center">
                 <div class="row mt-3">
-                    <div class="col-xl-12 row wow fadeInUp" data-wow-delay="1.2s">
+                    <div class="col-xl-12 row wow fadeInUp p-0 m-0" data-wow-delay="1.2s">
                         @foreach ($commissions as $commission)
                             @if($commission->id != 7)
                                 <div class="col-md-4">
