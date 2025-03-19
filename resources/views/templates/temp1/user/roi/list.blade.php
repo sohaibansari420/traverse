@@ -30,6 +30,16 @@
                 </div>
                 <div class="card-body bg-white" style="border: 1px solid black;">
                     <div class="row">
+                        <div class="col-xl-12 d-none" id="clock_timer" style="color:white;">
+                            <div class="text-center m-0 row" style="background: #1e1e25;border: 1px solid #1e1e25;border-radius: 12px;">
+                                <div class="col-md-6 mt-3">
+                                    <p style="color:white;"><strong>Time Remaining Until ROI Operations Can Be Reinitiated:</strong></p>
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <p style="color:white;"><span id="timeRemaining">00:00:00</span></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group col-md-12 mb-4">
                             <label class="font-weight-bold">@lang('Packages')</label>
                             <select class="form-control wallet_id" name="plan_id" id="package_id">
@@ -63,7 +73,7 @@
                             <!-- Buy Section -->
                             <div class="col-md-6">
                                 <div class="trade-box text-center">
-                                    <h4 class="text-center text-success">Buy <i class="fa-solid fa-cart-shopping"></i></h4>
+                                    <h4 class="text-center text-success" style="color:green !important;">Buy <i class="fa-solid fa-cart-shopping"></i></h4>
                                     <p><strong>COIN:</strong> USDT</p>
                                     <p><strong>ACQUISITIONS:</strong> USDT</p>
                                     <p><strong>BROKER:</strong> BitcoinToYou</p>
@@ -82,7 +92,7 @@
                             <!-- Sell Section -->
                             <div class="col-md-6">
                                 <div class="trade-box text-center">
-                                    <h4 class="text-center text-danger"><i class="fa-solid fa-cart-shopping"></i> Sell</h4>
+                                    <h4 class="text-center text-danger" style="color:red !important;">Sell<i class="fa-solid fa-cart-shopping"></i></h4>
                                     <p><strong>COIN:</strong> USDT</p>
                                     <p><strong>ACQUISITIONS:</strong> USDT</p>
                                     <p><strong>BROKER:</strong> Bitrecife</p>
@@ -160,55 +170,138 @@
     <script src="{{ asset($activeTemplateTrue) }}/dashboard/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset($activeTemplateTrue) }}/dashboard/js/plugins-init/datatables.init.js"></script>
     <script>
+        let countdownInterval;
         $(document).ready(function(){
             $('#compounding').prop('disabled', true);
-            $('#package_id').on('change',function(){
-                $('#compounding').prop('disabled', false);
-                var today = new Date(); // Get current date
-                var day = today.getDay(); // Get day of the week (0 = Sunday, 6 = Saturday)
-                
-                var selectedVal = $(this).val();
-                $('#plan_price').val('');
-                $('#plan_purchase').val('');
-                $('#trx').val('');
-                if (selectedVal !== "") {
-                    $.ajax({
-                        url: "{{ route('user.plan.roi.details') }}",
-                        type: 'GET',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            planId : selectedVal,
-                        },
-                        success: function(data) {
-                            console.log(data);
-                            $('#plan_price').val(data.price);
-                            if (data.plan_roi == 1) {
-                                $('#plan_purchase').val(data.percentage);
-                            }
-                            else{
-                                $('#plan_purchase').val(0);
-                                alert('Package is with only points,so you don"t have the access to roi operation.')
-                            }
-                            $('#trx').val(data.trx);
-                            if ((day === 0 || day === 6) || (data.roi_status == 0 && data.plan_roi == 1 && data.planStartHours == 1)) {
-                                $('#compounding').prop('disabled', false);
-                            }else{
-                                $('#compounding').prop('disabled', true);   
-                            }
-                        }
-                    });
-                }
-                else{
-                    alert('Please Select the package first');
-                }
-            });
-
-            setInterval(function () {
-                if ($('#package_id').val() !== "") {
-                    $('#package_id').trigger('change'); // Manually trigger the event
-                }
-            }, 300000);
         });
+        function fetchPlanDetails(forUpdate = false) {
+            var selectedVal = $('#package_id').val();
+            if (selectedVal !== "") {
+                $.ajax({
+                    url: "{{ route('user.plan.roi.details') }}",
+                    type: 'GET',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        planId: selectedVal,
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        $('#plan_price').val(data.price);
+                        $('#trx').val(data.trx);
+
+                        var today = new Date(); // Get current date
+                        var day = today.getDay(); // Get day of the week (0 = Sunday, 6 = Saturday)
+
+                        let storedData = JSON.parse(localStorage.getItem('planData')) || {};
+                        let lastUpdatedTime = storedData.timestamp || 0;
+                        let currentTime = new Date().getTime();
+                        
+                        if (data.plan_roi == 1) {
+                            // If forced update OR 5 minutes have passed, update the percentage
+                            if (forUpdate || (currentTime - lastUpdatedTime > 300000)) {
+                                storedData[selectedVal] = data.percentage;
+                                storedData.timestamp = currentTime;
+                                localStorage.setItem('planData', JSON.stringify(storedData));
+                            }
+
+                            // Set the percentage from stored data
+                            $('#plan_purchase').val(storedData[selectedVal]);
+                        } else {
+                            $('#plan_purchase').val(0);
+                            alert('Package is with only points, so you don\'t have access to ROI operation.');
+                        }
+
+                        // Manage the compounding button based on conditions
+                        if ((day === 0 || day === 6 || (data.roi_status == 0 && data.plan_roi == 1 && data.planStartHours == 1))) {
+                            $('#compounding').prop('disabled', false);
+                            $('#clock_timer').addClass('d-none');
+                        } else {
+                            $('#compounding').prop('disabled', true);
+                            console.log(countdownInterval)
+                            if (countdownInterval) {
+                                clearInterval(countdownInterval); // Clear the previous interval
+                            }
+                            fetchTimeDifference(data);
+                            $('#clock_timer').removeClass('d-none');
+                        }
+                    }
+                });
+            } else {
+                alert('Please select the package first');
+            }
+        }
+
+        $('#package_id').on('change', function () {
+            $('#compounding').prop('disabled', false);
+            $('#plan_price').val('');
+            $('#plan_purchase').val('');
+            $('#trx').val('');
+            fetchPlanDetails(); // Force update on selection change
+        });
+
+        // Fetch details every 5 minutes
+        setInterval(function () {
+            if ($('#package_id').val() !== "") {
+                fetchPlanDetails(true); // Update only if 5 minutes have passed
+            }
+        }, 300000);
+
+        // Load stored percentage on page load
+        if ($('#package_id').val() !== "") {
+            fetchPlanDetails();
+        }
+        
+
+        function fetchTimeDifference(data) {
+                const timePassed = data.time_passed;
+                const remainingTime = data.remaining_time;
+
+                // Display the time passed
+                $("#timePassed").text(`${timePassed.hours} hours ${timePassed.minutes} minutes`);
+                
+                // Start countdown from the remaining time (e.g., "11:32:13")
+                startCountdown(remainingTime);
+        }
+
+        // Function to start countdown from remaining time
+        function startCountdown(remainingTime) {
+            let timeArray = remainingTime.split(":"); // Split remaining time into [hours, minutes, seconds]
+            let hours = parseInt(timeArray[0]);
+            let minutes = parseInt(timeArray[1]);
+            let seconds = parseInt(timeArray[2]);
+
+            countdownInterval = setInterval(function() {
+                // Decrease the seconds
+                if (seconds > 0) {
+                    seconds--;
+                } else if (minutes > 0) {
+                    minutes--;
+                    seconds = 59;
+                } else if (hours > 0) {
+                    hours--;
+                    minutes = 59;
+                    seconds = 59;
+                }
+
+                // Update the displayed countdown time
+                $("#timeRemaining").text(
+                    `${padTime(hours)}:${padTime(minutes)}:${padTime(seconds)}`
+                );
+
+                // If time is up, stop the countdown
+                if (hours === 0 && minutes === 0 && seconds === 0) {
+                    clearInterval(countdownInterval);
+                    $("#timeRemaining").text("Time's up!");
+                }
+            }, 1000); // Update every second
+        }
+
+        // Function to pad the time with leading zeros
+        function padTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+   
+
     </script>
 @endpush
 

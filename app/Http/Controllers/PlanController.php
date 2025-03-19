@@ -407,7 +407,7 @@ class PlanController extends Controller
         $endRangePer = unserialize($plan->plan->features)[0];
         preg_match('/([\d\.]+)%/', $endRangePer, $matches);
         $dailyIncome = isset($matches[1]) ? floatval($matches[1]) : 0.0;
-        $randomIncome = round(mt_rand(0, $dailyIncome * 100) / 100, 2);
+        $randomIncome = round(mt_rand(0.1, $dailyIncome * 100) / 100, 2);
 
         $currentTime = Carbon::now();
         $createPlan = Carbon::parse($plan->created_at)->format('y-m-d H:i');
@@ -421,6 +421,18 @@ class PlanController extends Controller
         $roi_status = Transaction::where(['commission_id' => 1, 'user_id' => Auth::id(), 'plan_trx' => $plan->trx])
                 ->whereDate('created_at', \Carbon\Carbon::today())
                 ->count();
+        
+        $createdAt = Carbon::parse($plan->created_at);
+
+        // Get the current time (March 19, 2025 12:45 AM)
+        $currentTime = Carbon::now(); 
+    
+        // Calculate the difference in hours and minutes
+        $diffInHours = $createdAt->diffInHours($currentTime);
+        $diffInMinutes = $createdAt->diffInMinutes($currentTime);
+    
+        // Calculate remaining time until 12:25 PM
+        $remainingTime = $currentTime->copy()->diffInSeconds($createdAt->copy()->addDay(), false);
 
         $data = [
             'price' => $plan->amount,
@@ -431,6 +443,14 @@ class PlanController extends Controller
             'planStartHours' => $planStartHours,
             'type' => $plan->type,
             'plan_points' => $plan->with_point,
+
+            'created_at' => $createdAt->format('Y-m-d H:i:s'),
+            'current_time' => $currentTime->format('Y-m-d H:i:s'),
+            'time_passed' => [
+                'hours' => floor($diffInMinutes / 60), 
+                'minutes' => $diffInMinutes % 60
+            ],
+            'remaining_time' => gmdate("H:i:s", $remainingTime) // Format the remaining time
         ];
         return $data;
     }

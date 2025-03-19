@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\GeneralSetting;
 use App\Http\Controllers\Controller;
+use App\Models\Deposit;
 use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -223,6 +224,22 @@ class GeneralSettingController extends Controller
             return back()->withNotify($notify);
         }
         $notify[] = ['error', 'Notice error.'];
+        return back()->withNotify($notify);
+    }
+
+    public function depositIndex(Request $request){
+        $config = Deposit::first();
+        $page_title = 'Deposit Configuration';
+        return view('admin.deposit.config', compact('page_title', 'config'));
+    }
+
+    public function depositUpdate(Request $request){
+        $data = [
+            'btc_wallet' => $request->btc_wallet
+        ]; 
+        Deposit::where('btc_wallet',$request->old_btc)->update($data);
+        
+        $notify[] = ['success', 'Wallet has been updated.'];
         return back()->withNotify($notify);
     }
 }

@@ -62,8 +62,8 @@
                                                 <button type="submit" name="plan_id" value="{{ $data->id }}"
                                                     class="btn btn-primary float-end">
                                                     @lang('Confirm')</button>
-                                                <button type="button" class="btn btn-success" data-bs-target="#confUpgradeModal{{ $data->id }}"
-                                                    data-bs-toggle="modal">Upgrade Plan</button>
+                                                {{-- <button type="button" class="btn btn-success" data-bs-target="#confUpgradeModal{{ $data->id }}"
+                                                    data-bs-toggle="modal">Upgrade Plan</button> --}}
                                             </div>
                                         </form>
                                     </div>
@@ -184,7 +184,7 @@
         margin: 0 auto 30px;
     }
     .pricingTable .title{
-        font-size: 35px;
+        font-size: 25px;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -239,22 +239,22 @@
     .pricingTable .pricingTable-signup button{
         color: #fff;
         background:#17a2b8;
-        font-size: 25px;
+        font-size: 15px;
         font-weight: 600;
-        line-height: 45px;
+        line-height: 30px;
         text-transform: uppercase;
         text-shadow: 0 0 10px rgba(0,0,0,0.8);
         padding: 10px 30px;
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         border-radius: 10px;
         transition: all 0.3s ease 0s;
     }
-    .pricingTable .pricingTable-signup button:hover{
+    /* .pricingTable .pricingTable-signup button:hover{
         color:#17a2b8;
         background: transparent;
         text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.3);
         border: 3px solid #17a2b8;
-    }
+    } */
     @media only screen and (max-width: 990px){
         .pricingTable{ margin: 0 0 40px; }
     }

@@ -91,7 +91,7 @@
             {{-- <div class="card-header" style="display:block;">
                 <h1 class="text-center">Balances & Bonuses!!!</h1>
             </div> --}}
-            <div class="card-body pb-0 mb-2">
+            <div class="card-body pb-0 pt-0 mb-2">
                 <div class="row text-center">
                     <div class="col-6 mt-4">
                         <div class="bgl-primary rounded p-3">
@@ -147,8 +147,8 @@
     </div>
 </div>
 <div clsss="row" style="display: flex;">
-    <div class="col-xl-12 row">
-        <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.3s">
+    <div class="col-xl-12">
+        <div class="wow fadeInUp" data-wow-delay="1.3s">
             @php
                 $now = \Carbon\Carbon::now();
                 $created = new \Carbon\Carbon(auth()->user()->check_fairy);
@@ -165,8 +165,8 @@
             @endphp
             <div class="card overflow-hidden">
                 <div class="text-center overlay-box" style="background-image: url({{ asset($activeTemplateTrue) }}/dashboard/images/big/img1.png);">
-                    <h3 class="mt-3 mb-1 text-white">{{ $commissions[3]->name }}</h3>
-                    <p class="text-white mb-2">Join The Traverse Bot, earn cash back, sponsor 5 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p>
+                    <h3 class="mt-3 mb-1 text-white">{{ $commissions[3]->name }}</h3><br>
+                    {{-- <p class="text-white mb-2">Join The Traverse Bot, earn cash back, sponsor 5 members with in 15 days,<br/> unlock earning potential. Financial freedom awaits!</p> --}}
                 </div>
                 <div class="card-body">
                     <div class="row text-center">
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer border-0 mt-0 text-center">		
+                <div class="card-footer border-0 mt-0 text-center pt-0">		
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex justify-content-between">

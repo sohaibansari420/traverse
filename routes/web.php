@@ -378,6 +378,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('general-setting', 'GeneralSettingController@index')->name('setting.index');
         Route::post('general-setting', 'GeneralSettingController@update')->name('setting.update');
 
+        
+        // Deposit Configuration
+        Route::get('deposit-configuration', 'GeneralSettingController@depositIndex')->name('deposit.index');
+        Route::post('deposit-configuration', 'GeneralSettingController@depositUpdate')->name('deposit.update');
+
         // Logo-Icon
         Route::get('setting/logo-icon', 'GeneralSettingController@logoIcon')->name('setting.logo_icon');
         Route::post('setting/logo-icon', 'GeneralSettingController@logoIconUpdate')->name('setting.logo_icon');

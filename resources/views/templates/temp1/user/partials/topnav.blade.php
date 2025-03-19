@@ -29,7 +29,7 @@
 <!--**********************************
     Header start
 ***********************************-->
-<div class="header" style="background: linear-gradient(90deg, #362158, #2F1E4F, #000000);">
+<div class="header" style="background: linear-gradient(90deg, #2d2d37, #2d2d37, #2d2d37);">
     <div class="header-content">
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
