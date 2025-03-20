@@ -71,6 +71,9 @@ class CronController extends Controller
                 }
                 if($cron->type == 'new_register'){
                     familyTreeAdjust($cron->user_id);
+                    $user_m = User::find($cron->user_id);
+                    $user_m->check_fairy = Carbon::now();
+                    $user_m->save();
                     if($gnl->promo_account == 1){
                         $id = $cron->user_id;
                         $plan = 1;
