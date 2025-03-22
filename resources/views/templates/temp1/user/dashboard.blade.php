@@ -260,7 +260,7 @@
         </div> --}}
     </div>
 </div>
-{{-- @if(count($purchased_plans) > 0)
+@if(count($purchased_plans) > 0)
     <div class="row">
         <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.2s">
             
@@ -289,7 +289,7 @@
             </div>
         </div>
     </div>
-@endif --}}
+@endif
 @endsection
 
 @push('script')
