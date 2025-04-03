@@ -1699,7 +1699,7 @@ function showSingleUserinTreeUser($user)
             $userType = "free-user";
             $stShow = "Free";
             $planName = '';
-            $img = getImage('assets/images/user/profile/free_entry.png', '120x120');
+            $img = getImage('assets/images/user/profile/default.jpg', '120x120');
         } else {
             $userType = "paid-user";
             $stShow = "Paid";
