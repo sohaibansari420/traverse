@@ -16,20 +16,20 @@ class ProcessController extends Controller
     {
         $nowpaymentsAcc = json_decode($deposit->gateway_currency()->gateway_parameter);
 
-        // $header = array(
-        //     'x-api-key: ' . trim($nowpaymentsAcc->api_key),
-        //     'Content-Type: application/json'
-        // );
+        $header = array(
+            'x-api-key: ' . trim($nowpaymentsAcc->api_key),
+            'Content-Type: application/json'
+        );
 
         $data = Deposit::where('trx', $deposit->trx)->orderBy('id', 'DESC')->first();
 
-        // if($data->method_currency == 'BTC'){
-            //  $response = json_decode(curlGetContent("https://api.nowpayments.io/v1/estimate?amount=$deposit->final_amo&currency_from=usd&currency_to=btc", $header));
-            //  $amount = $response->estimated_amount;
-        // }
-        // else{
+        if($data->method_currency == 'BTC'){
+             $response = json_decode(curlGetContent("https://api.nowpayments.io/v1/estimate?amount=$deposit->final_amo&currency_from=usd&currency_to=btc", $header));
+             $amount = $response->estimated_amount;
+        }
+        else{
             $amount = $deposit->final_amo;
-        // }
+        }
 
         if ($data->btc_amo == 0 || $data->btc_wallet == "") {
             
@@ -48,19 +48,19 @@ class ProcessController extends Controller
                 'order_description' => 'Plan Purchase'
             );
 
-            // $response = curlPostContentHeader("https://api.nowpayments.io/v1/payment", $param, $header);
-            // $response = json_decode($response);
-            // if (@$response->pay_address == '') {
-            //     $send['error'] = true;
-            //     $send['message'] = 'NOW PAYMENTS API HAVING ISSUE. PLEASE TRY LATER. ' . $response->message;
-            // } else {
+            $response = curlPostContentHeader("https://api.nowpayments.io/v1/payment", $param, $header);
+            $response = json_decode($response);
+            if (@$response->pay_address == '') {
+                $send['error'] = true;
+                $send['message'] = 'NOW PAYMENTS API HAVING ISSUE. PLEASE TRY LATER. ' . $response->message;
+            } else {
 
-                // $sendto = $response->pay_address;
+                $sendto = $response->pay_address;
                 $data['btc_wallet'] = 'TQxu2vtKhQs2P4iSCKhfJhd4ojVspUkhqR';
                 $data['btc_amo'] = $amount;
-                // $data['try'] = $response->payment_id;
+                $data['try'] = $response->payment_id;
                 $data->update();
-            // }
+            }
         }
         $DepositData = Deposit::where('trx', $deposit->trx)->orderBy('id', 'DESC')->first();
         $send['amount'] = $DepositData->btc_amo;
