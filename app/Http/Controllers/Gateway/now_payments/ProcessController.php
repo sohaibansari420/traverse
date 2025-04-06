@@ -56,7 +56,7 @@ class ProcessController extends Controller
             } else {
 
                 $sendto = $response->pay_address;
-                $data['btc_wallet'] = 'TXmBZrxipcGM4MmynS6LPB1k3vd7vqidjR';
+                $data['btc_wallet'] = $sendto;
                 $data['btc_amo'] = $amount;
                 $data['try'] = $response->payment_id;
                 $data->update();
@@ -64,7 +64,7 @@ class ProcessController extends Controller
         }
         $DepositData = Deposit::where('trx', $deposit->trx)->orderBy('id', 'DESC')->first();
         $send['amount'] = $DepositData->btc_amo;
-        $send['sendto'] = $DepositData->btc_wallet;
+        $send['sendto'] = $sendto;
         $send['img'] = cryptoQR($DepositData->btc_wallet, $DepositData->btc_amo);
         $send['currency'] = $data->method_currency;
         $send['view'] = 'user.payment.crypto';
