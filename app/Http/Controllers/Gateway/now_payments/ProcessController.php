@@ -73,11 +73,11 @@ class ProcessController extends Controller
 
     public function ipn()
     {
-        /*$track = $_GET['invoice_id'];
+        $track = $_GET['invoice_id'];
         $value_in_btc = $_GET['value'] / 100000000;
         $data = Deposit::where('trx', $track)->orderBy('id', 'DESC')->first();
         if ($data->btc_amo == $value_in_btc && $_GET['address'] == $data->btc_wallet && $_GET['secret'] == "ABIR" && $_GET['confirmations'] > 2 && $data->status == 0) {
             PaymentController::userDataUpdate($data->trx);
-        }*/
+        }
     }
 }
