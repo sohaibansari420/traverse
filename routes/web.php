@@ -271,6 +271,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::get('details/{id}', 'DepositController@details')->name('details');
 
             Route::post('reject', 'DepositController@reject')->name('reject');
+            Route::post('delete', 'DepositController@delete')->name('delete');
             Route::post('approve', 'DepositController@approve')->name('approve');
             Route::get('via/{method}/{type?}', 'DepositController@depViaMethod')->name('method');
             Route::get('/{scope}/search', 'DepositController@search')->name('search');

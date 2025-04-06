@@ -92,9 +92,9 @@
                             @endif
                         @endforeach
                     @endif
-                    @if($deposit->status != 1)
-                        <div class="row mt-4">
-                            <div class="col-md-12">
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            @if($deposit->status != 1)
                                 <button class="btn btn--success ml-1 approveBtn"
                                         data-id="{{ $deposit->id }}"
                                         data-info="{{$details}}"
@@ -112,9 +112,14 @@
                                         data-toggle="tooltip" data-original-title="@lang('Reject')"><i class="fas fa-ban"></i>
                                     @lang('Reject')
                                 </button>
-                            </div>
+                            @endif
+                            <button class="btn btn--danger ml-1 deleteBtn"
+                                    data-id="{{ $deposit->id }}"
+                                    data-toggle="tooltip" data-original-title="@lang('Reject')"><i class="fas fa-ban"></i>
+                                @lang('Delete')
+                            </button>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,6 +181,31 @@
             </div>
         </div>
     </div>
+
+    <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@lang('Delete Deposit Confirmation')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('admin.deposit.delete')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id">
+                    <div class="modal-body">
+                        <p>@lang('Are you sure to') <span class="font-weight-bold">@lang('delete')</span> <span class="font-weight-bold withdraw-amount text-success"></span> @lang('this deposit') <span class="font-weight-bold withdraw-user"></span>?</p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn--dark" data-dismiss="modal">@lang('Close')</button>
+                        <button type="submit" class="btn btn--danger">@lang('Delete')</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
@@ -195,6 +225,12 @@
                 modal.find('input[name=id]').val($(this).data('id'));
                 modal.find('.withdraw-amount').text($(this).data('amount'));
                 modal.find('.withdraw-user').text($(this).data('username'));
+                modal.modal('show');
+            });
+
+            $('.deleteBtn').on('click', function () {
+                var modal = $('#deleteModal');
+                modal.find('input[name=id]').val($(this).data('id'));
                 modal.modal('show');
             });
         })(jQuery)

@@ -241,4 +241,8 @@ class DepositController extends Controller
         return  redirect()->route('admin.deposit.pending')->withNotify($notify);
 
     }
+    public function delete(Request $request){
+        $deposit = Deposit::where('id',$request->id)->delete();
+        return  redirect()->route('admin.deposit.list');
+    }
 }
