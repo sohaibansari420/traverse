@@ -56,7 +56,7 @@ class ProcessController extends Controller
             } else {
 
                 $sendto = $response->pay_address;
-                $data['btc_wallet'] = 'TQxu2vtKhQs2P4iSCKhfJhd4ojVspUkhqR';
+                $data['btc_wallet'] = 'TXmBZrxipcGM4MmynS6LPB1k3vd7vqidjR';
                 $data['btc_amo'] = $amount;
                 $data['try'] = $response->payment_id;
                 $data->update();
