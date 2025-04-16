@@ -57,14 +57,14 @@ class ProcessController extends Controller
 
                 $sendto = $response->pay_address;
                 $data['btc_wallet'] = $sendto;
-                $data['btc_amo'] = $amount;
+                $data['btc_amo'] = $response->pay_amount;
                 $data['try'] = $response->payment_id;
                 $data->update();
             }
         }
         $DepositData = Deposit::where('trx', $deposit->trx)->orderBy('id', 'DESC')->first();
         $send['amount'] = $DepositData->btc_amo;
-        $send['sendto'] = $sendto;
+        $send['sendto'] = $DepositData->btc_wallet;
         $send['img'] = cryptoQR($DepositData->btc_wallet, $DepositData->btc_amo);
         $send['currency'] = $data->method_currency;
         $send['view'] = 'user.payment.crypto';
