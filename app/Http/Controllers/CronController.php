@@ -120,7 +120,7 @@ class CronController extends Controller
                     }
                 }
             }
-            // checkStatusNowPayments();
+            checkStatusNowPayments();
             //release3Blocks();
         }
         elseif($id == "24hours"){

@@ -35,7 +35,7 @@ class ProcessController extends Controller
             
             $secret = trim($nowpaymentsAcc->secret_code);
             $invoice_id = $data->trx;
-            $callback_url = route('ipn.'.$deposit->gateway->alias);
+            $callback_url = route('ipn.'.$deposit->gateway->alias) . "?invoice_id=" . $invoice_id . "&secret=" . $secret;
 
 
             $param = array(
@@ -44,10 +44,8 @@ class ProcessController extends Controller
                 'pay_amount' => $amount,
                 'pay_currency' => $data->method_currency,
                 'ipn_callback_url' => 'https://nowpayments.io',
-                // 'ipn_callback_url' => $callback_url,
                 'order_id' => $deposit->trx,
-                'order_description' => 'Plan Purchase',
-                'ipn_secret'        => $secret,
+                'order_description' => 'Plan Purchase'
             );
 
             $response = curlPostContentHeader("https://api.nowpayments.io/v1/payment", $param, $header);
@@ -75,37 +73,11 @@ class ProcessController extends Controller
 
     public function ipn()
     {   
-        $payload = json_decode(file_get_contents("php://input"), true);
-
-        if (!$payload || !isset($payload['payment_status'], $payload['order_id'])) {
-            return; // Invalid request
-        }
-
-        $trx = $payload['order_id'];
-        $paymentStatus = $payload['payment_status'];
-        $payAddress = $payload['pay_address'];
-        $payAmount = $payload['pay_amount'];
-        $confirmations = $payload['confirmations'] ?? 0;
-        $ipnSecret = $payload['ipn_secret'] ?? null;
-
-        $track = $_GET['invoice_id'];
+        /*$track = $_GET['invoice_id'];
         $value_in_btc = $_GET['value'] / 100000000;
-
         $data = Deposit::where('trx', $track)->orderBy('id', 'DESC')->first();
-        $gateway = json_decode($data->gateway_currency()->gateway_parameter);
-        $expectedSecret = trim($gateway->secret_code);
-
-        // Load gateway config from the related deposit
-        $nowpaymentsAcc = json_decode($data->gateway_currency()->gateway_parameter);
-        $secret = trim($nowpaymentsAcc->secret_code);
-
-        if (
-            $paymentStatus === 'finished' &&
-            $payAddress === $data->btc_wallet &&
-            $ipnSecret === $expectedSecret &&
-            $data->status == 0
-        ) {
+        if ($data->btc_amo == $value_in_btc && $_GET['address'] == $data->btc_wallet && $_GET['secret'] == "ABIR" && $_GET['confirmations'] > 2 && $data->status == 0) {
             PaymentController::userDataUpdate($data->trx);
-        }
+        }*/
     }
 }
