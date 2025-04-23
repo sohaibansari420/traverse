@@ -1883,7 +1883,7 @@ function updateWallet($user_id = '', $trx = '', $wallet_id = '', $commission_id 
     $transaction->country = User::where('id', $user_id)->first()->address->country;
     $transaction->remark = $remarks;
     $transaction->commission_id = $commission_id;
-    $transaction->roi_percent = $percentROI;
+    $transaction->roi_percent = $percentROI ?? 0;
 
     $wallet = UserWallet::where(['user_id' => $user_id, 'wallet_id' => $wallet_id])->first();
 
@@ -2582,8 +2582,13 @@ function checkSponsorWithdraw($id = '')
                 $total_direct_sale += Plan::where('id', $direct_sale->plan_id)->firstOrFail()->price;
             }
         }
-
-        if (($general->user1_detail * $plan_price) <= $total_direct_sale) {
+        if($plan_price->plan_limit != null){
+            $planLimit = $plan_price->plan_limit;
+        }
+        else{
+            $planLimit = $general->user1_detail;
+        }
+        if (($planLimit * $plan_price) <= $total_direct_sale) {
             return 1;
         } else {
             return 0;

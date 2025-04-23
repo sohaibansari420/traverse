@@ -71,7 +71,16 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <h3>To get withdraw with promotional account. You need to join ${{$general->user1_detail * App\Models\PurchasedPlan::where('user_id', Auth::id())->where('type', 'sponsor')->first()->amount}} direct sale.</h3>
+                                     @php
+                                        $plan = App\Models\PurchasedPlan::where('user_id', Auth::id())->where('type', 'sponsor')->first();
+                                        if($plan->plan_limit != null){
+                                            $planLimit = $plan->plan_limit;
+                                        }
+                                        else{
+                                            $planLimit = $general->user1_detail;
+                                        }
+                                     @endphp   
+                                    <h3>To get withdraw with promotional account. You need to join ${{$planLimit * $plan->amount}} direct sale.</h3>
                                 @endif
                             @else
                                 @foreach ($withdrawMethod as $data)
