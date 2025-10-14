@@ -10,6 +10,7 @@ use App\Models\Epin;
 use App\Models\Plan;
 use App\Models\PurchasedPlan;
 use App\Models\CronUpdate;
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
@@ -257,5 +258,40 @@ class WalletController extends Controller
 
         $notify[] = ['success', 'Epin Updated Successfully.'];
         return back()->withNotify($notify);
+    }
+
+    public function checkPackagePaymentStatus(Request $request){
+         $data = $request->validate([
+            'user_wallet' => 'required|string',
+            'amount_usd' => 'required|numeric',
+            'tx_hash' => 'nullable|string',
+        ]);
+
+        $user = auth()->user();
+        $amount = getAmount($request->amount_usd);
+
+        $data = new Deposit();
+        $data->user_id = $user->id;
+        $data->country = $user->address->country;
+        $data->method_code = "metamask";
+        $data->method_currency = "USDT";
+        $data->amount = $amount;
+        $data->charge = "0";
+        $data->rate = "0";
+        $data->final_amo = getAmount($amount);
+        $data->btc_amo = 0;
+        $data->btc_wallet = "";
+        $data->trx = $request->user_wallet;
+        $data->try = 0;
+        $data->status = 0;
+        $data->save();
+        session()->put('Track', $data['trx']);
+
+        updateWallet($data->user_id, $data->trx, 1, NULL, '+', getAmount($data->amount), 'Deposit Via MetaMask' . "USDT", getAmount($data->charge), 'deposit_complete', NULL,NULL);
+
+        // Save in DB
+        // Payment::create($data);
+
+        return redirect()->route('user.home');
     }
 }

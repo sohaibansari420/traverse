@@ -1,6 +1,10 @@
 @extends($activeTemplate . 'user.layouts.app')
 
 @section('panel')
+<div class="text-center mb-5 d-none" id="connect-metamask">
+    <h2>Connect Your Wallet</h2>
+    <button id="connect-wallet" class="btn btn-primary">Connect Token Pocket Wallet</button>
+</div>
 <div class="swiper mySwiper-counter position-relative overflow-hidden">
     <div class="swiper-wrapper ">
         <!--swiper-slide-->
@@ -293,6 +297,50 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script>
+        let userAddress = "";
+        async function isMetaMaskConnected() {
+            if (typeof window.ethereum === 'undefined') {
+                console.log("MetaMask is not installed");
+                $("#connect-metamask").removeClass('d-none'); // Show "Connect" button
+                return false;
+            }
+
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+                if (accounts.length > 0) {
+                    console.log("Connected MetaMask account:", accounts[0]);
+                    $("#connect-metamask").addClass('d-none'); // Hide "Connect" button
+                    return true;
+                } else {
+                    console.log("MetaMask is installed but not connected");
+                    $("#connect-metamask").removeClass('d-none'); // Show "Connect" button
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error checking MetaMask connection:", error);
+                $("#connect-metamask").removeClass('d-none');
+                return false;
+            }
+        }
+        isMetaMaskConnected();
+        document.getElementById("connect-wallet").onclick = async () => {
+            if (typeof window.ethereum !== 'undefined') {
+            try {
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                console.log("Connected wallet:", userAddress);
+                // Send to backend if needed
+            } catch (err) {
+                alert("User denied wallet connection");
+            }
+            } else {
+            alert("Please install MetaMask");
+            }
+        };
+    </script>
     <script>
         var copy = function(elementId) {
             var input = document.getElementById(elementId);

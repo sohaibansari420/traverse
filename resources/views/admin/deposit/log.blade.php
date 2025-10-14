@@ -47,7 +47,6 @@
                                     @if (!request()->routeIs('admin.users.deposits') && !request()->routeIs('admin.users.deposits.method'))
                                         <th scope="col">@lang('Username')</th>
                                     @endif
-                                    <th scope="col">@lang('Method')</th>
                                     <th scope="col">@lang('Amount')</th>
                                     <th scope="col">@lang('Payable')</th>
                                     <th scope="col">@lang('Status')</th>
@@ -68,15 +67,7 @@
                                                     href="{{ route('admin.users.detail', $deposit->user_id) }}">{{ $deposit->user->username }}</a>
                                             </td>
                                         @endif
-                                        <td data-label="@lang('Method')">
-                                            @if (request()->routeIs('admin.users.deposits') || request()->routeIs('admin.users.deposits.method'))
-                                                <a
-                                                    href="{{ route('admin.users.deposits.method', [$deposit->gateway->alias, @$type ? $type : 'all', $userId]) }}">{{ __($deposit->gateway->name) }}</a>
-                                            @else
-                                                <a
-                                                    href="{{ route('admin.deposit.method', [$deposit->gateway->alias, @$type ? $type : 'all']) }}">{{ __($deposit->gateway->name) }}</a>
-                                            @endif
-                                        </td>
+                                        
                                         <td data-label="@lang('Amount')" class="font-weight-bold">
                                             {{ getAmount($deposit->amount) }} {{ __($general->cur_text) }}</td>
 

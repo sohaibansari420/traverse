@@ -496,6 +496,9 @@ Route::name('user.')->prefix('user')->group(function () {
             //Media
             Route::get('/media', 'PlanController@mediaIndex')->name('media.index');
 
+            
+            Route::post('/payment-success', 'Admin\WalletController@checkPackagePaymentStatus')->name('checkPackagePaymentStatus');
+
             //plan
             Route::get('/plan', 'PlanController@planIndex')->name('plan.index');
             Route::get('/plan/details', 'PlanController@planDetails')->name('plan.details');
@@ -558,6 +561,7 @@ Route::name('user.')->prefix('user')->group(function () {
             Route::get('/withdraw/preview', 'UserController@withdrawPreview')->name('withdraw.preview');
             Route::post('/withdraw/preview', 'UserController@withdrawSubmit')->name('withdraw.submit');
             Route::get('/withdraw/history', 'UserController@withdrawLog')->name('withdraw.history');
+            Route::post('web3/withdraw', 'WebThreeController@WalletWEBWithdrawal')->name('withdraw.WalletWEBWithdrawal');
 
         });
     });
