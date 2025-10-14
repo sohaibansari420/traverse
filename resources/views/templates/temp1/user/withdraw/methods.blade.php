@@ -127,7 +127,7 @@
                                                     @if (@$created_at && $remaining > 0)
                                                         <h4 id="note"></h4>
                                                     @else
-                                                        {{-- <a href="javascript:void(0)" type="button"
+                                                        <a href="javascript:void(0)" type="button"
                                                             data-id="{{ $data->id }}" data-resource="{{ $data }}"
                                                             data-min_amount="{{ getAmount($data->min_limit) }}"
                                                             data-max_amount="{{ getAmount($data->max_limit) }}"
@@ -138,8 +138,8 @@
                                                             data-wallet_balance="{{ $wallet_balance }}"
                                                             class=" btn btn-primary btn-block deposit" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal">
-                                                            @lang('Withdraw Now')</a> --}}
-                                                         <div class="form-group">
+                                                            @lang('Withdraw Now')</a>
+                                                         {{-- <div class="form-group">
                                                             <label>@lang('Enter Amount'):</label>
                                                             <div class="input-group p-2">
                                                                 <input id="amount" type="text" class="form-control form-control-lg"
@@ -151,7 +151,7 @@
                                                             <button class="btn btn-outline-info rounded-pill px-4" id="withdrawBtn">
                                                                 <i class="fas fa-shopping-cart me-2"></i>Withdraw Now
                                                             </button>
-                                                        </div>    
+                                                        </div>     --}}
                                                     @endif
                                                 </div>
                                             </div>
@@ -215,58 +215,58 @@
 @push('script')
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script>
-    const walletID = {{ $wallet_id }}
-    $('#withdrawBtn').click(async function() {
-        var $btn = $(this);
-        var amount = $('#amount').val();
+    // const walletID = {{ $wallet_id }}
+    // $('#withdrawBtn').click(async function() {
+    //     var $btn = $(this);
+    //     var amount = $('#amount').val();
 
-        if (!amount || amount < 20) {
-            alert('Please enter wallet and amount');
-            return;
-        }
+    //     if (!amount || amount < 20) {
+    //         alert('Please enter wallet and amount');
+    //         return;
+    //     }
 
-        // Check for MetaMask / Ethereum provider
-        if (!window.ethereum) {
-            alert('Token Pocket or compatible wallet not detected!');
-            return;
-        }
+    //     // Check for MetaMask / Ethereum provider
+    //     if (!window.ethereum) {
+    //         alert('Token Pocket or compatible wallet not detected!');
+    //         return;
+    //     }
 
-        if ($btn.prop('disabled')) return;
-        $btn.prop('disabled', true).text('Processing...');  
+    //     if ($btn.prop('disabled')) return;
+    //     $btn.prop('disabled', true).text('Processing...');  
 
-        try {
-            // Request account access
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const userAccount = accounts[0];
+    //     try {
+    //         // Request account access
+    //         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    //         const userAccount = accounts[0];
 
-            // Send AJAX request with amount and user wallet
-            $.ajax({
-                url: "{{ route('user.withdraw.WalletWEBWithdrawal') }}",
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    amount: amount,
-                    walletID : walletID,
-                    wallet: userAccount
-                },
-                success: function(res) {
-                    alert(res.success || res.error || 'Transaction sent');
-                },
-                error: function(xhr) {
-                    alert(xhr.responseJSON?.error || 'Transaction failed');
-                }
-            });
-        } catch (err) {
-            console.error(err);
-            alert('User denied wallet connection');
-        }
-        finally {
-            // Re-enable button
-            $btn.prop('disabled', false).text('Withdraw');
-        }
-    });
+    //         // Send AJAX request with amount and user wallet
+    //         $.ajax({
+    //             url: "{{ route('user.withdraw.WalletWEBWithdrawal') }}",
+    //             type: 'POST',
+    //             data: {
+    //                 _token: '{{ csrf_token() }}',
+    //                 amount: amount,
+    //                 walletID : walletID,
+    //                 wallet: userAccount
+    //             },
+    //             success: function(res) {
+    //                 alert(res.success || res.error || 'Transaction sent');
+    //             },
+    //             error: function(xhr) {
+    //                 alert(xhr.responseJSON?.error || 'Transaction failed');
+    //             }
+    //         });
+    //     } catch (err) {
+    //         console.error(err);
+    //         alert('User denied wallet connection');
+    //     }
+    //     finally {
+    //         // Re-enable button
+    //         $btn.prop('disabled', false).text('Withdraw');
+    //     }
+    // });
 </script>    
-{{-- <script>
+<script>
         'use strict';
         (function($) {
             $('.deposit').on('click', function() {
@@ -291,7 +291,7 @@
                 $('.edit-wallet_balance').val(wallet_balance);
             });
         })(jQuery)
-    </script> --}}
+    </script>
     <script>
         (function($) {
 
