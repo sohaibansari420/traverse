@@ -368,14 +368,23 @@ function getIpInfo()
         }
     }
 
-    $xml = @simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=" . $ip);
+    // $xml = @simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=" . $ip);
 
-    $country = @$xml->geoplugin_countryName;
-    $city = @$xml->geoplugin_city;
-    $area = @$xml->geoplugin_areaCode;
-    $code = @$xml->geoplugin_countryCode;
-    $long = @$xml->geoplugin_longitude;
-    $lat = @$xml->geoplugin_latitude;
+    $xml = @simplexml_load_file("http://ip-api.com/xml?ip=" . $ip);
+
+    // $country = @$xml->geoplugin_countryName;
+    // $city = @$xml->geoplugin_city;
+    // $area = @$xml->geoplugin_areaCode;
+    // $code = @$xml->geoplugin_countryCode;
+    // $long = @$xml->geoplugin_longitude;
+    // $lat = @$xml->geoplugin_latitude;
+
+    $country = @$xml->country;
+    $city = @$xml->city;
+    $area = @$xml->zip;
+    $code = @$xml->countryCode;
+    $long = @$xml->lon;
+    $lat = @$xml->lat;
 
     $data['country'] = $country;
     $data['city'] = $city;
