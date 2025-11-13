@@ -103,10 +103,10 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-control-label  font-weight-bold">@lang('Trc20 Wallet')<span
+                                            <label class="form-control-label  font-weight-bold">@lang('BEP20 Wallet')<span
                                                     class="text-danger">*</span></label>
                                             <input class="form-control form-control-lg" type="text"
-                                                value="{{ auth()->user()->trc20_wallet }}" placeholder="Trc20 Wallet"
+                                                value="{{ auth()->user()->trc20_wallet }}" placeholder="BEP20 Wallet"
                                                 readonly>
                                         </div>
                                     </div>

@@ -539,7 +539,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label  font-weight-bold">@lang('Trc20 Wallet') </label>
+                                    <label class="form-control-label  font-weight-bold">@lang('BEP20 Wallet') </label>
                                     <input class="form-control" type="text" name="trc20_wallet"
                                         value="{{ $user->trc20_wallet }}">
                                 </div>
