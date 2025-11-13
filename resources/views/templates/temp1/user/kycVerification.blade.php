@@ -60,7 +60,7 @@
                                 <div class="form-group col-md-6 offset-md-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="trc20_wallet"
-                                            placeholder="@lang('Enter your Tether TRC20 Wallet')*" required>
+                                            placeholder="@lang('Enter your Tether BEP20 Wallet')*" required>
                                     </div>
                                 </div>
                             </div>
