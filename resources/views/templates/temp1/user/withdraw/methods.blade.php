@@ -52,7 +52,7 @@
                                                         @if (@$created_at && $remaining > 0)
                                                             <h4 id="note"></h4>
                                                         @else
-                                                            {{-- <a href="javascript:void(0)" type="button"
+                                                            <a href="javascript:void(0)" type="button"
                                                                 data-id="{{ $data->id }}" data-resource="{{ $data }}"
                                                                 data-min_amount="{{ getAmount($data->min_limit) }}"
                                                                 data-max_amount="{{ getAmount($data->max_limit) }}"
@@ -63,8 +63,8 @@
                                                                 data-wallet_balance="{{ $wallet_balance }}"
                                                                 class=" btn btn-primary btn-block deposit" data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal">
-                                                                @lang('Withdraw Now')</a> --}}
-                                                            <div class="form-group">
+                                                                @lang('Withdraw Now')</a>
+                                                            {{-- <div class="form-group">
                                                                 <label>@lang('Enter Amount'):</label>
                                                                 <div class="input-group p-2">
                                                                     <input id="amount" type="text" class="form-control form-control-lg"
@@ -76,7 +76,7 @@
                                                                 <button class="btn btn-outline-info rounded-pill px-4" id="withdrawBtn">
                                                                     <i class="fas fa-shopping-cart me-2"></i>Withdraw Now
                                                                 </button>
-                                                            </div>
+                                                            </div> --}}
                                                         @endif
                                                     </div>
                                                 </div>
