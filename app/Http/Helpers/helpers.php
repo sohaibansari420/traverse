@@ -1773,7 +1773,7 @@ function showSingleUserinTree($user)
         } else {
             $userType = "paid-user";
             $stShow = "Paid";
-            $planName = $user->plan[0]->plan->name;
+            $planName = $user->plan[0]->plan->name ?? '';
         }
 
         $img = getImage('assets/images/user/profile/' . $user->image, '120x120');
