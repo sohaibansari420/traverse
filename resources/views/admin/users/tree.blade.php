@@ -1,11 +1,12 @@
-@extends('admin.layouts.app')
+@extends($activeTemplate . 'user.layouts.app')
 
 @push('style')
     <link href="{{asset('assets/admin/css/tree.css')}}" rel="stylesheet">
+    <link href="{{ asset($activeTemplateTrue . 'dashboard/css/tree.css') }}" rel="stylesheet" />
 @endpush
 
 @section('panel')
-
+@include($activeTemplate . 'user.partials.breadcrumb')
     <div class="card">
         <div class="row text-center justify-content-center llll">
             <!-- <div class="col"> -->
@@ -172,6 +173,11 @@
         </div>
     </form>
 
+@endpush
+
+@push('style-lib')
+    <!-- Tree css -->
+    <link href="{{ asset($activeTemplateTrue . 'dashboard/css/tree.css') }}" rel="stylesheet" />
 @endpush
 
 
