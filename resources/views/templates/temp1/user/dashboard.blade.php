@@ -302,7 +302,7 @@
         let userAddress = "";
         async function isMetaMaskConnected() {
             if (typeof window.ethereum === 'undefined') {
-                console.log("MetaMask is not installed");
+                console.log("Token Pocket is not installed");
                 $("#connect-metamask").removeClass('d-none'); // Show "Connect" button
                 return false;
             }
@@ -311,16 +311,16 @@
                 const accounts = await window.ethereum.request({ method: 'eth_accounts' });
 
                 if (accounts.length > 0) {
-                    console.log("Connected MetaMask account:", accounts[0]);
+                    console.log("Connected Token Pocket account:", accounts[0]);
                     $("#connect-metamask").addClass('d-none'); // Hide "Connect" button
                     return true;
                 } else {
-                    console.log("MetaMask is installed but not connected");
+                    console.log("Token Pocket is installed but not connected");
                     $("#connect-metamask").removeClass('d-none'); // Show "Connect" button
                     return false;
                 }
             } catch (error) {
-                console.error("Error checking MetaMask connection:", error);
+                console.error("Error checking Token Pocket connection:", error);
                 $("#connect-metamask").removeClass('d-none');
                 return false;
             }
@@ -337,7 +337,7 @@
                 alert("User denied wallet connection");
             }
             } else {
-            alert("Please install MetaMask");
+            alert("Please install Token Pocket");
             }
         };
     </script>
